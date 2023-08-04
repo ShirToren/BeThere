@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:modle ="clr-namespace:BeThere.Models"
+             xmlns:viewmodel ="clr-namespace:BeThere.ViewModels"
+             x:DataType="viewmodel:UsersHistoryViewModle"
+             x:Class="BeThere.MainPage"
+             Title="{Binding Title}">
+
+    <StackLayout>
+      <Button Text="Send Question"
+              Command="{Binding AskNewQuestionCommand}">
+      </Button>
+
+    <Grid ColumnDefinitions="*,*"
+          ColumnSpacing="5"
+          RowDefinitions="*,Auto"
+          RowSpacing="0">
+
+    
+        
+        <CollectionView BackgroundColor="Transparent"
+                        Grid.ColumnSpan="1"
+                        ItemsSource="{Binding PreviousQuestions}"
+                        SelectedItem="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="modle:QuestionToAsk">
+                    <Grid Padding="10">
+                        <Frame HeightRequest="50" Style="{StaticResource CardView}"
+                               Padding="0">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                      Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:UsersHistoryViewModle}}, Path=GoToDetailsCommand}"/>
+                            </Frame.GestureRecognizers>
+                            <Grid Padding="0"
+                                  ColumnDefinitions="*,20">
+                                <Label Text="0" Grid.Column="1" HorizontalOptions="StartAndExpand"/>
+                                <Image Aspect="Fill"
+                                       Source="arrow2.png"
+                                       HorizontalOptions="EndAndExpand"
+                                       Background="Transparent"
+                                       WidthRequest="20"
+                                       HeightRequest="20"/>
+                            <VerticalStackLayout Grid.Column="0"
+                                                 Padding="10"
+                                                 VerticalOptions="Center">
+                                <Label Text="{Binding Question}"/>
+                                <Label Text="{Binding Date}"/>
+                            </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
+
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <ActivityIndicator IsVisible="{Binding IsBusy}"
+                           IsRunning="{Binding IsBusy}"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="CenterAndExpand"
+                           Grid.RowSpan="2"
+                           Grid.ColumnSpan="2"></ActivityIndicator>
+     
+    </Grid>
+    </StackLayout>
+
+</ContentPage>

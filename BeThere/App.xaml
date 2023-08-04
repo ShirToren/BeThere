@@ -1,0 +1,53 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:BeThere"
+             x:Class="BeThere.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style TargetType="Grid">
+                <Setter Property="RowSpacing"
+                        Value="6" />
+                <Setter Property="ColumnSpacing"
+                        Value="6" />
+            </Style>
+
+            <Color x:Key="PrimaryColor">#FFFCD5</Color>
+            <Color x:Key="SecondaryColor">#091848 </Color>
+            <Color x:Key="LightBackground">#FAF9F8</Color>
+
+            <Style x:Key="Headline" TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource SecondaryColor}" />
+                <Setter Property="FontFamily" Value="Sitka" />
+            </Style>
+
+            <Style x:Key="UpToolText" TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource PrimaryColor}" />
+                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="FontFamily" Value="Sitka" />
+            </Style>
+
+            <Style x:Key="CardView" TargetType="Frame">
+                <Setter Property="BorderColor" Value="#DDDDDD" />
+                <Setter Property="HasShadow" Value="{OnPlatform iOS=false, MacCatalyst=false, Default=true}" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="Background" Value="{StaticResource LightBackground}" />
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="IsClippedToBounds" Value="True"/>
+            </Style>
+
+          
+
+            <Style TargetType="Label">
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+            </Style>
+            
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

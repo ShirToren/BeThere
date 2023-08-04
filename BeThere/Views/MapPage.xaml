@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             xmlns:loc="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials"
+             x:Class="BeThere.Views.MapPage">
+
+    <StackLayout BackgroundColor="Black">
+        <Grid BackgroundColor="Black">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="100"/>
+
+            </Grid.ColumnDefinitions>
+            <Label Text="Set" Style="{StaticResource UpToolText}" HorizontalOptions="Center">
+                   <Label.GestureRecognizers>
+                       <TapGestureRecognizer Tapped="SetQuestionTapped"/>
+                   </Label.GestureRecognizers>
+            </Label>
+            <Label Text="+" Style="{StaticResource UpToolText}" Grid.Column="1" HorizontalOptions="Center">
+                   <Label.GestureRecognizers>
+                       <TapGestureRecognizer Tapped="OnInhanceRadiusTapped"/>
+                   </Label.GestureRecognizers>
+            </Label>   
+            <Label Text="-" Style="{StaticResource UpToolText}" Grid.Column="2" HorizontalOptions="Center">
+                   <Label.GestureRecognizers>
+                       <TapGestureRecognizer Tapped="OnDecreaseRadiusTapped"/>
+                   </Label.GestureRecognizers>
+            </Label> 
+        </Grid>
+
+        <SearchBar x:Name="mapSearchBar"
+                   TextColor="White"
+                   BackgroundColor="Black"
+                   Placeholder="Search for a location"
+                   SearchButtonPressed="OnSearchButtonPressed">
+        </SearchBar>
+        
+        <maps:Map x:Name="mappy" IsShowingUser="True"
+              IsTrafficEnabled="True"
+              IsZoomEnabled="True"
+              IsScrollEnabled="True"
+              MapClicked="OnMapClicked"
+              MapType="Street">
+        </maps:Map>
+
+    </StackLayout>
+</ContentPage>
