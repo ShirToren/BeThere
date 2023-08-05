@@ -4,7 +4,6 @@ using BeThere.Models;
 using BeThere.Services;
 //using Android.Service.Autofill;
 
-
 namespace BeThere.ViewModels
 {
     public partial class RegisterViewModel : BaseViewModels

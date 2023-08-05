@@ -9,4 +9,10 @@ public partial class RegisterPage : ContentPage
         InitializeComponent();
         BindingContext = i_RegisterLogic;
     }
+
+    //protected override bool OnBackButtonPressed()
+    //{
+    //    Shell.Current.GoToAsync($"{nameof(LoginPage)}");
+    //    return true;
+    //}
 }
