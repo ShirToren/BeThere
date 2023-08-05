@@ -10,10 +10,15 @@ public partial class AppShell : Shell
         InitializeComponent();
         //Routing.RegisterRoute(nameof(ChatPage), typeof(ChatPage)); //gives a string of chatpage to navigate.
         //Routing.RegisterRoute(nameof(MapPage), typeof(MapPage));
+        Routing.RegisterRoute(nameof(LoadingPage), typeof(LoadingPage));
+        Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
+        Routing.RegisterRoute(nameof(ProfilePage), typeof(ProfilePage));
+
         Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
         Routing.RegisterRoute(nameof(DetailsQuestionPage), typeof(DetailsQuestionPage));
         Routing.RegisterRoute(nameof(MapPage), typeof(MapPage));
         Routing.RegisterRoute(nameof(SetQuestionPage), typeof(SetQuestionPage));
+        Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
 
 
     }

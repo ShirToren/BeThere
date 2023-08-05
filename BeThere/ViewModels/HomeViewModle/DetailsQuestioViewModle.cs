@@ -1,12 +1,13 @@
 ﻿using System;
 using BeThere.Models;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BeThere.ViewModels
 {
     [QueryProperty(nameof(Question), "Question")]
-    public class DetailsQuestionViewModle : BaseViewModels
+
+    public partial class DetailsQuestionViewModle : BaseViewModels
     {
-        private QuestionToAsk m_question;
 
         public DetailsQuestionViewModle()
         {
@@ -14,7 +15,8 @@ namespace BeThere.ViewModels
 
         }
 
-        public QuestionToAsk Question { get { return m_question; } }
+        [ObservableProperty]
+        private QuestionToAsk question;
 
     }
 }

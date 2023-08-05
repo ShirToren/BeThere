@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BeThere.Views.LoadingPage"
+             Shell.NavBarIsVisible="False"
+             Title="">
+
+    <VerticalStackLayout BackgroundColor="#FFFCD5" HorizontalOptions="Center" VerticalOptions="Center">
+        <ActivityIndicator IsRunning="true" 
+                           Color="Black" />
+        <Label Text="Checking authontication"></Label>
+    </VerticalStackLayout>
+</ContentPage>

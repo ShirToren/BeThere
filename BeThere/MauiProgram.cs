@@ -35,17 +35,22 @@ public static class MauiProgram
         builder.Services.AddSingleton<MainPage>();
         builder.Services.AddSingleton<MapPage>();
         builder.Services.AddTransient<DetailsQuestionPage>();
+        builder.Services.AddTransient<LoadingPage>();
+        builder.Services.AddSingleton<ProfilePage>();
         builder.Services.AddSingleton<LoginPage>();
         builder.Services.AddSingleton<RegisterPage>();
         builder.Services.AddSingleton<SetQuestionPage>();
 
-
+        builder.Services.AddTransient<AuthonticationService>();
         builder.Services.AddSingleton<BaseService>();
         builder.Services.AddSingleton<QuestionAskedService>();
         builder.Services.AddSingleton<ConnectToAppService>();
         builder.Services.AddSingleton<UpdateLocationService>();
         //builder.Services.AddSingleton<SendQuestionService>();
+
+
         builder.Services.AddSingleton<ConnectToAppViewModle>();
+        builder.Services.AddSingleton<ProfileViewModle>();
         builder.Services.AddTransient<SetQestionToAskViewModle>();
         builder.Services.AddSingleton<RegisterViewModel>();
         builder.Services.AddSingleton<UsersHistoryViewModle>();
