@@ -3,8 +3,8 @@ using BeThere.Models;
 using System.Collections.ObjectModel;
 using BeThere.Services;
 using BeThere.Views;
-namespace BeThere.ViewModels
 
+namespace BeThere.ViewModels
 {
     public class UsersHistoryViewModle : BaseViewModels
     {
@@ -31,18 +31,20 @@ namespace BeThere.ViewModels
 
         public ObservableCollection<QuestionToAsk> PreviousQuestions { get { return m_UsersPreviousQuestions; } }
 
-        public async Task GoToDetailsPage(QuestionToAsk i_PreviousQuestion)
+        public async Task GoToDetailsPage(QuestionToAsk i_QuestionTappted)
         {
-            if (i_PreviousQuestion is null)
+            if (i_QuestionTappted is null)
             {
                 return;
             }
 
-            await Shell.Current.GoToAsync($"{nameof(DetailsQuestionPage)}", true,
-            new Dictionary<string, object>
+
+            var navigationParameter = new Dictionary<string, object>
             {
-                {"Question",i_PreviousQuestion}
-            });
+                ["Question"] = i_QuestionTappted,
+            };
+
+            await Shell.Current.GoToAsync($"{nameof(DetailsQuestionPage)}", navigationParameter);
         }
 
         public async Task GoToMapPage()

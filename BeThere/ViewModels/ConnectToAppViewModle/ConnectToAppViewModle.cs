@@ -11,6 +11,7 @@ namespace BeThere.ViewModels
         public Command RegisterCommand { get; }
         public Command RegisterWithFaceBookCommand { get; }
         private ConnectToAppService m_LoginService;
+        private AuthonticationService m_AuthService;
         private ConnectWithFacebook m_FaceBookConnect;
 
         [ObservableProperty]
@@ -22,10 +23,11 @@ namespace BeThere.ViewModels
         [ObservableProperty]
         private string loginFailureMessage;
 
-        public ConnectToAppViewModle(ConnectToAppService i_LoginService)
+        public ConnectToAppViewModle(ConnectToAppService i_LoginService, AuthonticationService i_AuthonticationService)
         {
-            Title = "Login!!";
+            Title = "Login";
             m_LoginService = i_LoginService;
+            m_AuthService = i_AuthonticationService;
             LoginCommand = new Command(async () => await loginClicked());
             RegisterCommand = new Command(async () => await registerClicked());
         }
@@ -42,9 +44,13 @@ namespace BeThere.ViewModels
                 LoginFailureMessage = string.Empty;
                 IsBusy = true;
                 ResultUnit<string> response = await m_LoginService.TryToLogin(UserName, Password);
+
                 if (response.IsSuccess == true)
                 {
+                    m_AuthService.Login();
+                    Preferences.Set("UserName", UserName);
                     await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+                    //await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
                 }
                 else
                 {
