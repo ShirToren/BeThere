@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using BeThere.Models;
 using System.Text;
+using Xamarin.Essentials;
+
 
 namespace BeThere.Services
 {
@@ -10,12 +12,16 @@ namespace BeThere.Services
         public async Task<ResultUnit<string>> TryToLogin(string i_Username, string i_Password)
         {
             ResultUnit<string> result = new ResultUnit<string>();
-            string endPointQueryUri = $"Login?UserName={i_Username}&Password={i_Password}";
-           
-            HttpResponseMessage response = await GetHttpClient().GetAsync(endPointQueryUri);
-            
 
-            if (response.IsSuccessStatusCode)
+            string UserName = Xamarin.Essentials.Preferences.Get("UserName", string.Empty);
+            if (string.IsNullOrEmpty(UserName))
+            {
+                 string endPointQueryUri = $"Login?UserName={i_Username}&Password={i_Password}";
+           
+                 HttpResponseMessage response = await GetHttpClient().GetAsync(endPointQueryUri);
+
+
+                if (response.IsSuccessStatusCode)
             {
                 result.IsSuccess = true;
                 // Read the response content as a string
@@ -26,6 +32,7 @@ namespace BeThere.Services
                 if(userData != null) 
                 {
                     ConnectedUser = userData;
+                    Xamarin.Essentials.Preferences.Set("UserName", userData.Username);
                 }
             }
             else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
@@ -37,6 +44,7 @@ namespace BeThere.Services
             {
                 throw new HttpRequestException();
             }
+            }           
 
             return result;
         }
