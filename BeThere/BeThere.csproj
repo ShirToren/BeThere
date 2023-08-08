@@ -64,25 +64,17 @@
 
 	<ItemGroup>
 	  <None Remove="Services\" />
-	  <None Remove="ViewModles\ConnectToAppViewModle\" />
-	  <None Remove="ViewModles\HomeViewModle\" />
 	  <None Remove="Views\" />
-	  <None Remove="ViewModles\MapViewModle\" />
 	  <None Remove="Resources\Fonts\Stella Violet.otf" />
 	  <None Remove="Resources\Fonts\OpenSans-Bold.ttf" />
 	  <None Remove="Resources\Fonts\Sitka.ttc" />
 	  <None Remove="Resources\Images\arrow2.png" />
 	  <None Remove="Resources\Images\beeicon.png" />
 	  <None Remove="Models\" />
-	  <None Remove="ViewModles\ProfileViewModle\" />
 	  <None Remove="ViewModels\" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="ViewModles\ConnectToAppViewModle\" />
-	  <Folder Include="ViewModles\HomeViewModle\" />
 	  <Folder Include="Views\" />
-	  <Folder Include="ViewModles\MapViewModle\" />
-	  <Folder Include="ViewModles\ProfileViewModle\" />
 	  <Folder Include="ViewModels\" />
 	</ItemGroup>
 	<ItemGroup>

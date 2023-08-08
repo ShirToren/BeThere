@@ -19,7 +19,7 @@
         ContentTemplate="{DataTemplate view:LoginPage}"
         Route="LoginPage" />
 
-    <!--<ShellContent
+    <ShellContent
           Title="Home"
           ContentTemplate="{DataTemplate local:MainPage}"
           Route="MainPage" />
@@ -27,9 +27,9 @@
     <ShellContent
           Title="Home"
           ContentTemplate="{DataTemplate view:ProfilePage}"
-          Route="ProfilePage" />-->
+          Route="ProfilePage" />
 
-    <TabBar>
+    <!--<TabBar>
   
          <ShellContent
                 Title="Home"
@@ -41,6 +41,6 @@
                Title="Settings"
                ContentTemplate="{DataTemplate view:ProfilePage}"
                Route="ProfilePage" />
-    </TabBar>
+    </TabBar>-->
 
 </Shell>

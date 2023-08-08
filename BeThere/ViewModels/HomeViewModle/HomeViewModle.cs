@@ -1,4 +1,5 @@
 ﻿using System;
+using BeThere;
 using BeThere.Models;
 using System.Collections.ObjectModel;
 using BeThere.Services;
@@ -62,9 +63,9 @@ namespace BeThere.ViewModels
 
             try
             {
-                string userName = "User";
+             
                 IsBusy = true;
-                ResultUnit<List<QuestionToAsk>> response = await m_HistoryService.TryGetPreviousQuestions(userName);
+                ResultUnit<List<QuestionToAsk>> response = await m_HistoryService.TryGetPreviousQuestions();
                 if (m_UsersPreviousQuestions.Count != 0)
                 {
                     m_UsersPreviousQuestions.Clear();

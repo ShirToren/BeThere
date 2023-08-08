@@ -75,8 +75,10 @@ namespace BeThere.ViewModels
 
         private void setQuestionLocationDetails()
         {
-            m_QuestionToAsk.LocationLatitude = LocationToQuestion.Latitude;
-            m_QuestionToAsk.LocationLongitude = LocationToQuestion.Longitude;
+            //m_QuestionToAsk.LocationLatitude = LocationToQuestion.Latitude;
+            //m_QuestionToAsk.LocationLongitude = LocationToQuestion.Longitude;
+            LocationData location = new LocationData(LocationToQuestion.Latitude, LocationToQuestion.Longitude);
+            m_QuestionToAsk.Location = location; 
             m_QuestionToAsk.Date = LocationToQuestion.Timestamp.Date.ToString();
             m_QuestionToAsk.Time = LocationToQuestion.Timestamp.Hour.ToString();
             m_QuestionToAsk.Radius = m_Radius;
