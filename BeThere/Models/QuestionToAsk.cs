@@ -3,9 +3,9 @@ using System.ComponentModel;
 
 namespace BeThere.Models
 {
-    public class QuestionToAsk : INotifyPropertyChanged
+    public class QuestionToAsk 
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        //public event PropertyChangedEventHandler PropertyChanged;
 
         private string m_Question;
 
@@ -20,7 +20,7 @@ namespace BeThere.Models
         public int? MinimumAgeRange
         {
             get { return m_MinimumAgeRange; }
-            set { m_MinimumAgeRange = value; OnPropertyChanged(nameof(MinimumAgeRange)); }
+            set { m_MinimumAgeRange = value; }
         }
 
         private int? m_MaximumAgeRange;
@@ -28,7 +28,7 @@ namespace BeThere.Models
         public int? MaximumAgeRange
         {
             get { return m_MaximumAgeRange; }
-            set { m_MaximumAgeRange = value; OnPropertyChanged(nameof(MaximumAgeRange)); }
+            set { m_MaximumAgeRange = value; }
         }
 
         private string m_Gender;
@@ -36,24 +36,26 @@ namespace BeThere.Models
         public string Gender
         {
             get { return m_Gender; }
-            set { m_Gender = value; OnPropertyChanged(nameof(Gender)); }
+            set { m_Gender = value; }
         }
 
-        private double? m_LocationLatitude;
+        //private double? m_LocationLatitude;
 
-        public double? LocationLatitude
-        {
-            get { return m_LocationLatitude; }
-            set { m_LocationLatitude = value;}
-        }
+        //public double? LocationLatitude
+        //{
+        //    get { return m_LocationLatitude; }
+        //    set { m_LocationLatitude = value;}
+        //}
 
-        private double? m_LocationLongitude;
+        //private double? m_LocationLongitude;
 
-        public double? LocationLongitude
-        {
-            get { return m_LocationLongitude; }
-            set { m_LocationLongitude = value; }
-        }
+        //public double? LocationLongitude
+        //{
+        //    get { return m_LocationLongitude; }
+        //    set { m_LocationLongitude = value; }
+        //}
+
+        public LocationData Location { get; set; }
 
         private double? m_Radius;
 
@@ -68,7 +70,7 @@ namespace BeThere.Models
         public string Date
         {
             get { return m_Date; }
-            set { m_Date = value; OnPropertyChanged(Date); }
+            set { m_Date = value;  }
         }
 
         private string m_Time;
@@ -76,11 +78,11 @@ namespace BeThere.Models
         public string Time
         {
             get { return m_Time; }
-            set { m_Time = value; OnPropertyChanged(Time); }
+            set { m_Time = value; }
         }
 
 
-        void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        //void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
        
         public void ClearAllFeilds()
@@ -89,12 +91,14 @@ namespace BeThere.Models
             MinimumAgeRange = null;
             MaximumAgeRange = null;
             Gender = string.Empty;
-            LocationLatitude = null;
-            LocationLongitude = null;
+            //LocationLatitude = null;
+            //LocationLongitude = null;
             Radius = null;
             Date = string.Empty;
             Time = string.Empty;
         }
+
+
     }
 }
 

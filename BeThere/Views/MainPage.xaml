@@ -25,8 +25,8 @@
                         SelectedItem="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="modle:QuestionToAsk">
-                    <Grid Padding="10">
-                        <Frame HeightRequest="50" Style="{StaticResource CardView}"
+                    <Grid >
+                        <Frame HeightRequest="50" 
                                Padding="0">
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer CommandParameter="{Binding .}"
