@@ -26,6 +26,7 @@ namespace BeThere.Services
 
                 // Deserialize the JSON string into MyData object using Newtonsoft.Json
                 UserData userData = JsonConvert.DeserializeObject<UserData>(jsonResponse);
+
                 if(userData != null) 
                 {
                     ConnectedUser = userData;

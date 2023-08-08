@@ -32,6 +32,10 @@
                 <Setter Property="FontFamily" Value="Sitka" />
             </Style>
 
+             <Style x:Key="SuggestedContainerStyle" TargetType="Grid">
+                <Setter Property="Margin" Value="36, 24, 0, 24" />
+             </Style>
+
             <Style x:Key="CardView" TargetType="Frame">
                 <Setter Property="BorderColor" Value="#DDDDDD" />
                 <Setter Property="HasShadow" Value="{OnPlatform iOS=false, MacCatalyst=false, Default=true}" />
@@ -39,6 +43,16 @@
                 <Setter Property="Background" Value="{StaticResource LightBackground}" />
                 <Setter Property="CornerRadius" Value="10" />
                 <Setter Property="IsClippedToBounds" Value="True"/>
+            </Style>
+
+
+              <Style x:Key="TitleTextStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="26" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontFamily" Value="Metropolis Medium" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="WidthRequest" Value="160" />
+                <Setter Property="Margin" Value="36, 48, 0, 0" />
             </Style>
 
           

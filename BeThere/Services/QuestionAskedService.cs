@@ -2,8 +2,6 @@
 using Newtonsoft.Json;
 using System.Text;
 
-
-
 namespace BeThere.Services
 {
     public class QuestionAskedService : BaseService
@@ -15,10 +13,11 @@ namespace BeThere.Services
             m_usersPreviousQuestion = new List<QuestionToAsk>();
         }
 
-        public async Task<ResultUnit<List<QuestionToAsk>>> TryGetPreviousQuestions(string i_Username)
+        public async Task<ResultUnit<List<QuestionToAsk>>> TryGetPreviousQuestions()
         {
             ResultUnit<List<QuestionToAsk>> result = new ResultUnit<List<QuestionToAsk>>();
-            string endPointQueryUri = $"api/QuestionsAsked?UserName={i_Username}";
+            string username = ConnectedUser.Username;
+            string endPointQueryUri = $"api/QuestionsAsked?UserName={username}";
             HttpResponseMessage response = await GetHttpClient().GetAsync(endPointQueryUri);
             if (response.IsSuccessStatusCode)
             {

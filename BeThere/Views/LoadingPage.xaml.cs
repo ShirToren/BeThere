@@ -20,6 +20,7 @@ public partial class LoadingPage : ContentPage
         if (isAuthenticated == true)
         {
             await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+
         }
         else
         {
