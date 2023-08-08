@@ -1,6 +1,7 @@
 ﻿using System;
 using BeThere.Models;
 using BeThere.Services;
+using Plugin.LocalNotification;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 
@@ -50,8 +51,11 @@ namespace BeThere.ViewModels
             {
                 IsBusy = true;
                 setQuestionLocationDetails();
-                
+
                 ResultUnit<string> response = await m_SendQuestionService.TryPostNewQuestion("User", m_QuestionToAsk);
+
+                sendNotification();
+
                 if (response.IsSuccess == true)
                 {
                     await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
@@ -80,6 +84,27 @@ namespace BeThere.ViewModels
             m_QuestionToAsk.Date = LocationToQuestion.Timestamp.Date.ToString();
             m_QuestionToAsk.Time = LocationToQuestion.Timestamp.Hour.ToString();
             m_QuestionToAsk.Radius = m_Radius;
+        }
+        private async void sendNotification()
+        {
+            if (await LocalNotificationCenter.Current.AreNotificationsEnabled() == false)
+            {
+                await LocalNotificationCenter.Current.RequestNotificationPermission();
+            }
+
+            var notification = new NotificationRequest
+            {
+                NotificationId = 100,
+                Title = "New question",
+                Description = m_QuestionToAsk.Question,
+                ReturningData = "Dummy data", // Returning data when tapped on notification.
+                Schedule =
+    {
+        NotifyTime = DateTime.Now // Used for Scheduling local notification, if not specified notification will show immediately.
+    }
+            };
+
+            await LocalNotificationCenter.Current.Show(notification);
         }
     }
 }

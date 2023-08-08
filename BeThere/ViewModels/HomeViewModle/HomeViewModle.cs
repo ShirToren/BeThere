@@ -3,6 +3,7 @@ using BeThere.Models;
 using System.Collections.ObjectModel;
 using BeThere.Services;
 using BeThere.Views;
+using Plugin.LocalNotification;
 
 namespace BeThere.ViewModels
 {
@@ -49,7 +50,30 @@ namespace BeThere.ViewModels
 
         public async Task GoToMapPage()
         {
+             sendNotification();
             await Shell.Current.GoToAsync(nameof(MapPage));
+        }
+
+        private async void sendNotification()
+        {
+            if (await LocalNotificationCenter.Current.AreNotificationsEnabled() == false)
+            {
+                await LocalNotificationCenter.Current.RequestNotificationPermission();
+            }
+
+            var notification = new NotificationRequest
+            {
+                NotificationId = 100,
+                Title = "New question",
+                Description = "description",
+                ReturningData = "Dummy data", // Returning data when tapped on notification.
+                Schedule =
+    {
+        NotifyTime = DateTime.Now // Used for Scheduling local notification, if not specified notification will show immediately.
+    }
+            };
+
+            await LocalNotificationCenter.Current.Show(notification);
         }
 
 

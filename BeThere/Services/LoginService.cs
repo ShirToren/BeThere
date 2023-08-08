@@ -13,9 +13,6 @@ namespace BeThere.Services
         {
             ResultUnit<string> result = new ResultUnit<string>();
 
-            string UserName = Xamarin.Essentials.Preferences.Get("UserName", string.Empty);
-            if (string.IsNullOrEmpty(UserName))
-            {
                  string endPointQueryUri = $"Login?UserName={i_Username}&Password={i_Password}";
            
                  HttpResponseMessage response = await GetHttpClient().GetAsync(endPointQueryUri);
@@ -32,7 +29,6 @@ namespace BeThere.Services
                 if(userData != null) 
                 {
                     ConnectedUser = userData;
-                    Xamarin.Essentials.Preferences.Set("UserName", userData.Username);
                 }
             }
             else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
@@ -44,7 +40,7 @@ namespace BeThere.Services
             {
                 throw new HttpRequestException();
             }
-            }           
+                
 
             return result;
         }

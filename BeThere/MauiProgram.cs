@@ -3,6 +3,7 @@ using BeThere.Services;
 using BeThere.ViewModels;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls.Hosting;
+using Plugin.LocalNotification;
 
 namespace BeThere;
 
@@ -13,6 +14,7 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
+            .UseLocalNotification()
             .UseMauiMaps()
             .ConfigureFonts(fonts =>
             {
