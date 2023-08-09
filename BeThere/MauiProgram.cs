@@ -48,6 +48,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<QuestionAskedService>();
         builder.Services.AddSingleton<ConnectToAppService>();
         builder.Services.AddSingleton<UpdateLocationService>();
+        builder.Services.AddSingleton<NotificationsService>();
         //builder.Services.AddSingleton<SendQuestionService>();
 
 

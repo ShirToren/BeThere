@@ -16,7 +16,8 @@ namespace BeThere.Services
         public async Task<ResultUnit<List<QuestionToAsk>>> TryGetPreviousQuestions()
         {
             ResultUnit<List<QuestionToAsk>> result = new ResultUnit<List<QuestionToAsk>>();
-            string username = ConnectedUser.Username;
+            //string username = ConnectedUser.Username;
+            string username = "User";
             string endPointQueryUri = $"api/QuestionsAsked?UserName={username}";
             HttpResponseMessage response = await GetHttpClient().GetAsync(endPointQueryUri);
             if (response.IsSuccessStatusCode)

@@ -30,7 +30,6 @@ public partial class MapPage : ContentPage
             StrokeWidth = 8,
             FillColor = Color.FromArgb("#88FFC0CB")
         };
-
     }
 
     private CancellationTokenSource _cancelTokenSource;
@@ -183,6 +182,11 @@ public partial class MapPage : ContentPage
     private async void SetQuestionTapped(object sender, TappedEventArgs args)
     {
         //Location test = new Location { Latitude = m_WishedLocation.Latitude, Longitude = m_WishedLocation.Longitude, Altitude = m_WishedLocation.Altitude };
+        if (m_WishedLocation == null)
+        {
+            var location = await Geolocation.GetLocationAsync();
+            m_WishedLocation = new Location(location.Latitude, location.Longitude);
+        }
         string address = await GetLocationAdress();
         var navigationParameter = new Dictionary<string, object>
         {

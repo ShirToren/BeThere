@@ -13,13 +13,14 @@ namespace BeThere.ViewModels
         private ObservableCollection<QuestionToAsk> m_UsersPreviousQuestions;
         private QuestionAskedService m_HistoryService;
         private UpdateLocationService m_UpdateLocationService;
+        private NotificationsService m_NotificationsService;
 
         public Command GoToDetailsCommand { get; }
         public Command AskNewQuestionCommand { get; }
 
 
 
-        public UsersHistoryViewModle(QuestionAskedService i_HistoryService, UpdateLocationService i_UpdateLocationService)
+        public UsersHistoryViewModle(QuestionAskedService i_HistoryService, UpdateLocationService i_UpdateLocationService, NotificationsService i_NotificationsService)
         {
             Title = "Past questions";
             m_HistoryService = i_HistoryService;
@@ -28,7 +29,7 @@ namespace BeThere.ViewModels
             GoToDetailsCommand = new Command<QuestionToAsk>(async (question) => await GoToDetailsPage(question));
             AskNewQuestionCommand = new Command(async () => await GoToMapPage());
             Task task = GetAllPreviousQuestion();
-
+            m_NotificationsService = i_NotificationsService;
         }
 
         public ObservableCollection<QuestionToAsk> PreviousQuestions { get { return m_UsersPreviousQuestions; } }
@@ -51,16 +52,16 @@ namespace BeThere.ViewModels
 
         public async Task GoToMapPage()
         {
-             sendNotification();
+            //await sendNotification();
             await Shell.Current.GoToAsync(nameof(MapPage));
         }
 
-        private async void sendNotification()
+        private async Task sendNotification()
         {
-            if (await LocalNotificationCenter.Current.AreNotificationsEnabled() == false)
-            {
+            //if (await LocalNotificationCenter.Current.AreNotificationsEnabled() == false)
+            ///{
                 await LocalNotificationCenter.Current.RequestNotificationPermission();
-            }
+            //}
 
             var notification = new NotificationRequest
             {
@@ -107,7 +108,7 @@ namespace BeThere.ViewModels
                     //no prev questions?
                 }
             }
-            catch
+            catch(Exception ex)
             {
 
             }

@@ -84,7 +84,7 @@ namespace BeThere.Services
             ResultUnit<string> result = new ResultUnit<string>();
 
 
-            string endPointQueryUri = $"api/UpdateLocation?UserName={ConnectedUser.Username}";
+            string endPointQueryUri = $"api/UpdateLocation?UserName=User";
 
             string jsonData = JsonConvert.SerializeObject(i_Location);
             StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
