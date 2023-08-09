@@ -6,14 +6,18 @@ using System.Text;
 using System.Threading.Tasks;
 using BeThere.Models;
 using Plugin.LocalNotification;
+using Mopups.Interfaces;
+using BeThere.Views;
 
 namespace BeThere.Services
 {
     public class NotificationsService : BaseService
     {
         private readonly Timer r_Timer;
-        public NotificationsService()
+        IPopupNavigation popupNavigation;
+        public NotificationsService(IPopupNavigation popupNavigation)
         {
+            this.popupNavigation = popupNavigation;
             r_Timer = new Timer(TimerCallback, null, TimeSpan.Zero, TimeSpan.FromSeconds(5));
         }
 
@@ -22,6 +26,7 @@ namespace BeThere.Services
             ResultUnit<List<QuestionToAsk>> response = await TryGetNotifications();
             if(response.ReturnValue.Count > 0)
             {
+                popupNavigation.PushAsync(new PopupPage());
                 await sendNotification();
             }
         }

@@ -4,6 +4,9 @@ using BeThere.ViewModels;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls.Hosting;
 using Plugin.LocalNotification;
+using Mopups.Hosting;
+using Mopups.Interfaces;
+using Mopups.Services;
 
 namespace BeThere;
 
@@ -15,6 +18,7 @@ public static class MauiProgram
         builder
             .UseMauiApp<App>()
             .UseLocalNotification()
+            .ConfigureMopups()
             .UseMauiMaps()
             .ConfigureFonts(fonts =>
             {
@@ -34,7 +38,7 @@ public static class MauiProgram
         //builder.Logging.AddDebug();
 #endif
 
-        builder.Services.AddSingleton<MainPage>();
+        //builder.Services.AddSingleton<MainPage>();
         builder.Services.AddSingleton<MapPage>();
         builder.Services.AddTransient<DetailsQuestionPage>();
         builder.Services.AddTransient<LoadingPage>();
@@ -42,6 +46,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<LoginPage>();
         builder.Services.AddSingleton<RegisterPage>();
         builder.Services.AddSingleton<SetQuestionPage>();
+        builder.Services.AddSingleton<IPopupNavigation>(MopupService.Instance);
+        builder.Services.AddTransient<MainPage>();
 
         builder.Services.AddTransient<AuthonticationService>();
         builder.Services.AddSingleton<BaseService>();

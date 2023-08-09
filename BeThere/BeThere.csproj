@@ -58,6 +58,7 @@
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+		<PackageReference Include="Mopups" Version="1.1.1" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="Microsoft.Maui.Controls.Maps" Version="7.0.92" />
 		<PackageReference Include="Plugin.LocalNotification" Version="10.1.8" />
@@ -76,7 +77,6 @@
 	  <None Remove="ViewModels\" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Views\" />
 	  <Folder Include="ViewModels\" />
 	</ItemGroup>
 	<ItemGroup>
@@ -85,5 +85,10 @@
 	  <BundleResource Include="Resources\Fonts\Sitka.ttc" />
 	  <BundleResource Include="Resources\Images\arrow2.png" />
 	  <BundleResource Include="Resources\Images\beeicon.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <MauiXaml Update="Views\PopupPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 </Project>
