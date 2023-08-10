@@ -56,6 +56,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
 		<PackageReference Include="Mopups" Version="1.1.1" />
@@ -77,9 +78,6 @@
 	  <None Remove="ViewModels\" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="ViewModels\" />
-	</ItemGroup>
-	<ItemGroup>
 	  <BundleResource Include="Resources\Fonts\Stella_Violet.otf" />
 	  <BundleResource Include="Resources\Fonts\OpenSans-Bold.ttf" />
 	  <BundleResource Include="Resources\Fonts\Sitka.ttc" />
@@ -87,6 +85,9 @@
 	  <BundleResource Include="Resources\Images\beeicon.png" />
 	</ItemGroup>
 	<ItemGroup>
+	  <MauiXaml Update="Views\ChatPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\PopupPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -1,18 +1,29 @@
 using Mopups.Services;
+using BeThere.Models;
 
 namespace BeThere.Views;
 
 
 public partial class PopupPage
 {
-    public PopupPage()
+    private QuestionToAsk m_QuestionsList;
+    public PopupPage(QuestionToAsk i_QuestionsList)
     {
         InitializeComponent();
+        m_QuestionsList = i_QuestionsList;
+        QuestionLabel.Text = m_QuestionsList.Question;
     }
-
-    private void LoginButton_Clicked(object sender, EventArgs e)
+    private void CloseButton_Clicked(object sender, EventArgs e)
     {
         MopupService.Instance.PopAsync();
-        //nevigate to chat
+    }
+    private async void AnswerButton_Clicked(object sender, EventArgs e)
+    {
+        await GoToChatPage();
+        await MopupService.Instance.PopAsync();
+    }
+    public async Task GoToChatPage()
+    {
+        await Shell.Current.GoToAsync(nameof(ChatPage));
     }
 }

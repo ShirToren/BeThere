@@ -7,7 +7,5 @@ public partial class LoginPage : ContentPage
     {
         InitializeComponent();
         BindingContext = i_LoginLogic;
-        
     }
-    
 }

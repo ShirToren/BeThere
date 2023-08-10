@@ -5,7 +5,7 @@
              xmlns:mopupsanim="clr-namespace:Mopups.Animations;assembly=Mopups"
              x:Class="BeThere.Views.PopupPage"
              Title="MyPopupPage" BackgroundColor="#80000000" CloseWhenBackgroundIsClicked="False">
-    <mopups:PopupPage.Animation>
+    <!--<mopups:PopupPage.Animation>
         <mopupsanim:ScaleAnimation
             DurationIn="700"
             EasingIn="BounceOut"
@@ -13,39 +13,43 @@
             PositionOut="Center"
             ScaleIn="1"
             ScaleOut="0.7" />
-    </mopups:PopupPage.Animation>
+    </mopups:PopupPage.Animation>-->
     <ScrollView HorizontalOptions="Center" VerticalOptions="Center">
         <Border WidthRequest="300" HeightRequest="300"
                 BackgroundColor="White"
                 HorizontalOptions="Center">
             <Border.StrokeShape>
-                <RoundRectangle CornerRadius="40,0,0,40"/>
+                <RoundRectangle CornerRadius="20,20,20,20"/>
             </Border.StrokeShape>
             <VerticalStackLayout Spacing="3">
-                <Entry
-                    x:Name="UsernameEntry"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"
-                    Placeholder="Username" />
-
-                <Entry
-                    x:Name="PasswordEntry"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"
-                    IsPassword="True"
-                    Placeholder="Password" />
-
+                <Label
+                Text="New question"
+                Margin="10,5"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"/>
+                <Label
+                x:Name="QuestionLabel" 
+                Margin="10,5"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"/>
                 <Button
-                    x:Name="LoginButton"
-                    Margin="10,5"
-                    HorizontalOptions="Fill"
-                    VerticalOptions="EndAndExpand"
-                    Text="Login"
-                    Clicked="LoginButton_Clicked">
+                x:Name="CloseButton"
+                Margin="10,5"
+                HorizontalOptions="Fill"
+                VerticalOptions="EndAndExpand"
+                Text="Close"
+                Clicked="CloseButton_Clicked">
+                </Button>
+                <Button
+                x:Name="AnswerButton"
+                Margin="10,5"
+                HorizontalOptions="Fill"
+                VerticalOptions="EndAndExpand"
+                Text="Answer"
+                Clicked="AnswerButton_Clicked">
                 </Button>
             </VerticalStackLayout>
         </Border>
-
     </ScrollView>
 
 </mopups:PopupPage>
