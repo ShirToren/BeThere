@@ -35,7 +35,7 @@ namespace BeThere.Services
         {
             ResultUnit<List<QuestionToAsk>> result = new ResultUnit<List<QuestionToAsk>>();
             //string username = ConnectedUser.Username;
-            string username = "User";
+            string username = ConnectedUser.Username;
             string endPointQueryUri = $"api/Notifications?UserName={username}";
             HttpResponseMessage response = await GetHttpClient().GetAsync(endPointQueryUri);
             if (response.IsSuccessStatusCode)

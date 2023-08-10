@@ -17,7 +17,6 @@ namespace BeThere.Services
 
         public static UserData ConnectedUser { get; set; }
 
-
         public static HttpClient GetHttpClient()
         {
             if (s_ServerClient is not null)

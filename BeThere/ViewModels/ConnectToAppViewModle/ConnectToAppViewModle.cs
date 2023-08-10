@@ -48,7 +48,7 @@ namespace BeThere.ViewModels
                 if (response.IsSuccess == true)
                 {
                     m_AuthService.Login();
-                    Preferences.Set("UserName", UserName);
+                    m_AuthService.StoreAuthenticatedUser(UserName);
                     await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
                     //await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
                 }
