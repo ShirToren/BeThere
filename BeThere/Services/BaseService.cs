@@ -8,14 +8,14 @@ namespace BeThere.Services
 {
     public class BaseService
     {
-        
-        private static readonly string s_BaseUrl =
+        protected static readonly string s_BaseUrl =
            DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5209" : "http://localhost:5209";
 
-        // private static readonly string s_BaseUrl = "https://betherserverapi.azurewebsites.net";
+        // protected static readonly string s_BaseUrl = "https://betherserverapi.azurewebsites.net";
         private static HttpClient s_ServerClient;
 
         public static UserData ConnectedUser { get; set; }
+
 
 
         public static HttpClient GetHttpClient()

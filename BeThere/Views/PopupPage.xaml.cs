@@ -1,6 +1,7 @@
 using Mopups.Services;
 using BeThere.Models;
 
+
 namespace BeThere.Views;
 
 
@@ -24,6 +25,11 @@ public partial class PopupPage
     }
     public async Task GoToChatPage()
     {
-        await Shell.Current.GoToAsync(nameof(ChatPage));
+        var navigationParameter = new Dictionary<string, object>
+        {
+            ["ChatRoomId"] = m_QuestionsList.ChatRoomId
+        };
+        await Shell.Current.GoToAsync($"{nameof(ChatPage)}", navigationParameter);
+       // await Shell.Current.GoToAsync(nameof(ChatPage));
     }
 }

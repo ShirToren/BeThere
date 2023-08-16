@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel ="clr-namespace:BeThere.ViewModels.ChatViewModel"
              x:Class="BeThere.Views.ChatPage"
+             x:DataType="viewmodel:ChatViewModel"
              Title="ChatPage">
     <ScrollView>
         <VerticalStackLayout
@@ -12,18 +14,21 @@
             <Label
                 x:Name="chatMessages"
                 FontSize="18"
+                Text="{Binding AllMessages}"
                 HorizontalOptions="Center" />
 
             <Entry
                 x:Name="myChatMessage"
                 Placeholder="Type your message"
                 FontSize="18"
+                Text="{Binding Message}"
                 HorizontalOptions="Center" />
 
             <Button
                 x:Name="sendButton"
                 Text="Send"
-                Clicked="OnCounterClicked"
+                Command="{Binding SendMessageCommand}"
+                IsEnabled="{Binding IsNotBusy}"
                 HorizontalOptions="Center" />
 
         </VerticalStackLayout>

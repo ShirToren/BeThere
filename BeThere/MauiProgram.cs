@@ -8,6 +8,7 @@ using Mopups.Hosting;
 using Mopups.Interfaces;
 using Mopups.Services;
 using BeThere.ViewModels.PopupViewModel;
+using BeThere.ViewModels.ChatViewModel;
 
 namespace BeThere;
 
@@ -59,6 +60,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<UpdateLocationService>();
         builder.Services.AddSingleton<NotificationsService>();
         //builder.Services.AddSingleton<SendQuestionService>();
+        builder.Services.AddSingleton<ChatService>();
 
 
         builder.Services.AddSingleton<ConnectToAppViewModle>();
@@ -68,6 +70,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<UsersHistoryViewModle>();
         builder.Services.AddTransient<DetailsQuestionViewModle>();
         builder.Services.AddSingleton<PopupViewModel>();
+        builder.Services.AddSingleton<ChatViewModel>();
 
         return builder.Build();
     }
