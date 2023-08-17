@@ -56,8 +56,11 @@ namespace BeThere.ViewModels
                 Guid guid = Guid.NewGuid();
                 string uuidString = guid.ToString();
 
+
                 m_QuestionToAsk.ChatRoomId = uuidString;
-                ResultUnit<string> response = await m_SendQuestionService.TryPostNewQuestion("User", m_QuestionToAsk);
+
+                ResultUnit<string> response = await m_SendQuestionService.TryPostNewQuestion(m_QuestionToAsk);
+
 
                 sendNotification();
 

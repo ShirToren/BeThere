@@ -16,9 +16,7 @@ namespace BeThere.Services
         public async Task<ResultUnit<List<QuestionToAsk>>> TryGetPreviousQuestions()
         {
             ResultUnit<List<QuestionToAsk>> result = new ResultUnit<List<QuestionToAsk>>();
-            //string username = ConnectedUser.Username;
-            string username = "User";
-            string endPointQueryUri = $"api/QuestionsAsked?UserName={username}";
+            string endPointQueryUri = $"api/QuestionsAsked?UserName={ConnectedUser.Username}";
             HttpResponseMessage response = await GetHttpClient().GetAsync(endPointQueryUri);
             if (response.IsSuccessStatusCode)
             {
@@ -40,10 +38,10 @@ namespace BeThere.Services
 
         }
 
-        public async Task<ResultUnit<string>> TryPostNewQuestion(string i_Username, QuestionToAsk i_Question)
+        public async Task<ResultUnit<string>> TryPostNewQuestion(QuestionToAsk i_Question)
         {
             ResultUnit<string> result = new ResultUnit<string>();
-            string endPointQueryUri = $"api/QuestionsAsked?UserName={i_Username}";
+            string endPointQueryUri = $"api/QuestionsAsked?UserName={ConnectedUser.Username}";
 
             string jsonData = JsonConvert.SerializeObject(i_Question);
             StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
@@ -54,7 +52,6 @@ namespace BeThere.Services
                 //handle ba
             }
 
-            
             return result;
         }
 

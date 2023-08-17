@@ -31,14 +31,6 @@ namespace BeThere.Models
             set { m_Age = value; OnPropertyChanged(m_Age); }
         }
 
-        private string m_Name;
-
-        public string Name
-        {
-            get { return m_Name; }
-            set { m_Name = value; OnPropertyChanged(nameof(m_Name)); }
-        }
-
         private string m_Email;
 
         public string Email
@@ -47,12 +39,20 @@ namespace BeThere.Models
             set { m_Email = value; OnPropertyChanged(nameof(m_Email)); }
         }
 
-        private string? m_Gender;
+        private string m_Gender;
 
         public string Gender
         {
             get { return m_Gender; }
-            set { m_Email = value; OnPropertyChanged(nameof(m_Gender)); }
+            set { m_Gender = value; OnPropertyChanged(nameof(m_Gender)); }
+        }
+
+        private string? m_Name;
+
+        public string? Name
+        {
+            get { return m_Name; }
+            set { m_Name = value; OnPropertyChanged(nameof(m_Name)); }
         }
 
 

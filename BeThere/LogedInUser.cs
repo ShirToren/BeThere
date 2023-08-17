@@ -16,11 +16,9 @@ namespace BeThere
 			return username;
         }
 
-        public static string SetLogedInUser()
+        public static void SetLogedInUser(UserData i_LogedInUser)
         {
-            string username = "User";
-
-            return username;
+			m_LogedInUser = i_LogedInUser;
         }
 
     }

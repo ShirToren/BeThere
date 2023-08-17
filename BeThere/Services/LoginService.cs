@@ -18,19 +18,22 @@ namespace BeThere.Services
                  HttpResponseMessage response = await GetHttpClient().GetAsync(endPointQueryUri);
 
 
-                if (response.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode)
             {
                 result.IsSuccess = true;
-                // Read the response content as a string
                 string jsonResponse = await response.Content.ReadAsStringAsync();
-
-                // Deserialize the JSON string into MyData object using Newtonsoft.Json
                 UserData userData = JsonConvert.DeserializeObject<UserData>(jsonResponse);
 
                 if(userData != null) 
                 {
                     ConnectedUser = userData;
+                    LogedInUser.SetLogedInUser(userData);
                 }
+                else
+                {
+                    //json convert failed 
+                }
+
             }
             else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
             {

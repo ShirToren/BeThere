@@ -48,22 +48,6 @@ namespace BeThere.Models
             set { m_Gender = value; }
         }
 
-        //private double? m_LocationLatitude;
-
-        //public double? LocationLatitude
-        //{
-        //    get { return m_LocationLatitude; }
-        //    set { m_LocationLatitude = value;}
-        //}
-
-        //private double? m_LocationLongitude;
-
-        //public double? LocationLongitude
-        //{
-        //    get { return m_LocationLongitude; }
-        //    set { m_LocationLongitude = value; }
-        //}
-
         public LocationData Location { get; set; }
 
         private double? m_Radius;
@@ -100,8 +84,7 @@ namespace BeThere.Models
             MinimumAgeRange = null;
             MaximumAgeRange = null;
             Gender = string.Empty;
-            //LocationLatitude = null;
-            //LocationLongitude = null;
+            Location = null;
             Radius = null;
             Date = string.Empty;
             Time = string.Empty;

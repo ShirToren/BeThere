@@ -82,13 +82,9 @@ namespace BeThere.Services
         public async Task <ResultUnit<string>> TryPostCurrentLocation(LocationData i_Location)
         {
             ResultUnit<string> result = new ResultUnit<string>();
-
-
-            string endPointQueryUri = $"api/UpdateLocation?UserName=User";
-
+            string endPointQueryUri = $"api/UpdateLocation?UserName={ConnectedUser.Username}";
             string jsonData = JsonConvert.SerializeObject(i_Location);
             StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-
             HttpResponseMessage response = await GetHttpClient().PostAsync(endPointQueryUri, content);
 
             if (!response.IsSuccessStatusCode)
