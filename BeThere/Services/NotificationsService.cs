@@ -15,19 +15,25 @@ namespace BeThere.Services
     {
         private readonly Timer r_Timer;
         IPopupNavigation popupNavigation;
+        private static readonly Object sr_ListLock = new object();
         public NotificationsService(IPopupNavigation popupNavigation)
         {
             this.popupNavigation = popupNavigation;
             r_Timer = new Timer(TimerCallback, null, TimeSpan.Zero, TimeSpan.FromSeconds(5));
+            Notifications = new List<QuestionToAsk>();
         }
 
         private async void TimerCallback(object state)
         {
             ResultUnit<List<QuestionToAsk>> response = await TryGetNotifications();
+            lock(sr_ListLock)
+            {
+                Notifications = response.ReturnValue;
+            }
             if(response.ReturnValue.Count > 0)
             {
-                popupNavigation.PushAsync(new PopupPage());
                 await sendNotification();
+                await popupNavigation.PushAsync(new PopupPage(Notifications[0]));
             }
         }
 
@@ -62,22 +68,35 @@ namespace BeThere.Services
         {
             //if (await LocalNotificationCenter.Current.AreNotificationsEnabled() == false)
             ///{
+            ///
             await LocalNotificationCenter.Current.RequestNotificationPermission();
+            //Dispatcher dispatcher = (Dispatcher)Dispatcher.GetForCurrentThread();
+            //dispatcher.Dispatch(async () => await LocalNotificationCenter.Current.RequestNotificationPermission());
             //}
 
-            var notification = new NotificationRequest
+
+            lock(sr_ListLock)
             {
-                NotificationId = 100,
-                Title = "New question",
-                Description = "description",
-                ReturningData = "Dummy data", // Returning data when tapped on notification.
-                Schedule =
+                foreach (QuestionToAsk questionToAsk in Notifications)
+                {
+                    var notification = new NotificationRequest
+                    {
+                        NotificationId = 100,
+                        Title = "New question",
+                        Description = questionToAsk.Question,
+                        ReturningData = "Dummy data", // Returning data when tapped on notification.
+                        Schedule =
     {
         NotifyTime = DateTime.Now // Used for Scheduling local notification, if not specified notification will show immediately.
     }
-            };
+                    };
 
-            await LocalNotificationCenter.Current.Show(notification);
+                    LocalNotificationCenter.Current.Show(notification);
+                }
+                
+            }
         }
+
+        public List<QuestionToAsk> Notifications { get; set; }
     }
 }

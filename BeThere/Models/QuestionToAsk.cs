@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.ComponentModel;
 
 namespace BeThere.Models
@@ -6,6 +7,14 @@ namespace BeThere.Models
     public class QuestionToAsk 
     {
         //public event PropertyChangedEventHandler PropertyChanged;
+
+        private string m_ChatRoomId;
+
+        public string ChatRoomId
+        {
+            get { return m_ChatRoomId; }
+            set { m_ChatRoomId = value; }
+        }
 
         private string m_Question;
 
