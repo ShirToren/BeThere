@@ -29,7 +29,8 @@ namespace BeThere.Services
         }
 
         public async Task JoinChatRoom(string chatRoomId)
-        {
+        { // when opening an old chat, call this method and it will load the chat. leave chat room when exit.
+
             if(r_Connection.State == HubConnectionState.Connected)
             {
                 await r_Connection.SendAsync("JoinChatRoom", chatRoomId);
