@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Maui.ApplicationModel;
 using BeThere.Models;
+using BeThere.Views;
+using Mopups.Interfaces;
 
 namespace BeThere.ViewModels.ChatViewModel
 {
@@ -30,7 +32,7 @@ namespace BeThere.ViewModels.ChatViewModel
             SendMessageCommand = new Command(async () => await sendMessageClicked());
             r_ChatLogic.HandleMessageReceived((ChatMessage) =>
             {
-                MainThread.BeginInvokeOnMainThread(() =>
+                MainThread.BeginInvokeOnMainThread(async () =>
                 {
                     AllMessages += $"{Environment.NewLine}{ChatMessage.Content}";
                 });
