@@ -20,7 +20,6 @@ public partial class LoadingPage : ContentPage
            
             await m_AuthService.GetAuthLoginUser();
             await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
-
         }
         else
         {

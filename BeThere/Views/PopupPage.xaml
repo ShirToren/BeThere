@@ -32,6 +32,10 @@
                 Margin="10,5"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"/>
+
+                <Entry x:Name="AnswerText" BackgroundColor="Transparent" Placeholder="Enter your answer" 
+                           TextColor="Black" Margin="5,0"
+                           PlaceholderColor="Gray" />
                 <Button
                 x:Name="CloseButton"
                 Margin="10,5"

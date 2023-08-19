@@ -61,6 +61,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<NotificationsService>();
         //builder.Services.AddSingleton<SendQuestionService>();
         builder.Services.AddSingleton<ChatService>();
+        builder.Services.AddSingleton<AnswerService>();
 
 
         builder.Services.AddSingleton<ConnectToAppViewModle>();
