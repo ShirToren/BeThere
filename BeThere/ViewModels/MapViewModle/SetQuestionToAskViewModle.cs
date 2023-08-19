@@ -61,7 +61,6 @@ namespace BeThere.ViewModels
 
                 ResultUnit<string> response = await m_SendQuestionService.TryPostNewQuestion(m_QuestionToAsk);
 
-
                 sendNotification();
 
                 if (response.IsSuccess == true)
