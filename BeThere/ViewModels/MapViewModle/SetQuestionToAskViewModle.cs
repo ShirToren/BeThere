@@ -7,17 +7,17 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BeThere.ViewModels
 {
-    [QueryProperty(nameof(LocationToQuestion),"Location")]
+    [QueryProperty(nameof(LocationToQuestion), "Location")]
     [QueryProperty(nameof(LocationAddress), "Address")]
     [QueryProperty(nameof(Radius), "Radius")]
 
     public partial class SetQestionToAskViewModle : BaseViewModels
-	{
+    {
         private QuestionAskedService m_SendQuestionService;
         private ChatService m_ChatService;
         public Command SendQuestionCommand { get; }
         private QuestionToAsk m_QuestionToAsk;
-  
+
         [ObservableProperty]
         Location locationToQuestion;
 
@@ -25,14 +25,14 @@ namespace BeThere.ViewModels
         private string locationAddress;
 
         private double m_Radius;
-        public double Radius { get => m_Radius; set { m_Radius = value; IsRadiusSet = m_Radius != 0; }}
+        public double Radius { get => m_Radius; set { m_Radius = value; IsRadiusSet = m_Radius != 0; } }
 
         [ObservableProperty]
         bool isRadiusSet;
 
 
         public SetQestionToAskViewModle(QuestionAskedService i_SendQuestionService, ChatService i_ChatService)
-		{
+        {
             m_SendQuestionService = i_SendQuestionService;
             m_ChatService = i_ChatService;
             m_QuestionToAsk = new QuestionToAsk();
@@ -70,7 +70,7 @@ namespace BeThere.ViewModels
                 }
                 else
                 {
-                    
+
                 }
             }
             catch (Exception ex)
@@ -90,9 +90,9 @@ namespace BeThere.ViewModels
             //m_QuestionToAsk.LocationLatitude = LocationToQuestion.Latitude;
             //m_QuestionToAsk.LocationLongitude = LocationToQuestion.Longitude;
             LocationData location = new LocationData(LocationToQuestion.Latitude, LocationToQuestion.Longitude);
-            m_QuestionToAsk.Location = location; 
-            m_QuestionToAsk.Date = LocationToQuestion.Timestamp.Date.ToString();
-            m_QuestionToAsk.Time = LocationToQuestion.Timestamp.Hour.ToString();
+            m_QuestionToAsk.Location = location;
+            m_QuestionToAsk.Date = LocationToQuestion.Timestamp.Date.ToString("dd/MM/yyyy");
+            m_QuestionToAsk.Time = LocationToQuestion.Timestamp.TimeOfDay.ToString(@"hh\:mm");
             m_QuestionToAsk.Radius = m_Radius;
         }
         private async void sendNotification()
@@ -118,4 +118,3 @@ namespace BeThere.ViewModels
         }
     }
 }
-

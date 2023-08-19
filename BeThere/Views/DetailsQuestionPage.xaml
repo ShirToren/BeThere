@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BeThere.Views.DetailsQuestionPage"
              xmlns:viewmodel ="clr-namespace:BeThere.ViewModels"
+             x:DataType="viewmodel:DetailsQuestionViewModle"
+             xmlns:modle ="clr-namespace:BeThere.Models"
              Title="DetailsQuestionPage">
 
 
@@ -14,9 +16,10 @@
                 <Setter Property="VerticalOptions" Value="Start" />
             </Style>
 
-            <Color x:Key="TimeStampColor">DarkGray</Color>
+            <Color x:Key="TimeStampColor">Black</Color>
 
             <Style x:Key="TimeStampStyle" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="Start"></Setter>
                 <Setter Property="TextColor" Value="{StaticResource TimeStampColor}" />
                 <Setter Property="FontSize" Value="18" />
                 <Setter Property="FontFamily" Value="Metropolis Regular" />
@@ -29,7 +32,8 @@
                 <Setter Property="FontAttributes" Value="Bold" />
                 <!--<Setter Property="WidthRequest" Value="150" />-->
                 <Setter Property="HorizontalOptions" Value="Start" />
-                <Setter Property="Margin" Value="20, 16" />
+                <Setter Property="Margin" Value="15,16" />
+
             </Style>
 
             <Style x:Key="ButtonsContainerStyle" TargetType="StackLayout">
@@ -94,6 +98,55 @@
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="VerticalOptions" Value="Center" />
             </Style>
+
+            <Style x:Key="RecentChatCollectionStyle" TargetType="CollectionView">
+                <Setter Property="Margin" Value="12, 24, 12, 0" />
+            </Style>
+
+            <Style x:Key="RecentEllipseStyle" TargetType="Ellipse">
+                <Setter Property="HeightRequest" Value="72" />
+                <Setter Property="WidthRequest" Value="72" />
+            </Style>
+
+             <Style x:Key="RecentImageStyle" TargetType="Image">
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HeightRequest" Value="48" />
+                <Setter Property="Margin" Value="10" />
+            </Style>
+
+            <Style x:Key="RecentImageContainerStyle" TargetType="Grid">
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HeightRequest" Value="72" />
+                <Setter Property="WidthRequest" Value="72" />
+            </Style>
+
+             <Style x:Key="NameTextStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontFamily" Value="Metropolis Regular" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="Margin" Value="12, 0" />
+                 <Setter Property="VerticalTextAlignment" Value="End"/>
+                <Setter Property="VerticalOptions" Value="End"/>
+            </Style>
+
+             <Style x:Key="MessageTextStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontFamily" Value="Metropolis Regular" />
+                <Setter Property="LineBreakMode" Value="TailTruncation" />
+                <Setter Property="MaxLines" Value="1" />
+                <Setter Property="Margin" Value="12, 12, 12, 0" />
+            </Style>
+
+             <Color x:Key="TimeColor">Black</Color>
+
+            <Style x:Key="TimeTextStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource TimeColor}" />
+                <Setter Property="FontFamily" Value="Metropolis Regular" />
+                <Setter Property="FontSize" Value="12" />
+            </Style>
             
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -105,42 +158,62 @@
     <ContentPage.Content>
         <Grid      
             BackgroundColor="{StaticResource PrimaryColor}"
-            RowDefinitions="220, *">
-            <StackLayout>
-                <Grid 
-                    ColumnDefinitions="Auto, *"
-                    Style="{StaticResource NavigationButtonContainerStyle}">
-                    <Label
-                        Text="{Binding Question.Date}"
-                        Style="{StaticResource TimeStampStyle}">
-                        <!--<Label.GestureRecognizers>
-                            <TapGestureRecognizer 
-                                Command="{Binding BackCommand}" />
-                        </Label.GestureRecognizers>-->
-                    </Label>
-                    <Label                    
-                        Grid.Column="1"
+            RowDefinitions="Auto, *">
+            <VerticalStackLayout>
+                <Grid Padding="14">  
+                   <Grid.ColumnDefinitions>
+                     <ColumnDefinition Width="Auto"/>
+                     <ColumnDefinition />
+                   </Grid.ColumnDefinitions>
+                    
+                  <Label Grid.Column="0" 
+                         Text="{Binding Question.Date}"
+                         Style="{StaticResource TimeStampStyle}">
+                  </Label>
+                  <Label Grid.Column="1"                   
                         Text="{Binding Question.Time}"
                         HorizontalOptions="Start"
                         Style="{StaticResource TimeStampStyle}"/>
+
                 </Grid>
-                <StackLayout Grid.Row="1">
-                       <Label
+                <Grid Padding="14">
+                     <Grid.ColumnDefinitions>
+                     <ColumnDefinition Width="Auto"/>
+                     <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Image Grid.Column="0">
+                    </Image>
+
+                   <Label Text="Question" Style="{StaticResource TimeStampStyle}" Grid.Column="1"/>
+                </Grid>
+
+
+                <Label Grid.Row="1" 
                         Text="{Binding Question.Question}" 
                         Style="{StaticResource UsernameTextStyle}"/>
-                 </StackLayout>
+                <Label/>
 
-                <StackLayout Grid.Row="2">
-                       <Label
-                        Text="Location" 
-                        Style="{StaticResource Headline}"/>
-                </StackLayout>
+                 <Grid Padding="14">
+                     <Grid.ColumnDefinitions>
+                     <ColumnDefinition Width="Auto"/>
+                     <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
 
-                <StackLayout Grid.Row="3">
-                       <Label
-                        Text="{Binding Question}" 
-                        Style="{StaticResource Headline}"/>
-                </StackLayout>
+                    <Image Grid.Column="0" > 
+                    </Image>
+
+           
+                 <Label 
+                        Text="Location"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource TimeStampStyle}"/>
+                </Grid>
+      
+                <Label Padding="17"
+                        Text="{Binding QuestionAskedAddress}"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource TimeStampStyle}"/>
                 <!--<Grid 
                     Grid.Row="1"
                     Background="pink"
@@ -159,17 +232,73 @@
                         </Grid>
                     </StackLayout>
                 </Grid>-->
-            </StackLayout>
-            <Grid
+            </VerticalStackLayout>
+
+
+        <Grid Grid.Row="1">
+              <BoxView
+                    Style="{StaticResource ChatAdornerStyle}"/>
+        <CollectionView
+                   ItemsSource="{Binding Answers}"
+                   Style="{StaticResource RecentChatCollectionStyle}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="modle:QuestionToAsk">
+                    <Grid
+                        ColumnDefinitions="Auto, *"
+                        RowSpacing="0"
+                        Margin="15, 24">
+
+                       <Grid 
+                           Style="{StaticResource RecentImageContainerStyle}">
+                           <Ellipse
+                              Fill="{StaticResource PrimaryColor}"
+                              Style="{StaticResource RecentEllipseStyle}"/>
+                           <Image
+                              Source="beeicon.png"
+                              Style="{StaticResource RecentImageStyle}"/>
+                       </Grid>
+
+                       <Grid Grid.Column="1" ColumnDefinitions="*, Auto">
+                         <StackLayout VerticalOptions="End" BackgroundColor="AliceBlue">
+                            <Label        
+                             Text="{Binding Gender}"
+                             Style="{StaticResource NameTextStyle}"/>
+                            <Label         
+                             Text="{Binding Question}"
+                             Style="{StaticResource MessageTextStyle}"/>
+                         </StackLayout>
+                         <StackLayout Grid.Column="1">
+                            <Label 
+                              Text="{Binding Time}"
+                              Style="{StaticResource TimeTextStyle}"/>
+                            <Button
+                             Text="BeeChat"
+                             Style="{StaticResource MessageTextStyle}"/>
+                         </StackLayout>
+         
+                       </Grid>
+
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+
+        <!--<ActivityIndicator IsVisible="{Binding IsBusy}"
+                           IsRunning="{Binding IsBusy}"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="CenterAndExpand"
+                           Grid.RowSpan="2"
+                           Grid.ColumnSpan="2"></ActivityIndicator>-->
+     
+     </Grid>
+
+            <!--<Grid
                 Grid.Row="1">
                 <BoxView
                     Style="{StaticResource ChatAdornerStyle}"/>
-                <Grid
-                    RowDefinitions="*, Auto">
 
-                </Grid>
-            </Grid>
-        </Grid>
-    </ContentPage.Content>
+            </Grid>-->
+    </Grid>
+  </ContentPage.Content>
 </ContentPage>
-

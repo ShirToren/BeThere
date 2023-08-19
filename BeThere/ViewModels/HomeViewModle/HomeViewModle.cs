@@ -41,10 +41,12 @@ namespace BeThere.ViewModels
                 return;
             }
 
+            String LocationAddress = new String(await i_QuestionTappted.Location.GetLocationAdress());
 
             var navigationParameter = new Dictionary<string, object>
             {
                 ["Question"] = i_QuestionTappted,
+                ["QuestionAddress"] = LocationAddress,
             };
 
             await Shell.Current.GoToAsync($"{nameof(DetailsQuestionPage)}", navigationParameter);
@@ -60,7 +62,7 @@ namespace BeThere.ViewModels
         {
             //if (await LocalNotificationCenter.Current.AreNotificationsEnabled() == false)
             ///{
-                await LocalNotificationCenter.Current.RequestNotificationPermission();
+            await LocalNotificationCenter.Current.RequestNotificationPermission();
             //}
 
             var notification = new NotificationRequest
@@ -88,7 +90,7 @@ namespace BeThere.ViewModels
 
             try
             {
-             
+
                 IsBusy = true;
                 ResultUnit<List<QuestionToAsk>> response = await m_HistoryService.TryGetPreviousQuestions();
                 if (m_UsersPreviousQuestions.Count != 0)
@@ -108,7 +110,7 @@ namespace BeThere.ViewModels
                     //no prev questions?
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
@@ -120,4 +122,3 @@ namespace BeThere.ViewModels
 
     }
 }
-
