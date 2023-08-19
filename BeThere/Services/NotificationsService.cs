@@ -42,6 +42,10 @@ namespace BeThere.Services
                 await sendNotification();
                 await popupNavigation.PushAsync(new PopupPage(Notifications[0], m_AnswerService));
             }
+            if(answersResponse.ReturnValue.Count > 0)
+            {
+                string shir = String.Empty;
+            }
         }
 
         public async Task<ResultUnit<List<QuestionToAsk>>> TryGetNotifications()
