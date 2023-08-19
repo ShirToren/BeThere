@@ -48,7 +48,7 @@ public static class MauiProgram
 #endif
 
         //builder.Services.AddSingleton<MainPage>();
-        builder.Services.AddSingleton<MapPage>();
+        builder.Services.AddTransient<MapPage>();
         builder.Services.AddSingleton<ChatPage>();
         builder.Services.AddTransient<DetailsQuestionPage>();
         builder.Services.AddTransient<LoadingPage>();

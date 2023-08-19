@@ -145,7 +145,7 @@
             <Style x:Key="TimeTextStyle" TargetType="Label">
                 <Setter Property="TextColor" Value="{StaticResource TimeColor}" />
                 <Setter Property="FontFamily" Value="Metropolis Regular" />
-                <Setter Property="FontSize" Value="12" />
+                <Setter Property="FontSize" Value="14" />
             </Style>
             
         </ResourceDictionary>
@@ -246,7 +246,7 @@
                     <Grid
                         ColumnDefinitions="Auto, *"
                         RowSpacing="0"
-                        Margin="15, 24">
+                        Margin="14, 24">
 
                        <Grid 
                            Style="{StaticResource RecentImageContainerStyle}">
@@ -259,7 +259,7 @@
                        </Grid>
 
                        <Grid Grid.Column="1" ColumnDefinitions="*, Auto">
-                         <StackLayout VerticalOptions="End" BackgroundColor="AliceBlue">
+                         <StackLayout VerticalOptions="Center" >
                             <Label        
                              Text="{Binding Gender}"
                              Style="{StaticResource NameTextStyle}"/>
@@ -267,12 +267,15 @@
                              Text="{Binding Question}"
                              Style="{StaticResource MessageTextStyle}"/>
                          </StackLayout>
-                         <StackLayout Grid.Column="1">
-                            <Label 
+                         <StackLayout Grid.Column="1" VerticalOptions="Center">
+                            <Label HorizontalOptions="Center"
                               Text="{Binding Time}"
                               Style="{StaticResource TimeTextStyle}"/>
                             <Button
-                             Text="BeeChat"
+                             Text="Chat"
+                             WidthRequest="60"
+                             FontFamily="Metropolis Regular"
+                             BackgroundColor="Wheat"
                              Style="{StaticResource MessageTextStyle}"/>
                          </StackLayout>
          
