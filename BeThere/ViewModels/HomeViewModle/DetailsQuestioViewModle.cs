@@ -10,20 +10,22 @@ namespace BeThere.ViewModels
 
     public partial class DetailsQuestionViewModle : BaseViewModels
     {
+        private ObservableCollection<QuestionToAsk> test;
 
         public DetailsQuestionViewModle()
         {
-
-            QuestionToAsk test1 = new QuestionToAsk();
-            test1.Question = "Try";
-            test1.Gender = "all";
-            test1.Time = "12:12";
-            QuestionToAsk test2 = new QuestionToAsk();
-            test2.Question = "lala";
-            test2.Gender = "all";
-            test2.Time = "13:13";
-            Answers.Add(test1);
-            Answers.Add(test2);
+            test = new ObservableCollection<QuestionToAsk>();
+            QuestionToAsk question1 = new QuestionToAsk();
+            question1.Question = "Try";
+            question1.Gender = "all";
+            question1.Time = "12:12";
+            QuestionToAsk question2 = new QuestionToAsk();
+            question2.Question = "lala";
+            question2.Gender = "all";
+            question2.Time = "13:13";
+            test.Add(question1);
+            test.Add(question2);
+      
         }
 
         [ObservableProperty]
@@ -31,9 +33,6 @@ namespace BeThere.ViewModels
 
         [ObservableProperty]
         private string questionAskedAddress;
-
-
-        private ObservableCollection<QuestionToAsk> test = new ObservableCollection<QuestionToAsk> { };
 
         public ObservableCollection<QuestionToAsk> Answers { get { return test; } }
 

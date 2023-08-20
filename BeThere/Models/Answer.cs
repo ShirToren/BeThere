@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace BeThere.Models
 {
-    public class Answer
+    public class UserAnswer
     {
         public string Username { get; set; }
         public string Text { get; set; }
         public string QuestionId { get; set; } 
         public string ChatRoomId { get; set; }
-        public Answer(string i_UserName, string i_Text, string i_QuestionId, string i_ChatRoomId)
+
+
+        public UserAnswer(string i_UserName, string i_Text, string i_QuestionId, string i_ChatRoomId)
         {
             Username = i_UserName;
             Text = i_Text;

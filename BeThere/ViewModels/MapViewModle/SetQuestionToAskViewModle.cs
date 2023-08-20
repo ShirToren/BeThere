@@ -59,12 +59,13 @@ namespace BeThere.ViewModels
 
                 m_QuestionToAsk.ChatRoomId = uuidString;
 
-                ResultUnit<string> response = await m_SendQuestionService.TryPostNewQuestion(m_QuestionToAsk);
+                ResultUnit<long> response = await m_SendQuestionService.TryPostNewQuestion(m_QuestionToAsk);
 
                 sendNotification();
 
                 if (response.IsSuccess == true)
                 {
+                    m_QuestionToAsk.QuestionId = response.ReturnValue;
                     await m_ChatService.JoinChatRoom(m_QuestionToAsk.ChatRoomId);
                     await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
                 }
