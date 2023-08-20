@@ -24,6 +24,14 @@ namespace BeThere.Models
             set { m_Question = value;}
         }
 
+        private long m_QuestionId;
+
+        public long QuestionId
+        {
+            get { return m_QuestionId; }
+            set { m_QuestionId = value; }
+        }
+
         private int? m_MinimumAgeRange;
 
         public int? MinimumAgeRange

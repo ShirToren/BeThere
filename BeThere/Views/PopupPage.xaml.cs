@@ -26,7 +26,7 @@ public partial class PopupPage
         //await GoToChatPage();
         Guid guid = Guid.NewGuid();
         string uuidString = guid.ToString();
-        Answer newAnswer = new Answer(LogedInUser.LogedInUserName(), AnswerText.Text, m_QuestionsList.Question, uuidString);
+        UserAnswer newAnswer = new UserAnswer(LogedInUser.LogedInUserName(), AnswerText.Text, m_QuestionsList.Question, uuidString);
         await m_AnswerService.TryPostNewAnswer(newAnswer);
         await MopupService.Instance.PopAsync();
     }

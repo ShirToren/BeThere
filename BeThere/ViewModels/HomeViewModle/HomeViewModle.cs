@@ -15,24 +15,28 @@ namespace BeThere.ViewModels
         private UpdateLocationService m_UpdateLocationService;
         private NotificationsService m_NotificationsService;
 
+        private Dictionary<string, QuestionToAsk> m_AllQuestions;
+        private Dictionary<string, QuestionAnswers> m_AllAnswers;
+
+        public ObservableCollection<QuestionToAsk> PreviousQuestions { get { return m_UsersPreviousQuestions; } }
         public Command GoToDetailsCommand { get; }
         public Command AskNewQuestionCommand { get; }
 
-
-
+       
         public UsersHistoryViewModle(QuestionAskedService i_HistoryService, UpdateLocationService i_UpdateLocationService, NotificationsService i_NotificationsService)
         {
             Title = "Past questions";
+            m_UsersPreviousQuestions = new ObservableCollection<QuestionToAsk>();
+            m_AllQuestions = new Dictionary<string, QuestionToAsk>();
+            m_AllAnswers = new Dictionary<string, QuestionAnswers>();
             m_HistoryService = i_HistoryService;
             m_UpdateLocationService = i_UpdateLocationService;
-            m_UsersPreviousQuestions = new ObservableCollection<QuestionToAsk>();
             GoToDetailsCommand = new Command<QuestionToAsk>(async (question) => await GoToDetailsPage(question));
             AskNewQuestionCommand = new Command(async () => await GoToMapPage());
             Task task = GetAllPreviousQuestion();
             m_NotificationsService = i_NotificationsService;
         }
 
-        public ObservableCollection<QuestionToAsk> PreviousQuestions { get { return m_UsersPreviousQuestions; } }
 
         public async Task GoToDetailsPage(QuestionToAsk i_QuestionTappted)
         {
@@ -40,11 +44,13 @@ namespace BeThere.ViewModels
             {
                 return;
             }
-
+          
+            String LocationAddress = new String(await i_QuestionTappted.Location.GetLocationAdress());
 
             var navigationParameter = new Dictionary<string, object>
             {
                 ["Question"] = i_QuestionTappted,
+                ["QuestionAddress"] = LocationAddress.ToString(),
             };
 
             await Shell.Current.GoToAsync($"{nameof(DetailsQuestionPage)}", navigationParameter);
@@ -60,7 +66,7 @@ namespace BeThere.ViewModels
         {
             //if (await LocalNotificationCenter.Current.AreNotificationsEnabled() == false)
             ///{
-                await LocalNotificationCenter.Current.RequestNotificationPermission();
+            await LocalNotificationCenter.Current.RequestNotificationPermission();
             //}
 
             var notification = new NotificationRequest
@@ -88,29 +94,39 @@ namespace BeThere.ViewModels
 
             try
             {
-             
+
                 IsBusy = true;
-                ResultUnit<List<QuestionToAsk>> response = await m_HistoryService.TryGetPreviousQuestions();
-                if (m_UsersPreviousQuestions.Count != 0)
-                {
-                    m_UsersPreviousQuestions.Clear();
-                }
+                ResultUnit<Dictionary<string, Tuple<QuestionToAsk, QuestionAnswers>>> response = await m_HistoryService.TryGetPreviousQuestions();
+
 
                 if (response.IsSuccess == true)
                 {
-                    foreach (QuestionToAsk previousQuestion in response.ReturnValue)
+                    if (m_UsersPreviousQuestions.Count != 0)
                     {
-                        m_UsersPreviousQuestions.Add(previousQuestion);
+                        m_UsersPreviousQuestions.Clear();
+                    }
+
+                    foreach (var KeyValue in response.ReturnValue)
+                    {
+
+                        m_AllQuestions.Add(KeyValue.Key, KeyValue.Value.Item1);
+                        m_UsersPreviousQuestions.Add(KeyValue.Value.Item1);
+
+                        if(KeyValue.Value.Item2 != null)
+                        {
+                            m_AllAnswers.Add(KeyValue.Key, KeyValue.Value.Item2);
+                        }
                     }
                 }
+
                 else
                 {
                     //no prev questions?
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-
+                string massage = ex.Message;
             }
             finally
             {
@@ -120,4 +136,3 @@ namespace BeThere.ViewModels
 
     }
 }
-

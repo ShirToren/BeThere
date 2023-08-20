@@ -6,22 +6,22 @@ namespace BeThere.Services
 {
     public class QuestionAskedService : BaseService
     {
-        private List<QuestionToAsk> m_usersPreviousQuestion;
+        private Dictionary<string, Tuple<QuestionToAsk, QuestionAnswers>> m_usersPreviousQuestion;
 
         public QuestionAskedService()
         {
-            m_usersPreviousQuestion = new List<QuestionToAsk>();
+            m_usersPreviousQuestion = new Dictionary<string, Tuple<QuestionToAsk, QuestionAnswers>>();
         }
 
-        public async Task<ResultUnit<List<QuestionToAsk>>> TryGetPreviousQuestions()
+        public async Task<ResultUnit<Dictionary<string, Tuple<QuestionToAsk, QuestionAnswers>>>> TryGetPreviousQuestions()
         {
-            ResultUnit<List<QuestionToAsk>> result = new ResultUnit<List<QuestionToAsk>>();
-            string endPointQueryUri = $"api/QuestionsAsked?UserName={ConnectedUser.Username}";
+            ResultUnit<Dictionary<string, Tuple<QuestionToAsk, QuestionAnswers>>> result = new ResultUnit<Dictionary<string, Tuple<QuestionToAsk, QuestionAnswers>>>();
+            string endPointQueryUri = $"api/Questions?UserName={ConnectedUser.Username}";
             HttpResponseMessage response = await GetHttpClient().GetAsync(endPointQueryUri);
             if (response.IsSuccessStatusCode)
             {
                 string jsonResponse = await response.Content.ReadAsStringAsync();
-                m_usersPreviousQuestion = JsonConvert.DeserializeObject<List<QuestionToAsk>>(jsonResponse);
+                m_usersPreviousQuestion = JsonConvert.DeserializeObject<Dictionary<string, Tuple<QuestionToAsk, QuestionAnswers>>>(jsonResponse);
                 result.ReturnValue = m_usersPreviousQuestion;
             }
             else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
@@ -38,15 +38,19 @@ namespace BeThere.Services
 
         }
 
-        public async Task<ResultUnit<string>> TryPostNewQuestion(QuestionToAsk i_Question)
+        public async Task<ResultUnit<long>> TryPostNewQuestion(QuestionToAsk i_Question)
         {
-            ResultUnit<string> result = new ResultUnit<string>();
-            string endPointQueryUri = $"api/QuestionsAsked?UserName={ConnectedUser.Username}";
+            ResultUnit<long> result = new ResultUnit<long>();
+            string endPointQueryUri = $"api/Questions?UserName={ConnectedUser.Username}";
 
             string jsonData = JsonConvert.SerializeObject(i_Question);
             StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
             HttpResponseMessage response = await GetHttpClient().PostAsync(endPointQueryUri, content);
+            string questionId= await response.Content.ReadAsStringAsync();
+            result.ReturnValue = long.Parse(questionId);
+
+            //result.ReturnValue = long.Parse(response.Content.ToString());
             if (!response.IsSuccessStatusCode)
             {
                 //handle ba

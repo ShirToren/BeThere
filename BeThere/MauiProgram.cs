@@ -28,6 +28,13 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 fonts.AddFont("OpenSans-Bold.ttf", "OpenSansBold");
                 fonts.AddFont("Sitka.ttc", "Sitka");
+
+                fonts.AddFont("Metropolis-Black.otf", "Metropolis Black");
+                fonts.AddFont("Metropolis-Light.otf", "Metropolis Light");
+                fonts.AddFont("Metropolis-Medium.otf", "Metropolis Medium");
+                fonts.AddFont("Metropolis-Regular.otf", "Metropolis Regular");
+                fonts.AddFont("Metropolis-Regular.otf", "Metropolis Regular");
+                fonts.AddFont("MaterialIcons-Regular.ttf", "Material Icons");
             });
 
 
@@ -41,7 +48,7 @@ public static class MauiProgram
 #endif
 
         //builder.Services.AddSingleton<MainPage>();
-        builder.Services.AddSingleton<MapPage>();
+        builder.Services.AddTransient<MapPage>();
         builder.Services.AddSingleton<ChatPage>();
         builder.Services.AddTransient<DetailsQuestionPage>();
         builder.Services.AddTransient<LoadingPage>();
