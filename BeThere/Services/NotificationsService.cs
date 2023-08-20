@@ -30,7 +30,7 @@ namespace BeThere.Services
         private async void TimerCallback(object state)
         {
             ResultUnit<List<QuestionToAsk>> response = await TryGetNotifications();
-            ResultUnit<List<Answer>> answersResponse = await TryGetNewAnswers();
+            ResultUnit<List<UserAnswer>> answersResponse = await TryGetNewAnswers();
 
             lock (sr_ListLock)
             {
@@ -103,16 +103,16 @@ namespace BeThere.Services
             }
         }
 
-        public async Task<ResultUnit<List<Answer>>> TryGetNewAnswers()
+        public async Task<ResultUnit<List<UserAnswer>>> TryGetNewAnswers()
         {
-            ResultUnit<List<Answer>> result = new ResultUnit<List<Answer>>();
+            ResultUnit<List<UserAnswer>> result = new ResultUnit<List<UserAnswer>>();
             string username = ConnectedUser.Username;
             string endPointQueryUri = $"api/Answer?UserName={username}";
             HttpResponseMessage response = await GetHttpClient().GetAsync(endPointQueryUri);
             if (response.IsSuccessStatusCode)
             {
                 string jsonResponse = await response.Content.ReadAsStringAsync();
-                List<Answer> newAnswers = JsonConvert.DeserializeObject<List<Answer>>(jsonResponse);
+                List<UserAnswer> newAnswers = JsonConvert.DeserializeObject<List<UserAnswer>>(jsonResponse);
                 result.ReturnValue = newAnswers;
             }
             else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
@@ -130,6 +130,6 @@ namespace BeThere.Services
         }
 
         public List<QuestionToAsk> Notifications { get; set; }
-        public List<Answer> NewAnswers { get; set; }
+        public List<UserAnswer> NewAnswers { get; set; }
     }
 }

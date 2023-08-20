@@ -10,7 +10,7 @@ namespace BeThere.Services
 {
     public class AnswerService : BaseService
     {
-        public async Task<ResultUnit<string>> TryPostNewAnswer(Answer i_Answer)
+        public async Task<ResultUnit<string>> TryPostNewAnswer(UserAnswer i_Answer)
         {
             ResultUnit<string> result = new ResultUnit<string>();
             string endPointQueryUri = $"api/Answer?UserName={ConnectedUser.Username}";
