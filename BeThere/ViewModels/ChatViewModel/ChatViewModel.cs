@@ -55,6 +55,14 @@ namespace BeThere.ViewModels.ChatViewModel
             });
         }
 
+        public void clearMessages()
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                AllMessages = String.Empty;
+            });
+        }
+
         private async Task sendMessageClicked()
         {
             if (IsBusy == true)

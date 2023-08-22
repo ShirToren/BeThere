@@ -7,14 +7,14 @@ namespace BeThere.Views;
 
 public partial class PopupPage
 {
-    private QuestionToAsk m_QuestionsList;
+    private QuestionToAsk m_Question;
     private AnswerService m_AnswerService;
-    public PopupPage(QuestionToAsk i_QuestionsList, AnswerService i_AnswerService)
+    public PopupPage(QuestionToAsk i_Question, AnswerService i_AnswerService)
     {
         InitializeComponent();
-        m_QuestionsList = i_QuestionsList;
+        m_Question = i_Question;
         m_AnswerService =  i_AnswerService;
-        QuestionLabel.Text = m_QuestionsList.Question;
+        QuestionLabel.Text = m_Question.Question;
     }
     private void CloseButton_Clicked(object sender, EventArgs e)
     {
@@ -26,15 +26,16 @@ public partial class PopupPage
         //await GoToChatPage();
         Guid guid = Guid.NewGuid();
         string uuidString = guid.ToString();
-        UserAnswer newAnswer = new UserAnswer(LogedInUser.LogedInUserName(), AnswerText.Text, m_QuestionsList.Question, uuidString);
+        UserAnswer newAnswer = new UserAnswer(LogedInUser.LogedInUserName(), AnswerText.Text, m_Question.QuestionId, uuidString, DateTime.Now);
         await m_AnswerService.TryPostNewAnswer(newAnswer);
         await MopupService.Instance.PopAsync();
     }
+
     public async Task GoToChatPage()
     {
         var navigationParameter = new Dictionary<string, object>
         {
-            ["ChatRoomId"] = m_QuestionsList.ChatRoomId
+            ["ChatRoomId"] = m_Question.ChatRoomId
         };
         await Shell.Current.GoToAsync($"{nameof(ChatPage)}", navigationParameter);
        // await Shell.Current.GoToAsync(nameof(ChatPage));

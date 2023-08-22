@@ -21,7 +21,7 @@
         
         <CollectionView BackgroundColor="Transparent"
                         Grid.ColumnSpan="1"
-                        ItemsSource="{Binding PreviousQuestions}"
+                        ItemsSource="{Binding UsersPreviousQuestions}"
                         SelectedItem="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="modle:QuestionToAsk">

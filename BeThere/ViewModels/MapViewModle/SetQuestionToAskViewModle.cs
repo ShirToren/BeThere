@@ -13,8 +13,10 @@ namespace BeThere.ViewModels
 
     public partial class SetQestionToAskViewModle : BaseViewModels
     {
+
         private QuestionAskedService m_SendQuestionService;
         private ChatService m_ChatService;
+        private SharedDataSource m_SharedDateSource;
         public Command SendQuestionCommand { get; }
         private QuestionToAsk m_QuestionToAsk;
 
@@ -31,10 +33,11 @@ namespace BeThere.ViewModels
         bool isRadiusSet;
 
 
-        public SetQestionToAskViewModle(QuestionAskedService i_SendQuestionService, ChatService i_ChatService)
+        public SetQestionToAskViewModle(QuestionAskedService i_SendQuestionService, ChatService i_ChatService, SharedDataSource i_SharedDateSource)
         {
             m_SendQuestionService = i_SendQuestionService;
             m_ChatService = i_ChatService;
+            m_SharedDateSource = i_SharedDateSource;
             m_QuestionToAsk = new QuestionToAsk();
             SendQuestionCommand = new Command(async () => await sendQuestionClicked());
         }
@@ -53,19 +56,22 @@ namespace BeThere.ViewModels
             {
                 IsBusy = true;
                 setQuestionLocationDetails();
-                Guid guid = Guid.NewGuid();
-                string uuidString = guid.ToString();
 
+                Guid guidForQuestionId = Guid.NewGuid();
+                Guid guidForChatRoomId = Guid.NewGuid();
 
-                m_QuestionToAsk.ChatRoomId = uuidString;
+                m_QuestionToAsk.QuestionId = guidForQuestionId.ToString();
+                m_QuestionToAsk.ChatRoomId = guidForChatRoomId.ToString();
 
-                ResultUnit<long> response = await m_SendQuestionService.TryPostNewQuestion(m_QuestionToAsk);
+                ResultUnit<string> response = await m_SendQuestionService.TryPostNewQuestion(m_QuestionToAsk);
 
-                sendNotification();
+                HistoryData.AddQuestion(m_QuestionToAsk.QuestionId, m_QuestionToAsk);
+                HistoryData.AddNewAnswersItem(m_QuestionToAsk.QuestionId);
+
+                m_SharedDateSource.UsersPreviousQuestions.Add(m_QuestionToAsk);
 
                 if (response.IsSuccess == true)
                 {
-                    m_QuestionToAsk.QuestionId = response.ReturnValue;
                     await m_ChatService.JoinChatRoom(m_QuestionToAsk.ChatRoomId);
                     await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
                 }
@@ -117,5 +123,6 @@ namespace BeThere.ViewModels
 
             await LocalNotificationCenter.Current.Show(notification);
         }
+
     }
 }

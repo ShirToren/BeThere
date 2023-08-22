@@ -8,8 +8,7 @@ using BeThere.Models;
 using Plugin.LocalNotification;
 using Mopups.Interfaces;
 using BeThere.Views;
-
-
+using BeThere.ViewModels;
 
 namespace BeThere.Services
 {
@@ -40,18 +39,22 @@ namespace BeThere.Services
             if(response.ReturnValue.Count > 0)
             {
                 await sendNotification();
-                await popupNavigation.PushAsync(new PopupPage(Notifications[0], m_AnswerService));
+                await popupNavigation.PushAsync(new PopupPage(response.ReturnValue[0], m_AnswerService));
             }
             if(answersResponse.ReturnValue.Count > 0)
             {
-                string shir = String.Empty;
+                //save it to answers dictionary
+                foreach(UserAnswer answer in answersResponse.ReturnValue)
+                {
+                    HistoryData.AddSingelAnswer(answer.QuestionId, answer);
+                    //if details page is showing this question, add directly to current answers list on shared data
+                }
             }
         }
 
         public async Task<ResultUnit<List<QuestionToAsk>>> TryGetNotifications()
         {
             ResultUnit<List<QuestionToAsk>> result = new ResultUnit<List<QuestionToAsk>>();
-            //string username = ConnectedUser.Username;
             string username = ConnectedUser.Username;
             string endPointQueryUri = $"api/Notifications?UserName={username}";
             HttpResponseMessage response = await GetHttpClient().GetAsync(endPointQueryUri);

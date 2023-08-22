@@ -1,4 +1,7 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using BeThere.Models;
+using CommunityToolkit.Mvvm.ComponentModel;
+using System.Collections.ObjectModel;
+
 
 namespace BeThere.ViewModels
 {
@@ -12,7 +15,6 @@ namespace BeThere.ViewModels
         private string title;
 
         public bool IsNotBusy => !IsBusy;
-
     }
 }
 

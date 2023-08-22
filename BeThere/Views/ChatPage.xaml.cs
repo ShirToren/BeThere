@@ -5,57 +5,23 @@ using Microsoft.AspNetCore.SignalR.Client;
 
 public partial class ChatPage : ContentPage
 {
-    //private readonly HubConnection _connection;
+    private readonly ChatViewModel r_ChatViewModel;
     public ChatPage(ChatViewModel i_ChatViewModel)
 	{
 		InitializeComponent();
         BindingContext = i_ChatViewModel;
-
-/*        var baseUrl = "http://localhost";
-
-        // Android can't connect to localhost
-        if (DeviceInfo.Current.Platform == DevicePlatform.Android)
-        {
-            baseUrl = "http://10.0.2.2";
-        }
-
-        _connection = new HubConnectionBuilder()
-            .WithUrl($"{baseUrl}:5209/chat")
-            .Build();*/
-
-
-/*        _connection = new HubConnectionBuilder()
-            .WithUrl("http://10.0.2.2:5209/chat")
-            .Build();*/
-
-/*        _connection.On<string>("MessageReceived", (message) =>
-        {
-            Dispatcher.Dispatch(new Action(() =>
-            {
-                chatMessages.Text += $"{Environment.NewLine}{message}";
-            }));
-            
-        });*/
-
-/*
-
-        Task.Run(() =>
-        {
-            Dispatcher.Dispatch(async () =>
-            await _connection.StartAsync());
-        });*/
+        r_ChatViewModel = i_ChatViewModel;
     }
-
-    /*    private async void OnSendClicked(object sender, EventArgs e)
-        {
-            await _connection.InvokeCoreAsync("SendMessage", args: new[] {
-                "User name: ",
-                myChatMessage.Text });
-
-            myChatMessage.Text = String.Empty;
-        }*/
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
         base.OnNavigatedTo(args);
+    }
+
+    protected override void OnDisappearing()
+    {
+        // Perform actions when the page is about to disappear
+        // This could include cleanup, saving data, etc.
+        r_ChatViewModel.clearMessages();
+        base.OnDisappearing();
     }
 }

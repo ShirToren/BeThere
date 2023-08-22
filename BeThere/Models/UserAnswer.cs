@@ -12,14 +12,16 @@ namespace BeThere.Models
         public string Text { get; set; }
         public string QuestionId { get; set; } 
         public string ChatRoomId { get; set; }
+        public DateTime Timestamp { get; set; }
 
 
-        public UserAnswer(string i_UserName, string i_Text, string i_QuestionId, string i_ChatRoomId)
+        public UserAnswer(string i_UserName, string i_Text, string i_QuestionId, string i_ChatRoomId, DateTime i_Timestamp)
         {
             Username = i_UserName;
             Text = i_Text;
             QuestionId = i_QuestionId;
             ChatRoomId = i_ChatRoomId;
+            Timestamp = i_Timestamp;
         }
     }
 }

@@ -24,9 +24,9 @@ namespace BeThere.Models
             set { m_Question = value;}
         }
 
-        private long m_QuestionId;
+        private string m_QuestionId;
 
-        public long QuestionId
+        public string QuestionId
         {
             get { return m_QuestionId; }
             set { m_QuestionId = value; }
