@@ -5,24 +5,27 @@ using System.Collections.ObjectModel;
 using BeThere.Services;
 using BeThere.Views;
 using Plugin.LocalNotification;
-
+using CommunityToolkit.Mvvm.ComponentModel;
+using System.Windows.Input;
+using System.Collections.Specialized;
+using System.ComponentModel;
 
 namespace BeThere.ViewModels
 {
-    public class UsersHistoryViewModle : BaseViewModels
+    public partial class HomeViewModle : BaseViewModels
     {
         private QuestionAskedService m_HistoryService;
         private UpdateLocationService m_UpdateLocationService;
         private NotificationsService m_NotificationService;
-        private SharedDataSource m_SharedDataSource;
 
-        public ObservableCollection<QuestionToAsk> UsersPreviousQuestions => m_SharedDataSource.UsersPreviousQuestions;
+        public ObservableCollection<QuestionToAsk> UsersPreviousQuestions => SharedDataSource.UsersPreviousQuestions;
 
         public Command GoToDetailsCommand { get; }
         public Command AskNewQuestionCommand { get; }
 
 
-        public UsersHistoryViewModle(QuestionAskedService i_HistoryService, UpdateLocationService i_UpdateLocationService, NotificationsService i_NotificationService, SharedDataSource i_SharedDateSource)
+
+        public HomeViewModle(QuestionAskedService i_HistoryService, UpdateLocationService i_UpdateLocationService, NotificationsService i_NotificationService)
         {
             Title = "My questions";
             m_HistoryService = i_HistoryService;
@@ -31,8 +34,8 @@ namespace BeThere.ViewModels
             AskNewQuestionCommand = new Command(async () => await GoToMapPage());
             Task task = GetAllPreviousQuestion();
             m_NotificationService = i_NotificationService;
-            m_SharedDataSource = i_SharedDateSource;
         }
+
 
         public async Task GoToDetailsPage(QuestionToAsk i_QuestionTappted)
         {
@@ -54,7 +57,6 @@ namespace BeThere.ViewModels
 
         public async Task GoToMapPage()
         {
-            //await sendNotification();
             await Shell.Current.GoToAsync(nameof(MapPage));
         }
 
@@ -80,20 +82,21 @@ namespace BeThere.ViewModels
                         UsersPreviousQuestions.Clear();
                     }
 
-                    foreach (var KeyValue in response.ReturnValue)
-                    {
-                        HistoryData.AddQuestion(KeyValue.Key, KeyValue.Value.Item1);
-                        UsersPreviousQuestions.Add(KeyValue.Value.Item1);
+                        foreach (var KeyValue in response.ReturnValue)
+                        {
+                            HistoryData.AddQuestion(KeyValue.Key, KeyValue.Value.Item1);
+                            UsersPreviousQuestions.Add(KeyValue.Value.Item1);
 
-                        if(KeyValue.Value.Item2 != null)
-                        {
-                            HistoryData.AddAnswersItem(KeyValue.Key, KeyValue.Value.Item2);
+                            if (KeyValue.Value.Item2 != null)
+                            {
+                                HistoryData.AddAnswersItem(KeyValue.Key, KeyValue.Value.Item2);
+                            }
+                            else
+                            {
+                                HistoryData.AddNewAnswersItem(KeyValue.Key);
+                            }
                         }
-                        else
-                        {
-                            HistoryData.AddNewAnswersItem(KeyValue.Key);
-                        }
-                    }
+                    
                 }
 
                 else

@@ -28,6 +28,13 @@ public partial class PopupPage
         string uuidString = guid.ToString();
         UserAnswer newAnswer = new UserAnswer(LogedInUser.LogedInUserName(), AnswerText.Text, m_Question.QuestionId, uuidString, DateTime.Now);
         await m_AnswerService.TryPostNewAnswer(newAnswer);
+        foreach(QuestionToAsk question in SharedDataSource.UsersPreviousQuestions)
+        {
+            if (question.QuestionId.Equals(newAnswer.QuestionId))
+            {
+                question.NumOfAnswers++;
+            }
+        }
         await MopupService.Instance.PopAsync();
     }
 

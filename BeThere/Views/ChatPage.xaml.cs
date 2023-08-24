@@ -19,9 +19,7 @@ public partial class ChatPage : ContentPage
 
     protected override void OnDisappearing()
     {
-        // Perform actions when the page is about to disappear
-        // This could include cleanup, saving data, etc.
-        r_ChatViewModel.clearMessages();
+       r_ChatViewModel.clearMessages();
         base.OnDisappearing();
     }
 }

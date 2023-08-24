@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:modle ="clr-namespace:BeThere.Models"
              xmlns:viewmodel ="clr-namespace:BeThere.ViewModels"
-             x:DataType="viewmodel:UsersHistoryViewModle"
+             x:DataType="viewmodel:HomeViewModle"
              x:Class="BeThere.MainPage"
              Title="{Binding Title}">
 
@@ -21,8 +21,7 @@
         
         <CollectionView BackgroundColor="Transparent"
                         Grid.ColumnSpan="1"
-                        ItemsSource="{Binding UsersPreviousQuestions}"
-                        SelectedItem="None">
+                        ItemsSource="{Binding UsersPreviousQuestions}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="modle:QuestionToAsk">
                     <Grid >
@@ -30,11 +29,11 @@
                                Padding="0">
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer CommandParameter="{Binding .}"
-                                                      Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:UsersHistoryViewModle}}, Path=GoToDetailsCommand}"/>
+                                                      Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomeViewModle}}, Path=GoToDetailsCommand}"/>
                             </Frame.GestureRecognizers>
-                            <Grid Padding="0"
+                                <Grid Padding="0"
                                   ColumnDefinitions="*,20">
-                                <Label Text="0" Grid.Column="1" HorizontalOptions="StartAndExpand"/>
+                                    <Label Text="{Binding NumOfAnswers}" Grid.Column="1" HorizontalOptions="StartAndExpand"/>
                                 <Image Aspect="Fill"
                                        Source="arrow2.png"
                                        HorizontalOptions="EndAndExpand"

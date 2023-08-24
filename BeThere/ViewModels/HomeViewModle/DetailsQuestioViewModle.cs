@@ -13,19 +13,15 @@ namespace BeThere.ViewModels
 
     public partial class DetailsQuestionViewModle : BaseViewModels
     {
-        //private ObservableCollection<UserAnswer> answers;
         private ChatService m_ChatService;
-        private SharedDataSource m_SharedDataSource;
         public ICommand ChatCommand { get; private set; }
-        public ObservableCollection<UserAnswer> CurrentUserAnswers => m_SharedDataSource.CurrentUserAnswers;
+        public ObservableCollection<UserAnswer> CurrentUserAnswers => SharedDataSource.CurrentUserAnswers;
 
 
-        public DetailsQuestionViewModle(ChatService i_ChatService, SharedDataSource i_SharedDateSource)
+        public DetailsQuestionViewModle(ChatService i_ChatService)
         {
-            //answers = new ObservableCollection<UserAnswer>();
             ChatCommand = new Command<UserAnswer>(chatClicked);
             m_ChatService = i_ChatService;
-            m_SharedDataSource = i_SharedDateSource;
         }
 
         private async void chatClicked(UserAnswer item)

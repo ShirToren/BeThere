@@ -16,7 +16,6 @@ namespace BeThere.ViewModels
 
         private QuestionAskedService m_SendQuestionService;
         private ChatService m_ChatService;
-        private SharedDataSource m_SharedDateSource;
         public Command SendQuestionCommand { get; }
         private QuestionToAsk m_QuestionToAsk;
 
@@ -33,11 +32,10 @@ namespace BeThere.ViewModels
         bool isRadiusSet;
 
 
-        public SetQestionToAskViewModle(QuestionAskedService i_SendQuestionService, ChatService i_ChatService, SharedDataSource i_SharedDateSource)
+        public SetQestionToAskViewModle(QuestionAskedService i_SendQuestionService, ChatService i_ChatService)
         {
             m_SendQuestionService = i_SendQuestionService;
             m_ChatService = i_ChatService;
-            m_SharedDateSource = i_SharedDateSource;
             m_QuestionToAsk = new QuestionToAsk();
             SendQuestionCommand = new Command(async () => await sendQuestionClicked());
         }
@@ -68,7 +66,7 @@ namespace BeThere.ViewModels
                 HistoryData.AddQuestion(m_QuestionToAsk.QuestionId, m_QuestionToAsk);
                 HistoryData.AddNewAnswersItem(m_QuestionToAsk.QuestionId);
 
-                m_SharedDateSource.UsersPreviousQuestions.Add(m_QuestionToAsk);
+                SharedDataSource.UsersPreviousQuestions.Add(m_QuestionToAsk);
 
                 if (response.IsSuccess == true)
                 {

@@ -22,17 +22,19 @@ namespace BeThere.Services
             {
                 string jsonResponse = await response.Content.ReadAsStringAsync();
                 m_usersPreviousQuestion = JsonConvert.DeserializeObject<Dictionary<string, Tuple<QuestionToAsk, QuestionAnswers>>>(jsonResponse);
-                foreach(KeyValuePair<string, Tuple<QuestionToAsk, QuestionAnswers>> keyValue in m_usersPreviousQuestion)
-                {
-                    string endPointQueryUriForList = $"api/Questions/List?QuestionId={keyValue.Key}";
-                    HttpResponseMessage responseForList = await GetHttpClient().GetAsync(endPointQueryUriForList);
-                    if (responseForList.IsSuccessStatusCode)
+
+                    foreach (KeyValuePair<string, Tuple<QuestionToAsk, QuestionAnswers>> keyValue in m_usersPreviousQuestion)
                     {
-                        string jsonResponseForList = await responseForList.Content.ReadAsStringAsync();
-                        List<UserAnswer> list = JsonConvert.DeserializeObject<List<UserAnswer>>(jsonResponseForList);
-                        keyValue.Value.Item2.userAnswers = list;
+                        string endPointQueryUriForList = $"api/Questions/List?QuestionId={keyValue.Key}";
+                        HttpResponseMessage responseForList = await GetHttpClient().GetAsync(endPointQueryUriForList);
+                        if (responseForList.IsSuccessStatusCode)
+                        {
+                            string jsonResponseForList = await responseForList.Content.ReadAsStringAsync();
+                            List<UserAnswer> list = JsonConvert.DeserializeObject<List<UserAnswer>>(jsonResponseForList);
+                            keyValue.Value.Item2.userAnswers = list;
+                        }
                     }
-                }
+                
                
                 result.ReturnValue = m_usersPreviousQuestion;
             }

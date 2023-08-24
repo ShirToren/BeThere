@@ -4,9 +4,11 @@ namespace BeThere;
 
 public partial class MainPage : ContentPage
 {
-    public MainPage(UsersHistoryViewModle i_HistoryViewModle)
+    private HomeViewModle m_HomeViewModel;
+    public MainPage(HomeViewModle i_HomeViewModle)
     {
         InitializeComponent();
-        BindingContext = i_HistoryViewModle;
+        BindingContext = i_HomeViewModle;
+        m_HomeViewModel = i_HomeViewModle;
     }
 }
