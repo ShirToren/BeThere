@@ -13,5 +13,6 @@ namespace BeThere
         public static ObservableCollection<QuestionToAsk> UsersPreviousQuestions { get; } = new ObservableCollection<QuestionToAsk>();
         public static ObservableCollection<UserAnswer> CurrentUserAnswers { get; } = new ObservableCollection<UserAnswer>();
         public static ObservableCollection<ChatMessage> CurrentChatMessages { get; } = new ObservableCollection<ChatMessage>();
+        public static QuestionToAsk CurrentQuestion { get; set; }
     }
 }

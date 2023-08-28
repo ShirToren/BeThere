@@ -16,5 +16,6 @@ public partial class DetailsQuestionPage : ContentPage
     {
         base.OnNavigatedTo(args);
         m_DetailsViewModle.UpdateAnswersList();
+        SharedDataSource.CurrentQuestion = m_DetailsViewModle.Question;
     }
 }

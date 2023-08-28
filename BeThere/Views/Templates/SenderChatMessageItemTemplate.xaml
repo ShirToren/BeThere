@@ -32,14 +32,14 @@
             <Color x:Key="MessageColor">#F7F7F8</Color>
 
             <Style x:Key="MessageShapeStyle" TargetType="BoxView">
-                <Setter Property="BackgroundColor" Value="{StaticResource MessageColor}" />
+                <Setter Property="Color" Value="{StaticResource MessageColor}" />
                 <Setter Property="CornerRadius" Value="24, 24, 0, 24" />
             </Style>
 
             <Style x:Key="MessageTextStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="12" />
                 <Setter Property="FontFamily" Value="Metropolis Regular" />
-                <Setter Property="TextColor" Value="White" />
+                <Setter Property="TextColor" Value="Black" />
                 <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="Padding" Value="12, 0" />
             </Style>

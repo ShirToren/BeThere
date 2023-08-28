@@ -27,6 +27,9 @@ namespace BeThere.ViewModels
         [ObservableProperty]
         private string? confirmPassword;
 
+        [ObservableProperty]
+        private string ageEntryText;
+
         public UserData User { get { return m_UserData; } }
 
 
@@ -39,7 +42,7 @@ namespace BeThere.ViewModels
                 return;
             }
 
-            canRegister = validateMandatoryFieldsFilled() && validatePassword();
+            canRegister = validateMandatoryFieldsFilled() && validatePassword() && validateAge();
 
             if (canRegister == true)
             {
@@ -78,14 +81,39 @@ namespace BeThere.ViewModels
         {
             bool isValidData = true;
 
-            if (m_UserData.Username is null || m_UserData.Password is null || m_UserData.Email is null || ConfirmPassword is null)
+            if (m_UserData.Username is null || m_UserData.Password is null || m_UserData.Email is null || ConfirmPassword is null || m_UserData.Gender is null || m_UserData.FullName is null)
             {
                 InvalidRegisterMessage = "Please fill all requered fileds";
-                m_UserData.Password = string.Empty;
-                ConfirmPassword = string.Empty;
+                m_UserData.Password = null;
+                ConfirmPassword = null;
                 isValidData = false;
             }
 
+            return isValidData;
+        }
+
+        private bool validateAge()
+        {
+            bool isValidData = true; 
+            if (!int.TryParse(AgeEntryText, out int age))
+            {
+                InvalidRegisterMessage = "Please fill a valid age";
+                AgeEntryText = String.Empty;
+                isValidData = false;
+            }
+            else
+            {
+                if (age < 1 || age > 200)
+                {
+                    InvalidRegisterMessage = "Please fill a valid age";
+                    AgeEntryText = String.Empty;
+                    isValidData = false;
+                }
+                else
+                {
+                    m_UserData.Age = age;
+                }
+            }
             return isValidData;
         }
 

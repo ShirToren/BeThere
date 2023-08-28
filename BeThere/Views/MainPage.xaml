@@ -8,25 +8,34 @@
              Title="{Binding Title}">
 
     <StackLayout>
-      <Button Text="Send Question"
-              Command="{Binding AskNewQuestionCommand}">
-      </Button>
+        <Button Text="Send Question"
+              Command="{Binding AskNewQuestionCommand}"
+              HorizontalOptions="FillAndExpand">
+        </Button>
 
     <Grid ColumnDefinitions="*,*"
           ColumnSpacing="5"
           RowDefinitions="*,Auto"
-          RowSpacing="0">
+          RowSpacing="0"
+          Margin="5">
+        
 
     
         
         <CollectionView BackgroundColor="Transparent"
-                        Grid.ColumnSpan="1"
+                        Grid.ColumnSpan="2"
                         ItemsSource="{Binding UsersPreviousQuestions}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="modle:QuestionToAsk">
                     <Grid >
-                        <Frame HeightRequest="50" 
-                               Padding="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Frame Grid.Row="1"
+                                HeightRequest="50" 
+                               Padding="0"
+                               HorizontalOptions="FillAndExpand">
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer CommandParameter="{Binding .}"
                                                       Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomeViewModle}}, Path=GoToDetailsCommand}"/>

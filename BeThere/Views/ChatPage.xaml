@@ -14,14 +14,14 @@
                 <templates:SenderChatMessageItemTemplate />
             </DataTemplate>
 
-            <!--<DataTemplate x:Key="ReceiverMessageItemTemplate">
+            <DataTemplate x:Key="ReceiverMessageItemTemplate">
                 <templates:ReceiverChatMessageItemTemplate />
-            </DataTemplate>-->
+            </DataTemplate>
 
-            <!--<templates:MessageDataTemplateSelector 
+            <templates:MessageDataTemplateSelector 
                x:Key="MessageDataTemplateSelector"             
                SenderMessageTemplate="{StaticResource SenderMessageItemTemplate}"    
-               ReceiverMessageTemplate="{StaticResource ReceiverMessageItemTemplate}"/>-->
+               ReceiverMessageTemplate="{StaticResource ReceiverMessageItemTemplate}"/>
 
             <Style x:Key="NavigationButtonContainerStyle" TargetType="Grid">
                 <Setter Property="Margin" Value="24, 12" />
@@ -119,9 +119,10 @@
 
 
     <ContentPage.Content>
-        <Grid      
+       
+            <Grid      
             BackgroundColor="White"
-            RowDefinitions="220, *">
+            >
             <!--<Grid 
                 Grid.Row="0"
                 RowDefinitions="Auto, 150">
@@ -181,7 +182,7 @@
                     <Grid>
                         <CollectionView 
                             ItemsSource="{Binding CurrentChatMessages}"
-                            ItemTemplate="{StaticResource SenderMessageItemTemplate}"
+                            ItemTemplate="{StaticResource MessageDataTemplateSelector}"
                             Style="{StaticResource ChatCollectionStyle}" />
                     </Grid>
                     <Frame
@@ -217,6 +218,7 @@
                 </Grid>
             </Grid>
         </Grid>
+      
     </ContentPage.Content>
 
 

@@ -43,11 +43,14 @@ namespace BeThere.Services
             }
             if(answersResponse.ReturnValue.Count > 0)
             {
-                //save it to answers dictionary
                 foreach(UserAnswer answer in answersResponse.ReturnValue)
                 {
                     HistoryData.AddSingelAnswer(answer.QuestionId, answer);
-                    //if details page is showing this question, add directly to current answers list on shared data
+                    //if details page is showing this question, add new answers directly to current answers list on shared data
+                    if (SharedDataSource.CurrentQuestion != null && (SharedDataSource.CurrentQuestion.QuestionId.Equals(answer.QuestionId)))
+                    {
+                        SharedDataSource.CurrentUserAnswers.Add(answer);
+                    }
                 }
             }
         }

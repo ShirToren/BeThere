@@ -71,6 +71,7 @@ namespace BeThere.ViewModels
         [ObservableProperty]
         private QuestionToAsk question;
 
+
         [ObservableProperty]
         private string questionAskedAddress;
 

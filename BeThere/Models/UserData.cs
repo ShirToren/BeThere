@@ -23,12 +23,12 @@ namespace BeThere.Models
             set { m_Password = value; OnPropertyChanged(nameof(Password)); }
         }
 
-        private string m_Age;
+        private int m_Age;
 
-        public string Age
+        public int Age
         {
             get { return m_Age; }
-            set { m_Age = value; OnPropertyChanged(m_Age); }
+            set { m_Age = value; OnPropertyChanged(nameof(Age)); }
         }
 
         private string m_Email;
@@ -47,12 +47,12 @@ namespace BeThere.Models
             set { m_Gender = value; OnPropertyChanged(nameof(m_Gender)); }
         }
 
-        private string? m_Name;
+        private string m_FullName;
 
-        public string? Name
+        public string FullName
         {
-            get { return m_Name; }
-            set { m_Name = value; OnPropertyChanged(nameof(m_Name)); }
+            get { return m_FullName; }
+            set { m_FullName = value; OnPropertyChanged(nameof(m_FullName)); }
         }
 
 
@@ -62,8 +62,8 @@ namespace BeThere.Models
         {
             Username = string.Empty;
             Password = string.Empty;
-            Age = string.Empty;
-            Name = string.Empty;
+            Age = 0;
+            FullName = string.Empty;
             Email = string.Empty;
             Gender = string.Empty;
         }
