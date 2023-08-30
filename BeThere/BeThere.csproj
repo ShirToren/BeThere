@@ -85,10 +85,18 @@
 	  <BundleResource Include="Resources\Images\beeicon.png" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Compile Update="Views\PopupQuestionPage.xaml.cs">
+	    <DependentUpon>PopupQuestionPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+	<ItemGroup>
 	  <MauiXaml Update="Views\ChatPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\PopupPage.xaml">
+	  <MauiXaml Update="Views\PopupAnswerPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\PopupQuestionPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Templates\ReceiverChatMessageItemTemplate.xaml">

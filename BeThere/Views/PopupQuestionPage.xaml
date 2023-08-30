@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
              xmlns:mopupsanim="clr-namespace:Mopups.Animations;assembly=Mopups"
-             x:Class="BeThere.Views.PopupPage"
+             x:Class="BeThere.Views.PopupQuestionPage"
              Title="MyPopupPage" BackgroundColor="#80000000" CloseWhenBackgroundIsClicked="False">
     <!--<mopups:PopupPage.Animation>
         <mopupsanim:ScaleAnimation
@@ -23,19 +23,21 @@
             </Border.StrokeShape>
             <VerticalStackLayout Spacing="3">
                 <Label
-                Text="New question"
                 Margin="10,5"
+                Text="New question"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"/>
                 <Label
-                x:Name="QuestionLabel" 
+                x:Name="DescriptionLabel" 
                 Margin="10,5"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"/>
 
                 <Entry x:Name="AnswerText" BackgroundColor="Transparent" Placeholder="Enter your answer" 
                            TextColor="Black" Margin="5,0"
-                           PlaceholderColor="Gray" />
+                           PlaceholderColor="Gray"
+                       VerticalOptions="Center"
+HorizontalOptions="Center"/>
                 <Button
                 x:Name="CloseButton"
                 Margin="10,5"
@@ -47,9 +49,9 @@
                 <Button
                 x:Name="AnswerButton"
                 Margin="10,5"
+                Text="Answer"
                 HorizontalOptions="Fill"
                 VerticalOptions="EndAndExpand"
-                Text="Answer"
                 Clicked="AnswerButton_Clicked">
                 </Button>
             </VerticalStackLayout>

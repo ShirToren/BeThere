@@ -182,7 +182,7 @@
                     <Grid>
                         <CollectionView 
                             ItemsSource="{Binding CurrentChatMessages}"
-                            ItemTemplate="{StaticResource MessageDataTemplateSelector}"
+                            ItemTemplate="{StaticResource SenderMessageItemTemplate}"
                             Style="{StaticResource ChatCollectionStyle}" />
                     </Grid>
                     <Frame

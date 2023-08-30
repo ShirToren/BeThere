@@ -44,5 +44,16 @@ namespace BeThere
                 return new List<UserAnswer>();
             }
         }
+        public static QuestionToAsk GetQuestionObjectByQuestionId(string i_QuestionId)
+        {
+            if (sr_AllQuestions.ContainsKey(i_QuestionId))
+            {
+                return sr_AllQuestions[i_QuestionId];
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

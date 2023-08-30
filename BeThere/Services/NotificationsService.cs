@@ -9,6 +9,7 @@ using Plugin.LocalNotification;
 using Mopups.Interfaces;
 using BeThere.Views;
 using BeThere.ViewModels;
+using Mopups.Services;
 
 namespace BeThere.Services
 {
@@ -18,12 +19,58 @@ namespace BeThere.Services
         IPopupNavigation popupNavigation;
         private static readonly Object sr_ListLock = new object();
         private AnswerService m_AnswerService;
-        public NotificationsService(IPopupNavigation popupNavigation, AnswerService i_AnswerService)
+        private ChatService m_ChatService;
+        public NotificationsService(IPopupNavigation popupNavigation, AnswerService i_AnswerService, ChatService i_ChatService)
         {
             this.popupNavigation = popupNavigation;
             r_Timer = new Timer(TimerCallback, null, TimeSpan.Zero, TimeSpan.FromSeconds(5));
             Notifications = new List<QuestionToAsk>();
             m_AnswerService = i_AnswerService;
+            m_ChatService = i_ChatService;
+            LocalNotificationCenter.Current.NotificationActionTapped += Current_NotificationActionTapped;
+        }
+
+        private async void Current_NotificationActionTapped(Plugin.LocalNotification.EventArgs.NotificationActionEventArgs e)
+        {
+            if (e.IsTapped)
+            {
+                string returningData = e.Request.ReturningData;
+                if(returningData.Equals("Question"))
+                {
+                    ///push popup if not pushed
+                }
+                else
+                {
+                    QuestionToAsk question = HistoryData.GetQuestionObjectByQuestionId(returningData);
+                    String LocationAddress = new String(await question.Location.GetLocationAdress());
+                    var navigationParameter = new Dictionary<string, object>
+                    {
+                        ["Question"] = question,
+                        ["QuestionAddress"] = LocationAddress.ToString(),
+                    };
+
+                    try
+                    {
+                        await MopupService.Instance.PopAsync();
+                    } 
+                    catch (Exception ex)
+                    {
+
+                    }
+                    await Shell.Current.GoToAsync($"{nameof(DetailsQuestionPage)}", navigationParameter);
+                }
+            }
+            if (e.IsDismissed)
+            {
+                try
+                {
+                    await MopupService.Instance.PopAsync();
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
         }
 
         private async void TimerCallback(object state)
@@ -38,8 +85,8 @@ namespace BeThere.Services
             }
             if(response.ReturnValue.Count > 0)
             {
-                await sendNotification();
-                await popupNavigation.PushAsync(new PopupPage(response.ReturnValue[0], m_AnswerService));
+                await sendQuestionNotification();
+                await popupNavigation.PushAsync((Mopups.Pages.PopupPage)new PopupQuestionPage(response.ReturnValue[0], m_AnswerService, m_ChatService));
             }
             if(answersResponse.ReturnValue.Count > 0)
             {
@@ -51,6 +98,8 @@ namespace BeThere.Services
                     {
                         SharedDataSource.CurrentUserAnswers.Add(answer);
                     }
+                    await sendAnswerNotification();
+                    await popupNavigation.PushAsync((Mopups.Pages.PopupPage)new PopupAnswerPage(answer, m_AnswerService, m_ChatService));
                 }
             }
         }
@@ -81,7 +130,7 @@ namespace BeThere.Services
 
         }
 
-        private async Task sendNotification()
+        private async Task sendQuestionNotification()
         {
             //if (await LocalNotificationCenter.Current.AreNotificationsEnabled() == false)
             ///{
@@ -100,7 +149,7 @@ namespace BeThere.Services
                         NotificationId = 100,
                         Title = "New question",
                         Description = questionToAsk.Question,
-                        ReturningData = "Dummy data", // Returning data when tapped on notification.
+                        ReturningData = "Question", // Returning data when tapped on notification.
                         Schedule =
     {
         NotifyTime = DateTime.Now // Used for Scheduling local notification, if not specified notification will show immediately.
@@ -110,6 +159,33 @@ namespace BeThere.Services
                     LocalNotificationCenter.Current.Show(notification);
                 }
                 
+            }
+        }
+
+        private async Task sendAnswerNotification()
+        {
+
+            await LocalNotificationCenter.Current.RequestNotificationPermission();
+
+            lock (sr_ListLock)
+            {
+                foreach (UserAnswer userAnswer in NewAnswers)
+                {
+                    var notification = new NotificationRequest
+                    {
+                        NotificationId = 100,
+                        Title = "New answer",
+                        Description = "from " + userAnswer.Username,
+                        ReturningData = userAnswer.QuestionId, // Returning data when tapped on notification.
+                        Schedule =
+    {
+        NotifyTime = DateTime.Now // Used for Scheduling local notification, if not specified notification will show immediately.
+    }
+                    };
+
+                    LocalNotificationCenter.Current.Show(notification);
+                }
+
             }
         }
 
