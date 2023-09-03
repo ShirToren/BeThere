@@ -58,6 +58,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<SetQuestionPage>();
         builder.Services.AddSingleton<IPopupNavigation>(MopupService.Instance);
         builder.Services.AddTransient<MainPage>();
+        builder.Services.AddTransient<ChatHistoryPage>();
 
 
         builder.Services.AddTransient<AuthonticationService>();
@@ -79,6 +80,7 @@ public static class MauiProgram
         builder.Services.AddTransient<DetailsQuestionViewModle>();
         builder.Services.AddSingleton<PopupViewModel>();
         builder.Services.AddSingleton<ChatViewModel>();
+        builder.Services.AddSingleton<ChatHistoryViewModel>();
 
 
 

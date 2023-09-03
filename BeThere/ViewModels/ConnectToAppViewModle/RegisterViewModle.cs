@@ -6,7 +6,7 @@ using BeThere.Services;
 
 namespace BeThere.ViewModels
 {
-    public partial class RegisterViewModel : BaseViewModels
+    public partial class RegisterViewModel : BaseViewModel
     {
         private ConnectToAppService m_LoginService;
         private UserData m_UserData;

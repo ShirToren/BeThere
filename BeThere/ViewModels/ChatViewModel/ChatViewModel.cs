@@ -15,7 +15,7 @@ using System.Collections.ObjectModel;
 namespace BeThere.ViewModels.ChatViewModel
 {
     [QueryProperty(nameof(ChatRoomId), "ChatRoomId")]
-    public partial class ChatViewModel : BaseViewModels
+    public partial class ChatViewModel : BaseViewModel
     {
         private readonly ChatService r_ChatLogic;
         public Command SendMessageCommand { get; }

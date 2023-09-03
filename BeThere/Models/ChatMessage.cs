@@ -12,5 +12,16 @@ namespace BeThere.Models
         public string Content { get; set; }
         public DateTime Timestamp { get; set; }
         public string ChatRoomId { get; set; }
+        public ChatMessage(string sender, string content, DateTime time, string id)
+        {
+            Sender = sender;
+            Content = content;
+            Timestamp = time;
+            ChatRoomId = id;
+        }
+        public ChatMessage()
+        {
+                
+        }
     }
 }

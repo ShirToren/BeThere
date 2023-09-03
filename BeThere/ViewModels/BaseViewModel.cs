@@ -14,7 +14,7 @@ using System.Windows.Input;
 
 namespace BeThere.ViewModels
 {
-    public partial class BaseViewModels : ObservableObject
+    public partial class BaseViewModel : ObservableObject
     {
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(IsNotBusy))]

@@ -11,7 +11,7 @@ namespace BeThere.ViewModels
     [QueryProperty(nameof(LocationAddress), "Address")]
     [QueryProperty(nameof(Radius), "Radius")]
 
-    public partial class SetQestionToAskViewModle : BaseViewModels
+    public partial class SetQestionToAskViewModle : BaseViewModel
     {
 
         private QuestionAskedService m_SendQuestionService;

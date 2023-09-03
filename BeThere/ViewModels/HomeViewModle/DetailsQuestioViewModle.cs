@@ -11,7 +11,7 @@ namespace BeThere.ViewModels
     [QueryProperty(nameof(Question), "Question")]
     [QueryProperty(nameof(QuestionAskedAddress), "QuestionAddress")]
 
-    public partial class DetailsQuestionViewModle : BaseViewModels
+    public partial class DetailsQuestionViewModle : BaseViewModel
     {
         private ChatService m_ChatService;
         public ICommand ChatCommand { get; private set; }

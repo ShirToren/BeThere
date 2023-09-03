@@ -12,7 +12,7 @@ using System.ComponentModel;
 
 namespace BeThere.ViewModels
 {
-    public partial class HomeViewModle : BaseViewModels
+    public partial class HomeViewModle : BaseViewModel
     {
         private QuestionAskedService m_HistoryService;
         private UpdateLocationService m_UpdateLocationService;

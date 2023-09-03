@@ -5,7 +5,7 @@ using BeThere.Services;
 
 namespace BeThere.ViewModels
 {
-    public partial class ConnectToAppViewModle : BaseViewModels
+    public partial class ConnectToAppViewModle : BaseViewModel
     {
         public Command LoginCommand { get; }
         public Command RegisterCommand { get; }

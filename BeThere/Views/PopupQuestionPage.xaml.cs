@@ -28,7 +28,8 @@ public partial class PopupQuestionPage
             string uuidString = guid.ToString();
             UserAnswer newAnswer = new UserAnswer(LogedInUser.LogedInUserName(), AnswerText.Text, m_Question.QuestionId, uuidString, DateTime.Now);
             await m_AnswerService.TryPostNewAnswer(newAnswer);
-            await m_ChatService.JoinChatRoom(newAnswer.ChatRoomId);
+            //await m_ChatService.JoinChatRoom(newAnswer.ChatRoomId);
+            await m_ChatService.CreateChatRoom(newAnswer.ChatRoomId);
             foreach (QuestionToAsk question in SharedDataSource.UsersPreviousQuestions)
             {
                 if (question.QuestionId.Equals(newAnswer.QuestionId))
@@ -37,6 +38,6 @@ public partial class PopupQuestionPage
                 }
             }
   
-        await MopupService.Instance.PopAsync();
+            await MopupService.Instance.PopAsync();
     }
 }
