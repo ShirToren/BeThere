@@ -17,6 +17,7 @@ namespace BeThere.ViewModels
         private QuestionAskedService m_HistoryService;
         private UpdateLocationService m_UpdateLocationService;
         private NotificationsService m_NotificationService;
+        private ChatService m_ChatService;
 
         public ObservableCollection<QuestionToAsk> UsersPreviousQuestions => SharedDataSource.UsersPreviousQuestions;
 
@@ -25,7 +26,7 @@ namespace BeThere.ViewModels
 
 
 
-        public HomeViewModle(QuestionAskedService i_HistoryService, UpdateLocationService i_UpdateLocationService, NotificationsService i_NotificationService)
+        public HomeViewModle(QuestionAskedService i_HistoryService, UpdateLocationService i_UpdateLocationService, NotificationsService i_NotificationService, ChatService i_ChatService)
         {
             Title = "My questions";
             m_HistoryService = i_HistoryService;
@@ -34,6 +35,12 @@ namespace BeThere.ViewModels
             AskNewQuestionCommand = new Command(async () => await GoToMapPage());
             Task task = GetAllPreviousQuestion();
             m_NotificationService = i_NotificationService;
+            m_ChatService = i_ChatService;
+            Task.Run(() =>
+            {
+                MainThread.BeginInvokeOnMainThread(async () =>
+                await m_ChatService.StartConnection());
+            });
         }
 
 

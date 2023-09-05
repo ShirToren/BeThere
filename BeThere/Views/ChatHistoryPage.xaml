@@ -4,6 +4,7 @@
              xmlns:viewmodel ="clr-namespace:BeThere.ViewModels.ChatViewModel"
              xmlns:templates="clr-namespace:BeThere.Views.Templates"
              x:Class="BeThere.Views.ChatHistoryPage"
+             x:Name="MyPage"
              Title="ChatHistoryPage">
 
     <ContentPage.Resources>
@@ -85,6 +86,7 @@
                 <CollectionView
                   ItemsSource="{Binding AvailableChats}"
                    Style="{StaticResource RecentChatCollectionStyle}">
+
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <templates:RecentChatItemTemplate />

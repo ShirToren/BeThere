@@ -2,6 +2,7 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel="clr-namespace:BeThere.ViewModels"
+             xmlns:chatviewmodel="clr-namespace:BeThere.ViewModels.ChatViewModel"
              x:Class="BeThere.Views.Templates.RecentChatItemTemplate">
 
     <ContentView.Resources>
@@ -57,12 +58,24 @@
           ColumnDefinitions="Auto, *"
           RowSpacing="0"
           Margin="12, 24">
-            <!--<Grid.GestureRecognizers>
+            <Frame 
+                Grid.ColumnSpan="2"
+                WidthRequest="400"
+                HeightRequest="100"
+                Padding="0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Fill">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                      Command="{Binding Source={RelativeSource AncestorType={x:Type chatviewmodel:ChatHistoryViewModel}}, Path=ChatCommand}"/>
+                </Frame.GestureRecognizers>
+                </Frame>
+                <!--<Grid.GestureRecognizers>
                 <TapGestureRecognizer                
                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:HomeViewModel}}, Path=DetailCommand}"      
                     CommandParameter="{Binding}"/>
             </Grid.GestureRecognizers>-->
-            <Grid
+                <Grid
                 Style="{StaticResource RecentImageContainerStyle}">
                 <Ellipse
                     Fill="{StaticResource PrimaryColor}"

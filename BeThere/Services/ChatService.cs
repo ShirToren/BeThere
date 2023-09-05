@@ -25,34 +25,34 @@ namespace BeThere.Services
         public async Task SendMessage(string chatRoomId, string message)
         {
             await r_Connection.InvokeCoreAsync("SendMessage", args: new[] {
-                chatRoomId, 
-                "User",
+                chatRoomId,
+                LogedInUser.LogedInUserName(),
                 message });
         }
 
         public async Task JoinChatRoom(string chatRoomId)
         { // when opening an old chat, call this method and it will load the chat. leave chat room when exit.
 
-            if(r_Connection.State == HubConnectionState.Connected)
-            {
+            //if(r_Connection.State == HubConnectionState.Connected)
+            //{
                 await r_Connection.SendAsync("JoinChatRoom", chatRoomId);
-            }
-            else
-            {
-                r_ChatsIdToJoin.Add(chatRoomId);  
-            }
+            //}
+            //else
+            //{
+            //    r_ChatsIdToJoin.Add(chatRoomId);  
+            //}
         }
 
         public async Task CreateChatRoom(string chatRoomId)
         {
-            if (r_Connection.State == HubConnectionState.Connected)
-            {
+            //if (r_Connection.State == HubConnectionState.Connected)
+            //{
                 await r_Connection.SendAsync("CreateChatRoom", chatRoomId);
-            }
-            else
-            {
-                r_ChatsIdToCreate.Add(chatRoomId);
-            }
+            //}
+            //else
+            //{
+              //  r_ChatsIdToCreate.Add(chatRoomId);
+            //}
         }
 
         public async Task<ResultUnit<List<ChatMessage>>> TryGetMessagesByChatRoomId(string i_ChatRoomId)

@@ -37,7 +37,6 @@ namespace BeThere.ViewModels.ChatViewModel
             {
                 MainThread.BeginInvokeOnMainThread(async () =>
                 {
-                    //AllMessages += $"{Environment.NewLine}{ChatMessage.Content}";
                     SharedDataSource.CurrentChatMessages.Add(ChatMessage);
                 });
             });
@@ -47,21 +46,13 @@ namespace BeThere.ViewModels.ChatViewModel
                 {
                     SharedDataSource.CurrentChatMessages.Add(chatMessage);
                 }
-
-/*                MainThread.BeginInvokeOnMainThread(() =>
-                {
-                    foreach(ChatMessage message in ChatMessages)
-                    {
-                        AllMessages += $"{Environment.NewLine}{message.Content}";
-                    }
-                });*/
             });
 
-            Task.Run(() =>
+/*            Task.Run(() =>
             {
                 MainThread.BeginInvokeOnMainThread(async () =>
                 await r_ChatLogic.StartConnection());
-            });
+            });*/
         }
 
         public void clearMessages()

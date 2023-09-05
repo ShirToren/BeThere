@@ -70,7 +70,7 @@ namespace BeThere.ViewModels
 
                 if (response.IsSuccess == true)
                 {
-                    await m_ChatService.JoinChatRoom(m_QuestionToAsk.ChatRoomId);
+                    //await m_ChatService.JoinChatRoom(m_QuestionToAsk.ChatRoomId);
                     await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
                 }
                 else
