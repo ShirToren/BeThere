@@ -8,7 +8,7 @@ using Mopups.Services;
 
 namespace BeThere.ViewModels.PopupViewModel
 {
-    public partial class PopupViewModel : BaseViewModels
+    public partial class PopupViewModel : BaseViewModel
     {
         private readonly NotificationsService r_NotificationsService;
         public Command CloseCommand { get; }

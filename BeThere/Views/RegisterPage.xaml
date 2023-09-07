@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel ="clr-namespace:BeThere.ViewModels"
+             xmlns:templates="clr-namespace:BeThere.Views.Templates"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              x:Class="BeThere.Views.RegisterPage"
              BackgroundColor="{StaticResource PrimaryColor}"
              x:DataType="viewmodel:RegisterViewModel">
@@ -19,7 +21,7 @@
                 <Grid>
                   <Image Source="asterisk.png" HeightRequest="3"  HorizontalOptions="StartAndExpand"/>
                   <Label Grid.Column="1" FontFamily="OpenSansRegular" TextColor="{StaticResource SecondaryColor}" 
-                       FontSize="16" Text="Username"/>
+                       FontSize="16" Text="User name"/>
                 </Grid>
               
                 <Grid Margin="0,5">
@@ -30,7 +32,16 @@
                            PlaceholderColor="Gray" />
                    
                 </Grid>
+                <Label FontFamily="OpenSansRegular" TextColor="{StaticResource SecondaryColor}" 
+      FontSize="16" Text="Full name"/>
+                <Grid Margin="0,5">
+                    <Frame Opacity="0.3" BackgroundColor="Black" CornerRadius="5"/>
+                    <Entry BackgroundColor="Transparent" Placeholder="Enter full name" 
+          TextColor="Black" Margin="5,0"
+          Text="{Binding User.FullName}"
+          PlaceholderColor="Gray" />
 
+                </Grid>
                 <Label FontFamily="OpenSansRegular" TextColor="{StaticResource SecondaryColor}" 
                        FontSize="16" Text="Password"/>
                 <Grid Margin="0,5">
@@ -68,10 +79,20 @@
                     <Frame Opacity="0.3" BackgroundColor="Black" CornerRadius="5"/>
                     <Entry BackgroundColor="Transparent" Placeholder="Enter age" 
                            TextColor="Black" Margin="5,0"
-                           Text="{Binding User.Age}"
+                           Text="{Binding AgeEntryText}"
                            PlaceholderColor="Gray" />
 
                 </Grid>
+
+                <Picker x:Name="picker"
+                         Title="Select Gender" Grid.Row="1" SelectedItem="{Binding User.Gender}">
+                    <Picker.Items>
+                        <x:String>Female</x:String>
+                        <x:String>Male</x:String>
+                        <x:String>All</x:String>
+                    </Picker.Items>
+                </Picker>
+
             </StackLayout>
 
             

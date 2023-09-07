@@ -11,6 +11,7 @@ namespace BeThere.Services
 
         public AuthonticationService()
 		{
+
         }
 
         public async Task GetAuthLoginUser()

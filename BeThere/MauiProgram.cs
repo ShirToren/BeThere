@@ -49,7 +49,7 @@ public static class MauiProgram
 
         //builder.Services.AddSingleton<MainPage>();
         builder.Services.AddTransient<MapPage>();
-        builder.Services.AddSingleton<ChatPage>();
+        builder.Services.AddTransient<ChatPage>();
         builder.Services.AddTransient<DetailsQuestionPage>();
         builder.Services.AddTransient<LoadingPage>();
         builder.Services.AddSingleton<ProfilePage>();
@@ -58,7 +58,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<SetQuestionPage>();
         builder.Services.AddSingleton<IPopupNavigation>(MopupService.Instance);
         builder.Services.AddTransient<MainPage>();
-       
+        builder.Services.AddTransient<ChatHistoryPage>();
+
 
         builder.Services.AddTransient<AuthonticationService>();
         builder.Services.AddSingleton<BaseService>();
@@ -75,10 +76,13 @@ public static class MauiProgram
         builder.Services.AddSingleton<ProfileViewModle>();
         builder.Services.AddTransient<SetQestionToAskViewModle>();
         builder.Services.AddSingleton<RegisterViewModel>();
-        builder.Services.AddSingleton<UsersHistoryViewModle>();
+        builder.Services.AddSingleton<HomeViewModle>();
         builder.Services.AddTransient<DetailsQuestionViewModle>();
         builder.Services.AddSingleton<PopupViewModel>();
         builder.Services.AddSingleton<ChatViewModel>();
+        builder.Services.AddSingleton<ChatHistoryViewModel>();
+
+
 
         return builder.Build();
     }

@@ -22,6 +22,20 @@ namespace BeThere.Services
             {
                 string jsonResponse = await response.Content.ReadAsStringAsync();
                 m_usersPreviousQuestion = JsonConvert.DeserializeObject<Dictionary<string, Tuple<QuestionToAsk, QuestionAnswers>>>(jsonResponse);
+
+                    foreach (KeyValuePair<string, Tuple<QuestionToAsk, QuestionAnswers>> keyValue in m_usersPreviousQuestion)
+                    {
+                        string endPointQueryUriForList = $"api/Questions/List?QuestionId={keyValue.Key}";
+                        HttpResponseMessage responseForList = await GetHttpClient().GetAsync(endPointQueryUriForList);
+                        if (responseForList.IsSuccessStatusCode)
+                        {
+                            string jsonResponseForList = await responseForList.Content.ReadAsStringAsync();
+                            List<UserAnswer> list = JsonConvert.DeserializeObject<List<UserAnswer>>(jsonResponseForList);
+                            keyValue.Value.Item2.userAnswers = list;
+                        }
+                    }
+                
+               
                 result.ReturnValue = m_usersPreviousQuestion;
             }
             else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
@@ -38,9 +52,9 @@ namespace BeThere.Services
 
         }
 
-        public async Task<ResultUnit<long>> TryPostNewQuestion(QuestionToAsk i_Question)
+        public async Task<ResultUnit<string>> TryPostNewQuestion(QuestionToAsk i_Question)
         {
-            ResultUnit<long> result = new ResultUnit<long>();
+            ResultUnit<string> result = new ResultUnit<string>();
             string endPointQueryUri = $"api/Questions?UserName={ConnectedUser.Username}";
 
             string jsonData = JsonConvert.SerializeObject(i_Question);
@@ -48,7 +62,7 @@ namespace BeThere.Services
 
             HttpResponseMessage response = await GetHttpClient().PostAsync(endPointQueryUri, content);
             string questionId= await response.Content.ReadAsStringAsync();
-            result.ReturnValue = long.Parse(questionId);
+            result.ReturnValue = questionId;
 
             //result.ReturnValue = long.Parse(response.Content.ToString());
             if (!response.IsSuccessStatusCode)

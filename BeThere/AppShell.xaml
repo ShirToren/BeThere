@@ -25,9 +25,13 @@
           Route="MainPage" />
 
     <ShellContent
-          Title="Home"
+          Title="Profile"
           ContentTemplate="{DataTemplate view:ProfilePage}"
           Route="ProfilePage" />
+    <ShellContent
+          Title="Chats"
+          ContentTemplate="{DataTemplate view:ChatHistoryPage}"
+          Route="ChatHistoryPage" />
 
     <!--<TabBar>
   

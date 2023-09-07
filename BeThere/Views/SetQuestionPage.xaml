@@ -60,8 +60,8 @@
                          Title="Select a Gender" Grid.Row="1" SelectedItem="{Binding QuestionToAsk.Gender}"> 
                          <Picker.Items>
                          <x:String>All</x:String>
-                         <x:String>Femael</x:String>
-                         <x:String>Mael</x:String>
+                         <x:String>Female</x:String>
+                         <x:String>Male</x:String>
                          </Picker.Items>
                          </Picker>
                     </Grid>

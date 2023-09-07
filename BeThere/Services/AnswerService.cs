@@ -10,6 +10,7 @@ namespace BeThere.Services
 {
     public class AnswerService : BaseService
     {
+
         public async Task<ResultUnit<string>> TryPostNewAnswer(UserAnswer i_Answer)
         {
             ResultUnit<string> result = new ResultUnit<string>();
@@ -23,7 +24,6 @@ namespace BeThere.Services
             {
                 //handle ba
             }
-
             return result;
         }
     }

@@ -10,14 +10,17 @@ using Microsoft.Maui.ApplicationModel;
 using BeThere.Models;
 using BeThere.Views;
 using Mopups.Interfaces;
+using System.Collections.ObjectModel;
 
 namespace BeThere.ViewModels.ChatViewModel
 {
     [QueryProperty(nameof(ChatRoomId), "ChatRoomId")]
-    public partial class ChatViewModel : BaseViewModels
+    public partial class ChatViewModel : BaseViewModel
     {
         private readonly ChatService r_ChatLogic;
         public Command SendMessageCommand { get; }
+        public ObservableCollection<ChatMessage> CurrentChatMessages => SharedDataSource.CurrentChatMessages;
+
 
         [ObservableProperty]
         private string message;
@@ -34,25 +37,27 @@ namespace BeThere.ViewModels.ChatViewModel
             {
                 MainThread.BeginInvokeOnMainThread(async () =>
                 {
-                    AllMessages += $"{Environment.NewLine}{ChatMessage.Content}";
+                    SharedDataSource.CurrentChatMessages.Add(ChatMessage);
                 });
             });
             r_ChatLogic.HandleLoadChatReceived((ChatMessages) =>
             {
-                MainThread.BeginInvokeOnMainThread(() =>
+                foreach(ChatMessage chatMessage in ChatMessages)
                 {
-                    foreach(ChatMessage message in ChatMessages)
-                    {
-                        AllMessages += $"{Environment.NewLine}{message.Content}";
-                    }
-                });
+                    SharedDataSource.CurrentChatMessages.Add(chatMessage);
+                }
             });
 
-            Task.Run(() =>
+/*            Task.Run(() =>
             {
                 MainThread.BeginInvokeOnMainThread(async () =>
                 await r_ChatLogic.StartConnection());
-            });
+            });*/
+        }
+
+        public void clearMessages()
+        {
+            SharedDataSource.CurrentChatMessages.Clear();
         }
 
         private async Task sendMessageClicked()
@@ -62,7 +67,7 @@ namespace BeThere.ViewModels.ChatViewModel
                 return;
             }
                 IsBusy = true;
-                await r_ChatLogic.SendMessage(ChatRoomId, "User name: " + Message);
+                await r_ChatLogic.SendMessage(ChatRoomId, Message);
                 Message = String.Empty;
                 IsBusy = false;
         }

@@ -6,7 +6,6 @@ namespace BeThere.Models
 {
     public class QuestionToAsk 
     {
-        //public event PropertyChangedEventHandler PropertyChanged;
 
         private string m_ChatRoomId;
 
@@ -24,9 +23,9 @@ namespace BeThere.Models
             set { m_Question = value;}
         }
 
-        private long m_QuestionId;
+        private string m_QuestionId;
 
-        public long QuestionId
+        public string QuestionId
         {
             get { return m_QuestionId; }
             set { m_QuestionId = value; }
@@ -82,10 +81,18 @@ namespace BeThere.Models
             set { m_Time = value; }
         }
 
+        private int m_NumOfAnswers;
 
+        public int NumOfAnswers
+        {
+            get { return m_NumOfAnswers; }
+            set { m_NumOfAnswers = value; }
+        }
+
+        //public int NumOfAnswers { get; set; }
         //void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
-       
+
         public void ClearAllFeilds()
         {
             Question = string.Empty;

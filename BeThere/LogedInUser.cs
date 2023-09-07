@@ -11,9 +11,8 @@ namespace BeThere
 
 		public static string LogedInUserName()
 		{
-			string username = "User";
 
-			return username;
+			return m_LogedInUser.Username;
         }
 
         public static void SetLogedInUser(UserData i_LogedInUser)
