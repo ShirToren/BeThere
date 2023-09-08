@@ -6,7 +6,7 @@
              x:DataType="viewmodel:DetailsQuestionViewModle"
              xmlns:modle ="clr-namespace:BeThere.Models"
              x:Name="MyPage"
-             Title="DetailsQuestionPage">
+             Title="Question's Details">
 
 
     <ContentPage.Resources>
@@ -157,32 +157,32 @@
             BackgroundColor="{StaticResource PrimaryColor}"
             RowDefinitions="Auto, *">
             <VerticalStackLayout>
-                <Grid Padding="14">  
-                   <Grid.ColumnDefinitions>
-                     <ColumnDefinition Width="Auto"/>
-                     <ColumnDefinition />
-                   </Grid.ColumnDefinitions>
-                    
-                  <Label Grid.Column="0" 
+                <Grid Padding="14">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" 
                          Text="{Binding Question.Date}"
                          Style="{StaticResource TimeStampStyle}">
-                  </Label>
-                  <Label Grid.Column="1"                   
+                    </Label>
+                    <Label Grid.Column="1"                   
                         Text="{Binding Question.Time}"
                         HorizontalOptions="Start"
                         Style="{StaticResource TimeStampStyle}"/>
 
                 </Grid>
                 <Grid Padding="14">
-                     <Grid.ColumnDefinitions>
-                     <ColumnDefinition Width="Auto"/>
-                     <ColumnDefinition />
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
                     <Image Grid.Column="0">
                     </Image>
 
-                   <Label Text="Question" Style="{StaticResource TimeStampStyle}" Grid.Column="1"/>
+                    <Label Text="Question" Style="{StaticResource TimeStampStyle}" />
                 </Grid>
 
 
@@ -191,26 +191,30 @@
                         Style="{StaticResource UsernameTextStyle}"/>
                 <Label/>
 
-                 <Grid Padding="14">
-                     <Grid.ColumnDefinitions>
-                     <ColumnDefinition Width="Auto"/>
-                     <ColumnDefinition />
+                <Grid Padding="14">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
-                    <Image Grid.Column="0" > 
+                    <Image Grid.Column="0" >
                     </Image>
 
-           
-                 <Label 
+
+                    <Label 
                         Text="Location"
                         HorizontalOptions="Start"
                         Style="{StaticResource TimeStampStyle}"/>
                 </Grid>
-      
+
                 <Label Padding="17"
                         Text="{Binding QuestionAskedAddress}"
                         HorizontalOptions="Start"
                         Style="{StaticResource TimeStampStyle}"/>
+                <!--<Label Padding="17"
+        Text="Answers"
+        HorizontalOptions="Start"
+        Style="{StaticResource TimeStampStyle}"/>-->
                 <!--<Grid 
                     Grid.Row="1"
                     Background="pink"
@@ -230,15 +234,14 @@
                     </StackLayout>
                 </Grid>-->
             </VerticalStackLayout>
-
-
-        <Grid Grid.Row="1">
-              <BoxView
+            <Grid Grid.Row="1">
+                <BoxView
                     Style="{StaticResource ChatAdornerStyle}"/>
-        <CollectionView
+
+                <CollectionView
                    ItemsSource="{Binding Answers}"
                    Style="{StaticResource RecentChatCollectionStyle}">
-            <CollectionView.ItemTemplate>
+                    <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="modle:UserAnswer">
                     <Grid
                         ColumnDefinitions="Auto, *"

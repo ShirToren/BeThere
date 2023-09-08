@@ -17,6 +17,7 @@ namespace BeThere.ViewModels
         private QuestionAskedService m_SendQuestionService;
         private ChatService m_ChatService;
         public Command SendQuestionCommand { get; }
+        public Command ClearAllCommand { get; }
         private QuestionToAsk m_QuestionToAsk;
 
         [ObservableProperty]
@@ -38,9 +39,21 @@ namespace BeThere.ViewModels
             m_ChatService = i_ChatService;
             m_QuestionToAsk = new QuestionToAsk();
             SendQuestionCommand = new Command(async () => await sendQuestionClicked());
+            ClearAllCommand = new Command(() => clearAllClicked());
         }
 
-        public QuestionToAsk QuestionToAsk { get { return m_QuestionToAsk; } }
+        //public QuestionToAsk QuestionToAsk { get { return m_QuestionToAsk; }
+            public QuestionToAsk QuestionToAsk
+            {
+                get => m_QuestionToAsk;
+                set => SetProperty(ref m_QuestionToAsk, value);
+            }
+
+        
+        private void clearAllClicked()
+        {
+            QuestionToAsk = new QuestionToAsk();
+        }
 
 
         private async Task sendQuestionClicked()
@@ -53,29 +66,36 @@ namespace BeThere.ViewModels
             try
             {
                 IsBusy = true;
-                setQuestionLocationDetails();
-
-                Guid guidForQuestionId = Guid.NewGuid();
-                Guid guidForChatRoomId = Guid.NewGuid();
-
-                m_QuestionToAsk.QuestionId = guidForQuestionId.ToString();
-                m_QuestionToAsk.ChatRoomId = guidForChatRoomId.ToString();
-
-                ResultUnit<string> response = await m_SendQuestionService.TryPostNewQuestion(m_QuestionToAsk);
-
-                HistoryData.AddQuestion(m_QuestionToAsk.QuestionId, m_QuestionToAsk);
-                HistoryData.AddNewAnswersItem(m_QuestionToAsk.QuestionId);
-
-                SharedDataSource.UsersPreviousQuestions.Add(m_QuestionToAsk);
-
-                if (response.IsSuccess == true)
+                if (m_QuestionToAsk.Question == null || m_QuestionToAsk.Question.Equals(String.Empty))
                 {
-                    //await m_ChatService.JoinChatRoom(m_QuestionToAsk.ChatRoomId);
-                    await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+                    await Application.Current.MainPage.DisplayAlert("Unable to send question", "Text is empty.", "OK");
                 }
                 else
                 {
+                    setQuestionLocationDetails();
 
+                    Guid guidForQuestionId = Guid.NewGuid();
+                    Guid guidForChatRoomId = Guid.NewGuid();
+
+                    m_QuestionToAsk.QuestionId = guidForQuestionId.ToString();
+                    m_QuestionToAsk.ChatRoomId = guidForChatRoomId.ToString();
+
+                    ResultUnit<string> response = await m_SendQuestionService.TryPostNewQuestion(m_QuestionToAsk);
+
+                    HistoryData.AddQuestion(m_QuestionToAsk.QuestionId, m_QuestionToAsk);
+                    HistoryData.AddNewAnswersItem(m_QuestionToAsk.QuestionId);
+
+                    SharedDataSource.UsersPreviousQuestions.Add(m_QuestionToAsk);
+
+                    if (response.IsSuccess == true)
+                    {
+                        QuestionToAsk = new QuestionToAsk();
+                        await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+                    }
+                    else
+                    {
+
+                    }
                 }
             }
             catch (Exception ex)
@@ -85,8 +105,12 @@ namespace BeThere.ViewModels
             finally
             {
                 IsBusy = false;
-
             }
+
+        }
+
+        private void clearAll()
+        {
 
         }
 

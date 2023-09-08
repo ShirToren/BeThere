@@ -79,6 +79,7 @@ namespace BeThere.ViewModels.ChatViewModel
             string serializedRoomSet = JsonSerializer.Serialize(AvailableChatRooms);
             Preferences.Set("ChatRoomsList", serializedRoomSet);
         }
+
         private void removePreferences()
         {
             Preferences.Remove("MessagesList");

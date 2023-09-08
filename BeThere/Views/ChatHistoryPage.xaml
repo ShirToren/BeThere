@@ -5,7 +5,7 @@
              xmlns:templates="clr-namespace:BeThere.Views.Templates"
              x:Class="BeThere.Views.ChatHistoryPage"
              x:Name="MyPage"
-             Title="ChatHistoryPage">
+             Title="Available chats">
 
     <ContentPage.Resources>
         <ResourceDictionary>

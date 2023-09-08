@@ -10,7 +10,6 @@ public partial class DetailsQuestionPage : ContentPage
         InitializeComponent();
         m_DetailsViewModle = i_DetailsViewModle;
         BindingContext = i_DetailsViewModle;
-
     }
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
