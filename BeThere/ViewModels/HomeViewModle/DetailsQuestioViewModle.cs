@@ -15,7 +15,7 @@ namespace BeThere.ViewModels
     {
         private ChatService m_ChatService;
         public ICommand ChatCommand { get; private set; }
-        public ObservableCollection<UserAnswer> CurrentUserAnswers => SharedDataSource.CurrentUserAnswers;
+        private ObservableCollection<UserAnswer> CurrentUserAnswers => SharedDataSource.CurrentUserAnswers;
 
 
         public DetailsQuestionViewModle(ChatService i_ChatService)
@@ -70,7 +70,6 @@ namespace BeThere.ViewModels
 
         [ObservableProperty]
         private QuestionToAsk question;
-
 
         [ObservableProperty]
         private string questionAskedAddress;

@@ -38,7 +38,6 @@ public partial class MapPage : ContentPage
     protected async override void OnAppearing()
     {
         await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
-
     }
 
 
@@ -181,7 +180,6 @@ public partial class MapPage : ContentPage
 
     private async void SetQuestionTapped(object sender, TappedEventArgs args)
     {
-        //Location test = new Location { Latitude = m_WishedLocation.Latitude, Longitude = m_WishedLocation.Longitude, Altitude = m_WishedLocation.Altitude };
         if (m_WishedLocation == null)
         {
             var location = await Geolocation.GetLocationAsync();
@@ -200,13 +198,20 @@ public partial class MapPage : ContentPage
     private async Task<string> GetLocationAdress()
     {
         string locationAdress = null;
-        var placemarks = await Geocoding.GetPlacemarksAsync(m_WishedLocation.Latitude, m_WishedLocation.Longitude);
-
-        if (placemarks != null && placemarks.Any())
+        try
         {
-            var placemark = placemarks.FirstOrDefault();
-            locationAdress = $"{placemark.Thoroughfare}, {placemark.Locality}, {placemark.CountryName}";
+            var placemarks = await Geocoding.GetPlacemarksAsync(m_WishedLocation.Latitude, m_WishedLocation.Longitude);
+            if (placemarks != null && placemarks.Any())
+            {
+                var placemark = placemarks.FirstOrDefault();
+                locationAdress = $"{placemark.Thoroughfare}, {placemark.Locality}, {placemark.CountryName}";
+            }
         }
+        catch(Exception ex)
+        {
+            Console.WriteLine("hey");
+        }
+
 
         return locationAdress;
     }

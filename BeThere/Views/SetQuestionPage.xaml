@@ -8,7 +8,7 @@
              Title="Filters">
 
 
-   <Grid>
+        <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
@@ -26,7 +26,7 @@
                          </Grid.ColumnDefinitions>
                       <Label Text="With radius" Grid.Column="1" HorizontalOptions="End"/>
                       <Label Text="Send to" />
-                      <Label Text="{Binding LocationAddress}" Grid.Row="1"/>
+                    <Label Text="{Binding LocationAddress}" Grid.Row="1" />
                       <CheckBox IsChecked="{Binding IsRadiusSet}" HorizontalOptions="End"
                                    Grid.Row="1" Grid.Column="1" IsEnabled="False"/>
                 </Grid>
@@ -40,9 +40,9 @@
                          <ColumnDefinition Width="*"/>
                          </Grid.ColumnDefinitions>
                       <Label Text="Message to send" />
-                      <Frame BorderColor="Black" Grid.Row="1" HorizontalOptions="Fill">
+                      <Border  Grid.Row="1" HorizontalOptions="Fill">
                          <Entry Placeholder="Enter your message" HeightRequest="80" Text="{Binding QuestionToAsk.Question}"/>
-                      </Frame>
+                      </Border>
                    </Grid>
 
                    <Label Text="Filters" HorizontalOptions="CenterAndExpand" FontSize="20"/>
@@ -77,14 +77,14 @@
 
                          </Grid.ColumnDefinitions>
                       <Label Text="Age range:"/>
-                      <Frame BorderColor="Black" Grid.Row="1" Grid.Column="0" HeightRequest="60">
-                         <Entry Placeholder="Minimum" Text="{Binding QuestionToAsk.MinimumAgeRange}"/>
-                       </Frame>
-                      <Frame BorderColor="Black" Grid.Row="1" Grid.Column="1" HeightRequest="60">
-                         <Entry Placeholder="Maximum" HeightRequest="40" 
+                    <Border  Grid.Row="1" Grid.Column="0" HeightRequest="60">
+                        <Entry Placeholder="Minimum" HeightRequest="60" Text="{Binding QuestionToAsk.MinimumAgeRange}"/>
+                       </Border>
+                      <Border  Grid.Row="1" Grid.Column="1" HeightRequest="60">
+                         <Entry Placeholder="Maximum" HeightRequest="60" 
                                 Text="{Binding QuestionToAsk.MaximumAgeRange}">
                          </Entry>
-                      </Frame>
+                      </Border>
                     </Grid>
 
                 </StackLayout>
@@ -98,9 +98,11 @@
                   <ColumnDefinition />
                   <ColumnDefinition />
                   </Grid.ColumnDefinitions>
-              <Label Text="clear all" HorizontalOptions="Start" Margin="3"/>
+              <Button Text="clear all" HorizontalOptions="Start" Margin="3"
+                      Command="{Binding ClearAllCommand}" BackgroundColor="Black" TextColor="#FAF9F8"/>
               <Button Text="Send question" HorizontalOptions="End" Grid.Column="1" Margin="3" Command="{Binding SendQuestionCommand}"
                        BackgroundColor="Black" TextColor="#FAF9F8"/>
             </Grid>
-    </Grid> 
+    </Grid>
+
 </ContentPage>

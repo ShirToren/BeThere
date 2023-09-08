@@ -33,13 +33,13 @@ namespace BeThere.ViewModels.ChatViewModel
             Title = "Chat";
             r_ChatLogic = i_ChatLogic;
             SendMessageCommand = new Command(async () => await sendMessageClicked());
-            r_ChatLogic.HandleMessageReceived((ChatMessage) =>
-            {
-                MainThread.BeginInvokeOnMainThread(async () =>
-                {
-                    SharedDataSource.CurrentChatMessages.Add(ChatMessage);
-                });
-            });
+            //r_ChatLogic.HandleMessageReceived((ChatMessage) =>
+            //{
+            //    MainThread.BeginInvokeOnMainThread(async () =>
+            //    {
+            //        SharedDataSource.CurrentChatMessages.Add(ChatMessage);
+            //    });
+            //});
             r_ChatLogic.HandleLoadChatReceived((ChatMessages) =>
             {
                 foreach(ChatMessage chatMessage in ChatMessages)
