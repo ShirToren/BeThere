@@ -70,6 +70,7 @@ public static class MauiProgram
         //builder.Services.AddSingleton<SendQuestionService>();
         builder.Services.AddSingleton<ChatService>();
         builder.Services.AddSingleton<AnswerService>();
+        //builder.Services.AddTransient<IService, MyForeGroundService>();
 
 
         builder.Services.AddSingleton<ConnectToAppViewModle>();

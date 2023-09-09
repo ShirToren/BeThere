@@ -1,5 +1,6 @@
 ﻿using BeThere.Models;
 using BeThere.ViewModels;
+
 namespace BeThere;
 
 public partial class MainPage : ContentPage

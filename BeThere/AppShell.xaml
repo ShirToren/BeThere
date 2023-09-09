@@ -5,8 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:BeThere"
     xmlns:view="clr-namespace:BeThere.Views"
-    Shell.FlyoutBehavior="Flyout">
-
+    Shell.FlyoutBehavior="Disabled">
     <ShellContent
         Title="Loading" 
         ContentTemplate="{DataTemplate view:LoadingPage}"
@@ -18,20 +17,23 @@
         Shell.FlyoutBehavior="Disabled"
         ContentTemplate="{DataTemplate view:LoginPage}"
         Route="LoginPage" />
+    <TabBar>
 
-    <ShellContent
+        <ShellContent
           Title="Home"
           ContentTemplate="{DataTemplate local:MainPage}"
           Route="MainPage" />
 
-    <ShellContent
+        <ShellContent
           Title="Profile"
           ContentTemplate="{DataTemplate view:ProfilePage}"
           Route="ProfilePage" />
-    <ShellContent
+        <ShellContent
           Title="Chats"
           ContentTemplate="{DataTemplate view:ChatHistoryPage}"
           Route="ChatHistoryPage" />
+    </TabBar>
+
 
     <!--<TabBar>
   
