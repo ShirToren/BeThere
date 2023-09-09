@@ -152,7 +152,7 @@ namespace BeThere.Services
                         ReturningData = "Question", // Returning data when tapped on notification.
                         Schedule =
     {
-        NotifyTime = DateTime.Now // Used for Scheduling local notification, if not specified notification will show immediately.
+        NotifyTime = DateTime.Now.AddSeconds(10) // Used for Scheduling local notification, if not specified notification will show immediately.
     }
                     };
 
@@ -179,7 +179,7 @@ namespace BeThere.Services
                         ReturningData = userAnswer.QuestionId, // Returning data when tapped on notification.
                         Schedule =
     {
-        NotifyTime = DateTime.Now // Used for Scheduling local notification, if not specified notification will show immediately.
+        NotifyTime = DateTime.Now.AddSeconds(10) // Used for Scheduling local notification, if not specified notification will show immediately.
     }
                     };
 
