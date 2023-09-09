@@ -10,6 +10,7 @@ namespace BeThere.ViewModels
     [QueryProperty(nameof(LocationToQuestion), "Location")]
     [QueryProperty(nameof(LocationAddress), "Address")]
     [QueryProperty(nameof(Radius), "Radius")]
+    [QueryProperty(nameof(IsCityQuestion), "isCity")]
 
     public partial class SetQestionToAskViewModle : BaseViewModel
     {
@@ -28,6 +29,9 @@ namespace BeThere.ViewModels
 
         private double m_Radius;
         public double Radius { get => m_Radius; set { m_Radius = value; IsRadiusSet = m_Radius != 0; } }
+
+        private bool m_IsCityQuestion;
+        public bool IsCityQuestion { get => m_IsCityQuestion; set { m_IsCityQuestion = value; } }
 
         [ObservableProperty]
         bool isRadiusSet;

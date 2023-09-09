@@ -31,7 +31,12 @@
                    <Label.GestureRecognizers>
                        <TapGestureRecognizer Tapped="OnDecreaseRadiusTapped"/>
                    </Label.GestureRecognizers>
-            </Label> 
+            </Label>
+            <HorizontalStackLayout Grid.Column="4">
+                <CheckBox x:Name="CityCheckBox"  Color="{StaticResource PrimaryColor}" ></CheckBox >
+                <Label Text="All city" TextColor="{StaticResource PrimaryColor}"/>
+
+            </HorizontalStackLayout>
         </Grid>
 
         <SearchBar x:Name="mapSearchBar"
