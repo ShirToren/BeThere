@@ -99,9 +99,9 @@
                   <ColumnDefinition />
                   </Grid.ColumnDefinitions>
               <Button Text="clear all" HorizontalOptions="Start" Margin="3"
-                      Command="{Binding ClearAllCommand}" BackgroundColor="Black" TextColor="#FAF9F8"/>
+                      Command="{Binding ClearAllCommand}" BackgroundColor="#FF9B50" TextColor="Black"/>
               <Button Text="Send question" HorizontalOptions="End" Grid.Column="1" Margin="3" Command="{Binding SendQuestionCommand}"
-                       BackgroundColor="Black" TextColor="#FAF9F8"/>
+                       BackgroundColor="#FF9B50" TextColor="Black"/>
             </Grid>
     </Grid>
 

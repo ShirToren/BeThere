@@ -52,6 +52,8 @@
                 <Setter Property="FontFamily" Value="Metropolis Medium" />
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="WidthRequest" Value="160" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
                 <Setter Property="Margin" Value="36, 48, 0, 0" />
             </Style>
 
