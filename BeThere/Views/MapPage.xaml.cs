@@ -186,11 +186,14 @@ public partial class MapPage : ContentPage
             m_WishedLocation = new Location(location.Latitude, location.Longitude);
         }
         string address = await GetLocationAdress();
+
         var navigationParameter = new Dictionary<string, object>
         {
             ["Location"] = m_WishedLocation,
             ["Address"] = address,
-            ["Radius"] = m_WishedRadius
+            ["Radius"] = m_WishedRadius,
+            ["isCity"] = CityCheckBox.IsChecked
+           
         };
         await Shell.Current.GoToAsync($"{nameof(SetQuestionPage)}", navigationParameter);
     }

@@ -47,6 +47,8 @@ namespace BeThere.Services
                     // Replace the following line with your HTTP request code to send the location data.
                     //Console.WriteLine($"Latitude: {latitude}, Longitude: {longitude}");
                     LocationData locationToPost = new LocationData(latitude, longitude);
+                    await locationToPost.InitializeCity();
+                    
                     ResultUnit<string> result = await TryPostCurrentLocation(locationToPost);
                 }
             }

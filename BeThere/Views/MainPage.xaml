@@ -31,10 +31,8 @@
           ColumnSpacing="5"
           RowDefinitions="*,Auto"
           RowSpacing="0"
-          Margin="5">
-        
-
-    
+          Margin="0">
+       
         
         <CollectionView BackgroundColor="Transparent"
                         Grid.ColumnSpan="2"
@@ -46,9 +44,9 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <Frame Grid.Row="1"
+                            <Frame Grid.Row="1" CornerRadius="0"
                                 HeightRequest="50" 
-                               Padding="0"
+                               Padding="2"
                                HorizontalOptions="FillAndExpand">
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer CommandParameter="{Binding .}"

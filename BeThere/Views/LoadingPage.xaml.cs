@@ -13,7 +13,7 @@ public partial class LoadingPage : ContentPage
 
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
-        //m_AuthService.Logout();
+
         base.OnNavigatedTo(args);
         bool isAuthenticated = await m_AuthService.isAuthenticatedAsync();
         if (isAuthenticated == true)

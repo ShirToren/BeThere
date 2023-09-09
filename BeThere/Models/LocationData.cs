@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace BeThere.Models
 {
     public class LocationData
     {
+
         public LocationData(double i_Latitude, double i_Longitude)
         {
             this.Latitude = i_Latitude;
@@ -16,13 +18,37 @@ namespace BeThere.Models
 
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        public string City { get; set; }
 
+        public async Task InitializeCity()
+        {
+            try
+            {
+
+                var placemarks = await Geocoding.GetPlacemarksAsync(Latitude, Longitude);
+
+                if (placemarks != null && placemarks.Any())
+                {
+                    var placemark = placemarks.FirstOrDefault();
+                    City = placemark.Locality;
+                }
+                else
+                {
+                    City = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+ 
+            }
+
+        }
 
         public async Task<string> GetLocationAdress()
         {
             try
             {
-
                 string locationAdress = null;
                 var placemarks = await Geocoding.GetPlacemarksAsync(Latitude, Longitude);
 
@@ -33,6 +59,27 @@ namespace BeThere.Models
                 }
 
                 return locationAdress;
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                return null;
+            }
+        }
+
+        public async Task<string> GetLocationCity()
+        {
+            try
+            {
+                string locationCity = null;
+                var placemarks = await Geocoding.GetPlacemarksAsync(Latitude, Longitude);
+                if (placemarks != null && placemarks.Any())
+                {
+                    var placemark = placemarks.FirstOrDefault();
+                    locationCity = placemark.Locality;
+                }
+
+                return locationCity;
             }
             catch (Exception ex)
             {
