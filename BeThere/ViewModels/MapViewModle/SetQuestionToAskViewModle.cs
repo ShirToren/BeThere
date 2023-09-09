@@ -67,6 +67,8 @@ namespace BeThere.ViewModels
                 return;
             }
 
+
+
             try
             {
                 IsBusy = true;
