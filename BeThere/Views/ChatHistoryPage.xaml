@@ -6,7 +6,18 @@
              x:Class="BeThere.Views.ChatHistoryPage"
              x:Name="MyPage"
              Title="Available chats">
-
+    <Shell.TitleView>
+        <Grid>
+            <Label 
+       Text="Available Chats"
+       TextColor="Black"
+       HorizontalOptions="Center"
+       VerticalOptions="Center"
+       FontFamily ="OpenSansRegular"
+       FontSize="Title"
+       FontAttributes="Bold"/>
+        </Grid>
+    </Shell.TitleView>
     <ContentPage.Resources>
         <ResourceDictionary>
 

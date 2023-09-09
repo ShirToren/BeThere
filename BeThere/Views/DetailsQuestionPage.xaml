@@ -211,10 +211,10 @@
                         Text="{Binding QuestionAskedAddress}"
                         HorizontalOptions="Start"
                         Style="{StaticResource TimeStampStyle}"/>
-                <!--<Label Padding="17"
+                <Label Padding="17"
         Text="Answers"
         HorizontalOptions="Start"
-        Style="{StaticResource TimeStampStyle}"/>-->
+        Style="{StaticResource TimeStampStyle}"/>
                 <!--<Grid 
                     Grid.Row="1"
                     Background="pink"

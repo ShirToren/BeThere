@@ -6,12 +6,26 @@
              x:DataType="viewmodel:HomeViewModle"
              x:Class="BeThere.MainPage"
              Title="{Binding Title}">
-
-    <StackLayout>
+    <Shell.TitleView>
+        <Grid>
+            <Label 
+        Text="My Questions"
+        TextColor="Black"
+        HorizontalOptions="Center"
+        VerticalOptions="Center"
+        FontFamily ="OpenSansRegular"
+        FontSize="Title"
+        FontAttributes="Bold"/>
+        </Grid>
+    </Shell.TitleView>
+    <ScrollView Orientation="Vertical">
+        <StackLayout>
         <Button Text="Send Question"
               Command="{Binding AskNewQuestionCommand}"
-              HorizontalOptions="FillAndExpand">
+              HorizontalOptions="Center"
+                Margin="10">
         </Button>
+
 
     <Grid ColumnDefinitions="*,*"
           ColumnSpacing="5"
@@ -72,5 +86,5 @@
      
     </Grid>
     </StackLayout>
-
+    </ScrollView>
 </ContentPage>
