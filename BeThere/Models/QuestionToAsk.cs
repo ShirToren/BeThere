@@ -74,6 +74,14 @@ namespace BeThere.Models
             set { m_Date = value; OnPropertyChanged(nameof(Date)); }
         }
 
+        private bool m_IsCityQuestion;
+
+        public bool IsCityQuestion
+        {
+            get { return m_IsCityQuestion; }
+            set { m_IsCityQuestion = value; }
+        }
+
         private string m_Time;
 
         public string Time
