@@ -76,7 +76,7 @@ namespace BeThere.ViewModels
                 }
                 else
                 {
-                    setQuestionLocationDetails();
+                   await setQuestionLocationDetails();
 
                     Guid guidForQuestionId = Guid.NewGuid();
                     Guid guidForChatRoomId = Guid.NewGuid();
@@ -113,21 +113,17 @@ namespace BeThere.ViewModels
 
         }
 
-        private void clearAll()
+        private async Task setQuestionLocationDetails()
         {
-
-        }
-
-        private void setQuestionLocationDetails()
-        {
-            //m_QuestionToAsk.LocationLatitude = LocationToQuestion.Latitude;
-            //m_QuestionToAsk.LocationLongitude = LocationToQuestion.Longitude;
             LocationData location = new LocationData(LocationToQuestion.Latitude, LocationToQuestion.Longitude);
             m_QuestionToAsk.Location = location;
             m_QuestionToAsk.Date = LocationToQuestion.Timestamp.Date.ToString("dd/MM/yyyy");
             m_QuestionToAsk.Time = LocationToQuestion.Timestamp.TimeOfDay.ToString(@"hh\:mm");
             m_QuestionToAsk.Radius = m_Radius;
+            m_QuestionToAsk.IsCityQuestion = IsCityQuestion;
+            await m_QuestionToAsk.Location.InitializeCity();
         }
+
         private async void sendNotification()
         {
             if (await LocalNotificationCenter.Current.AreNotificationsEnabled() == false)

@@ -14,16 +14,35 @@ namespace BeThere.Models
         {
             this.Latitude = i_Latitude;
             this.Longitude = i_Longitude;
-            InitializeCity();
         }
 
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public string City { get; set; }
 
-        private async void InitializeCity()
+        public async Task InitializeCity()
         {
-            City = await GetLocationCity();
+            try
+            {
+
+                var placemarks = await Geocoding.GetPlacemarksAsync(Latitude, Longitude);
+
+                if (placemarks != null && placemarks.Any())
+                {
+                    var placemark = placemarks.FirstOrDefault();
+                    City = placemark.Locality;
+                }
+                else
+                {
+                    City = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+ 
+            }
+
         }
 
         public async Task<string> GetLocationAdress()
