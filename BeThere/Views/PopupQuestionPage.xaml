@@ -24,12 +24,12 @@
             <VerticalStackLayout Spacing="3">
                 <Label
                 Margin="10,5"
-                Text="New question"
+                Text="New question"  FontFamily="OpenSansBold"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"/>
                 <Label
-                x:Name="DescriptionLabel" 
-                Margin="10,5"
+                x:Name="DescriptionLabel"  
+                Margin="10,5"  FontFamily="OpenSansBold"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"/>
 
@@ -43,13 +43,13 @@ HorizontalOptions="Center"/>
                 Margin="10,5"
                 HorizontalOptions="Fill"
                 VerticalOptions="EndAndExpand"
-                Text="Close"
+                Text="Close"  FontFamily="OpenSansBold"
                 Clicked="CloseButton_Clicked">
                 </Button>
                 <Button
                 x:Name="AnswerButton"
                 Margin="10,5"
-                Text="Answer"
+                Text="Answer"  FontFamily="OpenSansBold"
                 HorizontalOptions="Fill"
                 VerticalOptions="EndAndExpand"
                 Clicked="AnswerButton_Clicked">

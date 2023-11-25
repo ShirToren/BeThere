@@ -18,7 +18,6 @@ public partial class LoadingPage : ContentPage
         bool isAuthenticated = await m_AuthService.isAuthenticatedAsync();
         if (isAuthenticated == true)
         {
-           
             await m_AuthService.GetAuthLoginUser();
             await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
         }

@@ -14,7 +14,10 @@ namespace BeThere
 
         public static void AddQuestion(string i_QuestionId, QuestionToAsk i_Question)
         {
-            sr_AllQuestions.Add(i_QuestionId, i_Question);
+            if(!sr_AllQuestions.ContainsKey(i_QuestionId))
+            {
+                sr_AllQuestions.Add(i_QuestionId, i_Question);
+            }
         }
         public static void AddNewAnswersItem(string i_QuestionId)
         {
@@ -54,6 +57,11 @@ namespace BeThere
             {
                 return null;
             }
+        }
+        public static void ClearAll()
+        {
+            sr_AllQuestions.Clear();
+            sr_AllAnswers.Clear();
         }
     }
 }

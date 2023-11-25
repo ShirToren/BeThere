@@ -52,7 +52,7 @@ public static class MauiProgram
         builder.Services.AddTransient<ChatPage>();
         builder.Services.AddTransient<DetailsQuestionPage>();
         builder.Services.AddTransient<LoadingPage>();
-        builder.Services.AddSingleton<ProfilePage>();
+        builder.Services.AddTransient<ProfilePage>();
         builder.Services.AddSingleton<LoginPage>();
         builder.Services.AddSingleton<RegisterPage>();
         builder.Services.AddSingleton<SetQuestionPage>();

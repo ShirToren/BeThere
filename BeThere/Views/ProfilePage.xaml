@@ -8,11 +8,10 @@
         <Grid>
             <Label 
        Text="Profile"
-       TextColor="Black"
        HorizontalOptions="Center"
        VerticalOptions="Center"
-       FontFamily ="OpenSansRegular"
-       FontSize="Title"
+       FontFamily="OpenSansBold"
+       FontSize="25"
        FontAttributes="Bold"/>
         </Grid>
     </Shell.TitleView>
@@ -40,6 +39,8 @@
             <Style x:Key="SenderImageStyle" TargetType="Image">
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HeightRequest" Value="150" />
+                <Setter Property="WidthRequest" Value="150" />
                 <Setter Property="Margin" Value="12" />
             </Style>
 
@@ -79,6 +80,11 @@
                  Style="{StaticResource SenderImageStyle}"/>
             
     </Grid>
-        <Label Text="User Name" HorizontalOptions="Center"></Label>
+
+        <Label  Margin="10" Text="{Binding UserName}" HorizontalOptions="Center"></Label>
+        <Label Margin="10" Text="{Binding FullName}" HorizontalOptions="Center"></Label>
+        <Label  Margin="10" Text="{Binding Email}" HorizontalOptions="Center"></Label>
+        <Label  Margin="10" Text="{Binding Age}" HorizontalOptions="Center"></Label>
+        <Button  Margin="50" Text="Logout"  HorizontalOptions="CenterAndExpand" Command="{Binding LogoutCommand}"></Button>
     </VerticalStackLayout>
 </ContentPage>

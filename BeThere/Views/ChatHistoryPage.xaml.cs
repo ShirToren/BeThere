@@ -20,27 +20,27 @@ public partial class ChatHistoryPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        if(m_AppearingForFirstTime)
-        {
-            if (Preferences.ContainsKey("MessagesList"))
-            {
-                string serializedList = Preferences.Get("MessagesList", string.Empty);
-                List<ChatMessage> list = JsonSerializer.Deserialize<List<ChatMessage>>(serializedList);
-                foreach (ChatMessage chatMessage in list)
-                {
-                    r_ChatHistoryViewModel.AvailableChats.Add(chatMessage);
-                }
-            }
-            if (Preferences.ContainsKey("ChatRoomsList"))
-            {
-                string serializedList = Preferences.Get("ChatRoomsList", string.Empty);
-                HashSet<string> list = JsonSerializer.Deserialize<HashSet<string>>(serializedList);
-                foreach (string chatRoom in list)
-                {
-                    r_ChatHistoryViewModel.AvailableChatRooms.Add(chatRoom);
-                }
-            }
-            m_AppearingForFirstTime = false;
+        if (m_AppearingForFirstTime)
+            //{
+            //    if (Preferences.ContainsKey("MessagesList"))
+            //    {
+            //        string serializedList = Preferences.Get("MessagesList", string.Empty);
+            //        List<ChatMessage> list = JsonSerializer.Deserialize<List<ChatMessage>>(serializedList);
+            //        foreach (ChatMessage chatMessage in list)
+            //        {
+            //            r_ChatHistoryViewModel.AvailableChats.Add(chatMessage);
+            //        }
+            //    }
+            //    if (Preferences.ContainsKey("ChatRoomsList"))
+            //    {
+            //        string serializedList = Preferences.Get("ChatRoomsList", string.Empty);
+            //        HashSet<string> list = JsonSerializer.Deserialize<HashSet<string>>(serializedList);
+            //        foreach (string chatRoom in list)
+            //        {
+            //            r_ChatHistoryViewModel.AvailableChatRooms.Add(chatRoom);
+            //        }
+            //    }
+            r_ChatHistoryViewModel.LoadChats();
+                m_AppearingForFirstTime = false;
         }
     }
-}

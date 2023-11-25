@@ -24,6 +24,8 @@ namespace BeThere.ViewModels
         public Command GoToDetailsCommand { get; }
         public Command AskNewQuestionCommand { get; }
 
+        [ObservableProperty]
+        private string helloMessage;
 
 
         public HomeViewModle(QuestionAskedService i_HistoryService, UpdateLocationService i_UpdateLocationService, NotificationsService i_NotificationService, ChatService i_ChatService)
@@ -36,6 +38,7 @@ namespace BeThere.ViewModels
             Task task = GetAllPreviousQuestion();
             m_NotificationService = i_NotificationService;
             m_ChatService = i_ChatService;
+            HelloMessage = "Hello, " + LogedInUser.LogedInUserName();
             Task.Run(() =>
             {
                 MainThread.BeginInvokeOnMainThread(async () =>

@@ -5,7 +5,17 @@
              x:Class="BeThere.Views.LoginPage"
              x:DataType="viewmodel:ConnectToAppViewModle"
              BackgroundColor="{StaticResource PrimaryColor}">
-
+    <Shell.TitleView>
+        <Grid>
+            <Label 
+        Text="Login"
+        HorizontalOptions="Center"
+        VerticalOptions="Center"
+        FontFamily="OpenSansBold"
+        FontSize="25"
+        FontAttributes="Bold"/>
+        </Grid>
+    </Shell.TitleView>
 
     <Grid IsVisible="{Binding IsNotBusy}">
         <StackLayout Margin="1">
@@ -22,7 +32,7 @@
                        FontSize="16" Text="Username"/>
                 <Grid Margin="0,5">
                     <Frame Opacity="0.3" BackgroundColor="Black" CornerRadius="5"/>
-                    <Entry BackgroundColor="Transparent" Placeholder="Enter username" 
+                    <Entry x:Name="userNameEntry" BackgroundColor="Transparent" Placeholder="Enter username" 
                            TextColor="Black" Margin="5,0"
                            Text="{Binding UserName}"
                            PlaceholderColor="Gray" />
@@ -33,7 +43,7 @@
                        FontSize="16" Text="Password"/>
                 <Grid Margin="0,5">
                     <Frame Opacity="0.3" BackgroundColor="Black" CornerRadius="5"/>
-                    <Entry BackgroundColor="Transparent" Placeholder="Enter password" 
+                    <Entry x:Name="PasswordEntry" BackgroundColor="Transparent" Placeholder="Enter password" 
                            TextColor="Black" Margin="5,0"
                            Text="{Binding Password}"
                            PlaceholderColor="Gray" IsPassword="True"/>
