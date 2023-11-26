@@ -40,13 +40,13 @@ namespace BeThere.ViewModels.ChatViewModel
             //        SharedDataSource.CurrentChatMessages.Add(ChatMessage);
             //    });
             //});
-            r_ChatLogic.HandleLoadChatReceived((ChatMessages) =>
-            {
-                foreach(ChatMessage chatMessage in ChatMessages)
-                {
-                    SharedDataSource.CurrentChatMessages.Add(chatMessage);
-                }
-            });
+            //r_ChatLogic.HandleLoadChatReceived((ChatMessages) =>
+            //{
+            //    foreach(ChatMessage chatMessage in ChatMessages)
+            //    {
+            //        SharedDataSource.CurrentChatMessages.Add(chatMessage);
+            //    }
+            //});
 
 /*            Task.Run(() =>
             {

@@ -89,6 +89,13 @@ namespace BeThere.Models
             get { return m_Time; }
             set { m_Time = value; OnPropertyChanged(nameof(Time)); }
         }
+        private string m_UserName;
+
+        public string UserName
+        {
+            get { return m_UserName; }
+            set { m_UserName = value; OnPropertyChanged(nameof(UserName)); }
+        }
 
         private int m_NumOfAnswers;
 

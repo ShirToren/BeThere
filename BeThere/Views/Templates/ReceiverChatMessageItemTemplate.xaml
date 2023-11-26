@@ -52,8 +52,8 @@
         </ResourceDictionary>
     </ContentView.Resources>
     <ContentView.Content>
-        <Grid
-        ColumnDefinitions="Auto, *"
+        <!--<Grid
+        ColumnDefinitions="Auto, *, Auto"
         Style="{StaticResource MessageContainerStyle}">
             <Label
             Text="{Binding Timestamp}"
@@ -67,6 +67,31 @@
                 Padding="12"
                 Style="{StaticResource MessageTextStyle}"/>
             </Grid>
+        </Grid>-->
+        <Grid
+         ColumnDefinitions="Auto, *, Auto"
+         Style="{StaticResource MessageContainerStyle}">
+            <Grid
+             Style="{StaticResource SenderContainerStyle}">
+                <!--<Ellipse
+                    Fill="{StaticResource PrimaryColor}"
+                    Style="{StaticResource SenderEllipseStyle}"/>-->
+                <!--<Image
+                 Source="emoji2.png"
+                 Style="{StaticResource SenderImageStyle}"/>-->
+            </Grid>
+            <Grid
+             Grid.Column="1">
+                <BoxView
+                 Style="{StaticResource MessageShapeStyle}"/>
+                <Label 
+                 Text="{Binding Content}"
+                 Style="{StaticResource MessageTextStyle}"/>
+            </Grid>
+            <Label
+             Grid.Column="0"
+             Text="{Binding Timestamp}"
+             Style="{StaticResource TimeTextStyle}"/>
         </Grid>
     </ContentView.Content>
 </ContentView>

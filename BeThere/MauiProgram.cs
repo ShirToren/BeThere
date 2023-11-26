@@ -49,7 +49,7 @@ public static class MauiProgram
 
         //builder.Services.AddSingleton<MainPage>();
         builder.Services.AddTransient<MapPage>();
-        builder.Services.AddTransient<ChatPage>();
+        builder.Services.AddSingleton<ChatPage>();
         builder.Services.AddTransient<DetailsQuestionPage>();
         builder.Services.AddTransient<LoadingPage>();
         builder.Services.AddTransient<ProfilePage>();

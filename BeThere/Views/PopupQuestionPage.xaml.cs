@@ -19,6 +19,7 @@ public partial class PopupQuestionPage
         m_ChatService = i_ChatService;
         m_CreditsService = i_CreditsService;
         DescriptionLabel.Text = m_Question.Question;
+        Title.Text = "New Question from " + i_Question.UserName;
     }
     private void CloseButton_Clicked(object sender, EventArgs e)
     {
@@ -30,8 +31,8 @@ public partial class PopupQuestionPage
             string uuidString = guid.ToString();
             UserAnswer newAnswer = new UserAnswer(LogedInUser.LogedInUserName(), AnswerText.Text, m_Question.QuestionId, uuidString, DateTime.Now);
             await m_AnswerService.TryPostNewAnswer(newAnswer);
-            await m_CreditsService.TryUpdateCredits(2);
-            LogedInUser.LogedInUserObject().Credits += 2;
+            await m_CreditsService.TryUpdateCredits(5);
+            LogedInUser.LogedInUserObject().Credits += 5;
             //await m_ChatService.JoinChatRoom(newAnswer.ChatRoomId);
             await m_ChatService.CreateChatRoom(newAnswer.ChatRoomId);
             foreach (QuestionToAsk question in SharedDataSource.UsersPreviousQuestions)

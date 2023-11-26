@@ -23,8 +23,8 @@
             </Style>
 
             <Style x:Key="SenderContainerStyle" TargetType="Grid">
-                <Setter Property="HeightRequest" Value="150" />
-                <Setter Property="WidthRequest" Value="150" />
+                <Setter Property="HeightRequest" Value="90" />
+                <Setter Property="WidthRequest" Value="90" />
                 <Setter Property="VerticalOptions" Value="End" />
                 <Setter Property="Margin" Value="70" />
             </Style>
@@ -32,15 +32,15 @@
             <Style x:Key="SenderEllipseStyle" TargetType="Ellipse">
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="VerticalOptions" Value="Center" />
-                <Setter Property="HeightRequest" Value="150" />
-                <Setter Property="WidthRequest" Value="150" />
+                <Setter Property="HeightRequest" Value="130" />
+                <Setter Property="WidthRequest" Value="130" />
             </Style>
 
             <Style x:Key="SenderImageStyle" TargetType="Image">
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="VerticalOptions" Value="Center" />
-                <Setter Property="HeightRequest" Value="150" />
-                <Setter Property="WidthRequest" Value="150" />
+                <Setter Property="HeightRequest" Value="130" />
+                <Setter Property="WidthRequest" Value="130" />
                 <Setter Property="Margin" Value="12" />
             </Style>
 
@@ -81,13 +81,13 @@
             
     </Grid>
 
-        <Label  Margin="10" Text="{Binding UserName}" HorizontalOptions="Center"></Label>
-        <Label Margin="10" Text="{Binding FullName}" HorizontalOptions="Center"></Label>
-        <Label  Margin="10" Text="{Binding Email}" HorizontalOptions="Center"></Label>
-        <Label  Margin="10" Text="Age:" HorizontalOptions="Center"></Label>
-        <Label  Margin="10" Text="{Binding Age}" HorizontalOptions="Center"></Label>
-        <Label  Margin="10" Text="Credits:" HorizontalOptions="Center"></Label>
-        <Label  Margin="10" Text="{Binding Credits}" HorizontalOptions="Center"></Label>
-        <Button  Margin="50" Text="Logout"  HorizontalOptions="CenterAndExpand" Command="{Binding LogoutCommand}"></Button>
+        <Label  Margin="10" TextColor="Black" FontSize="40"  FontFamily="OpenSansBold" Text="{Binding UserName}" HorizontalOptions="Center"></Label>
+        <Label Margin="10" FontFamily="OpenSansBold" Text="{Binding FullName}" HorizontalOptions="Center"></Label>
+        <Label  Margin="10" FontFamily="OpenSansBold" Text="{Binding Email}" HorizontalOptions="Center"></Label>
+        <Label  Margin="10" FontFamily="OpenSansBold" Text="Age:" HorizontalOptions="Center"></Label>
+        <Label  Margin="10" FontFamily="OpenSansBold" Text="{Binding Age}" HorizontalOptions="Center"></Label>
+        <Label  Margin="10" FontFamily="OpenSansBold" Text="Credits:" HorizontalOptions="Center"></Label>
+        <Label  Margin="10" FontFamily="OpenSansBold" Text="{Binding Credits}" HorizontalOptions="Center"></Label>
+        <Button  Margin="50" FontFamily="OpenSansBold" Text="Logout"  HorizontalOptions="CenterAndExpand" Command="{Binding LogoutCommand}"></Button>
     </VerticalStackLayout>
 </ContentPage>

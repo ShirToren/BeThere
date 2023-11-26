@@ -23,13 +23,9 @@
             </Border.StrokeShape>
             <VerticalStackLayout Spacing="3">
                 <Label
+                x:Name="Title"
                 Margin="10,5"
-                Text="New question"  FontFamily="OpenSansBold"
-                VerticalOptions="Center"
-                HorizontalOptions="Center"/>
-                <Label
-                Margin="10,5"
-                Text="Answer and get 2 more credits!"  FontFamily="OpenSansBold"
+                FontFamily="OpenSansBold"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"/>
                 <Label
@@ -37,7 +33,11 @@
                 Margin="10,5"  FontFamily="OpenSansBold"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"/>
-
+                <Label
+                Margin="10,5"
+                Text="Answer and get 5 more credits!"  FontFamily="OpenSansBold"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"/>
                 <Entry x:Name="AnswerText" BackgroundColor="Transparent" Placeholder="Enter your answer" 
                            TextColor="Black" Margin="5,0"
                            PlaceholderColor="Gray"

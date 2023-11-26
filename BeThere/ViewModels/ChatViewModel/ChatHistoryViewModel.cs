@@ -68,6 +68,13 @@ namespace BeThere.ViewModels.ChatViewModel
                     }
                 });
             });
+            m_ChatService.HandleLoadChatReceived((ChatMessages) =>
+            {
+                foreach (ChatMessage chatMessage in ChatMessages)
+                {
+                    SharedDataSource.CurrentChatMessages.Add(chatMessage);
+                }
+            });
         }
         public ObservableCollection<ChatMessage> AvailableChats { get { return m_AvailableChats; }  }
         public HashSet<string> AvailableChatRooms { get { return m_AvailableChatRooms; } } 
