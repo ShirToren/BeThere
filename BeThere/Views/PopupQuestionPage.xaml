@@ -28,6 +28,11 @@
                 VerticalOptions="Center"
                 HorizontalOptions="Center"/>
                 <Label
+                Margin="10,5"
+                Text="Answer and get 2 more credits!"  FontFamily="OpenSansBold"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"/>
+                <Label
                 x:Name="DescriptionLabel"  
                 Margin="10,5"  FontFamily="OpenSansBold"
                 VerticalOptions="Center"

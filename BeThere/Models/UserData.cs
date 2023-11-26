@@ -30,6 +30,12 @@ namespace BeThere.Models
             get { return m_Age; }
             set { m_Age = value; OnPropertyChanged(nameof(Age)); }
         }
+        private int m_Credits;
+        public int Credits
+        {
+            get { return m_Credits; }
+            set { m_Credits = value; OnPropertyChanged(nameof(Credits)); }
+        }
 
         private string m_Email;
 
@@ -66,6 +72,7 @@ namespace BeThere.Models
             FullName = string.Empty;
             Email = string.Empty;
             Gender = string.Empty;
+            Credits = 0;
         }
 
     }

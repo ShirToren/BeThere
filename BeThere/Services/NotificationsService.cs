@@ -20,13 +20,15 @@ namespace BeThere.Services
         private static readonly Object sr_ListLock = new object();
         private AnswerService m_AnswerService;
         private ChatService m_ChatService;
-        public NotificationsService(IPopupNavigation popupNavigation, AnswerService i_AnswerService, ChatService i_ChatService)
+        private CreditsService m_CreditsService;
+        public NotificationsService(IPopupNavigation popupNavigation, AnswerService i_AnswerService, ChatService i_ChatService, CreditsService i_CreditsService)
         {
             this.popupNavigation = popupNavigation;
             r_Timer = new Timer(TimerCallback, null, TimeSpan.Zero, TimeSpan.FromSeconds(5));
             Notifications = new List<QuestionToAsk>();
             m_AnswerService = i_AnswerService;
             m_ChatService = i_ChatService;
+            m_CreditsService = i_CreditsService;
             LocalNotificationCenter.Current.NotificationActionTapped += Current_NotificationActionTapped;
         }
 
@@ -86,7 +88,7 @@ namespace BeThere.Services
             if(response.ReturnValue.Count > 0)
             {
                 await sendQuestionNotification();
-                await popupNavigation.PushAsync((Mopups.Pages.PopupPage)new PopupQuestionPage(response.ReturnValue[0], m_AnswerService, m_ChatService));
+                await popupNavigation.PushAsync((Mopups.Pages.PopupPage)new PopupQuestionPage(response.ReturnValue[0], m_AnswerService, m_ChatService, m_CreditsService));
             }
             if(answersResponse.ReturnValue.Count > 0)
             {

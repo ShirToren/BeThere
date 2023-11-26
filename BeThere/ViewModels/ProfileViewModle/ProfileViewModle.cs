@@ -19,6 +19,8 @@ namespace BeThere.ViewModels
         private string email;
         [ObservableProperty]
         private string age;
+        [ObservableProperty]
+        private string credits;
 
         private UserData user => LogedInUser.LogedInUserObject();
 
@@ -31,6 +33,7 @@ namespace BeThere.ViewModels
             FullName = user.FullName;
             Email = user.Email;
             Age = user.Age.ToString();
+            Credits = user.Credits.ToString();
         }
 
         private async Task logoutClicked()
@@ -46,6 +49,7 @@ namespace BeThere.ViewModels
             FullName = user.FullName;
             Email = user.Email;
             Age = user.Age.ToString();
+            Credits = user.Credits.ToString();
         }
     }
 }

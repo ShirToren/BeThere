@@ -10,12 +10,14 @@ public partial class PopupQuestionPage
     private QuestionToAsk m_Question;
     private AnswerService m_AnswerService;
     private ChatService m_ChatService;
-    public PopupQuestionPage(QuestionToAsk i_Question, AnswerService i_AnswerService, ChatService i_ChatService)
+    private CreditsService m_CreditsService;
+    public PopupQuestionPage(QuestionToAsk i_Question, AnswerService i_AnswerService, ChatService i_ChatService, CreditsService i_CreditsService)
     {
         InitializeComponent();
         m_Question = i_Question;
         m_AnswerService =  i_AnswerService;
         m_ChatService = i_ChatService;
+        m_CreditsService = i_CreditsService;
         DescriptionLabel.Text = m_Question.Question;
     }
     private void CloseButton_Clicked(object sender, EventArgs e)
@@ -28,6 +30,8 @@ public partial class PopupQuestionPage
             string uuidString = guid.ToString();
             UserAnswer newAnswer = new UserAnswer(LogedInUser.LogedInUserName(), AnswerText.Text, m_Question.QuestionId, uuidString, DateTime.Now);
             await m_AnswerService.TryPostNewAnswer(newAnswer);
+            await m_CreditsService.TryUpdateCredits(2);
+            LogedInUser.LogedInUserObject().Credits += 2;
             //await m_ChatService.JoinChatRoom(newAnswer.ChatRoomId);
             await m_ChatService.CreateChatRoom(newAnswer.ChatRoomId);
             foreach (QuestionToAsk question in SharedDataSource.UsersPreviousQuestions)

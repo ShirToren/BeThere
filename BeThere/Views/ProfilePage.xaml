@@ -84,7 +84,10 @@
         <Label  Margin="10" Text="{Binding UserName}" HorizontalOptions="Center"></Label>
         <Label Margin="10" Text="{Binding FullName}" HorizontalOptions="Center"></Label>
         <Label  Margin="10" Text="{Binding Email}" HorizontalOptions="Center"></Label>
+        <Label  Margin="10" Text="Age:" HorizontalOptions="Center"></Label>
         <Label  Margin="10" Text="{Binding Age}" HorizontalOptions="Center"></Label>
+        <Label  Margin="10" Text="Credits:" HorizontalOptions="Center"></Label>
+        <Label  Margin="10" Text="{Binding Credits}" HorizontalOptions="Center"></Label>
         <Button  Margin="50" Text="Logout"  HorizontalOptions="CenterAndExpand" Command="{Binding LogoutCommand}"></Button>
     </VerticalStackLayout>
 </ContentPage>

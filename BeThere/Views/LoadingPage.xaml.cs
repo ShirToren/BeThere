@@ -9,6 +9,7 @@ public partial class LoadingPage : ContentPage
 	{
         InitializeComponent();
         m_AuthService = i_AuthService;
+        //m_AuthService.Logout();
     }
 
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
