@@ -6,9 +6,19 @@
              x:DataType="viewmodel:DetailsQuestionViewModle"
              xmlns:modle ="clr-namespace:BeThere.Models"
              x:Name="MyPage"
-             Title="Question's Details">
+             >
 
-
+    <Shell.TitleView>
+        <Grid>
+            <Label 
+       Text="Question's Details"
+       HorizontalOptions="Start"
+       VerticalOptions="Start"
+       FontFamily="OpenSansBold"
+       FontSize="25"
+       FontAttributes="Bold"/>
+        </Grid>
+    </Shell.TitleView>
     <ContentPage.Resources>
         <ResourceDictionary>
 

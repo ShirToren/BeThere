@@ -24,6 +24,8 @@ namespace BeThere.ViewModels
         public Command GoToDetailsCommand { get; }
         public Command AskNewQuestionCommand { get; }
 
+        [ObservableProperty]
+        private string helloMessage;
 
 
         public HomeViewModle(QuestionAskedService i_HistoryService, UpdateLocationService i_UpdateLocationService, NotificationsService i_NotificationService, ChatService i_ChatService)
@@ -32,10 +34,11 @@ namespace BeThere.ViewModels
             m_HistoryService = i_HistoryService;
             m_UpdateLocationService = i_UpdateLocationService;
             GoToDetailsCommand = new Command<QuestionToAsk>(async (question) => await GoToDetailsPage(question));
-            AskNewQuestionCommand = new Command(async () => await GoToMapPage());
+            AskNewQuestionCommand = new Command(async () => await SendQuestionCommand());
             Task task = GetAllPreviousQuestion();
             m_NotificationService = i_NotificationService;
             m_ChatService = i_ChatService;
+            HelloMessage = "Hello, " + LogedInUser.LogedInUserName();
             Task.Run(() =>
             {
                 MainThread.BeginInvokeOnMainThread(async () =>
@@ -62,9 +65,30 @@ namespace BeThere.ViewModels
             await Shell.Current.GoToAsync($"{nameof(DetailsQuestionPage)}", navigationParameter);
         }
 
+        public async Task SendQuestionCommand()
+        {
+            if (isUserHasCredit())
+            {
+                await GoToMapPage();
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Unable to send question", "You don't have credits. Try to answer to some questions before.", "OK");
+            }
+        }
+
         public async Task GoToMapPage()
         {
             await Shell.Current.GoToAsync(nameof(MapPage));
+        }
+
+        private bool isUserHasCredit()
+        {
+            if (LogedInUser.LogedInUserObject().Credits < 1)
+            {
+                return false;
+            }
+            return true;
         }
 
 

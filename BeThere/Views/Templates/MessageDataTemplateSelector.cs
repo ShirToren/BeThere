@@ -17,16 +17,18 @@ namespace BeThere.Views.Templates
         {
             //var message = (ChatMessage)item;
 
-            //if (message.Sender == null)
-            //    return ReceiverMessageTemplate;
+            //if (message.Sender.Equals(LogedInUser.LogedInUserName()))
+            //   return ReceiverMessageTemplate;
 
             //return SenderMessageTemplate;
+
+
             flag = !flag;
             if (flag)
             {
-                
+
                 return ReceiverMessageTemplate;
-                
+
             }
             return SenderMessageTemplate;
         }

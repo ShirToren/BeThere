@@ -36,6 +36,7 @@ namespace BeThere.Services
             //if(r_Connection.State == HubConnectionState.Connected)
             //{
                 await r_Connection.SendAsync("JoinChatRoom", chatRoomId);
+            await TryPostUserRoom(chatRoomId);
             //}
             //else
             //{
@@ -48,6 +49,7 @@ namespace BeThere.Services
             //if (r_Connection.State == HubConnectionState.Connected)
             //{
                 await r_Connection.SendAsync("CreateChatRoom", chatRoomId);
+                await TryPostUserRoom(chatRoomId);
             //}
             //else
             //{
@@ -109,6 +111,61 @@ namespace BeThere.Services
         public void HandleUpdateChatRoomsReceived(Action<string> updateChatRoomsReceivedHandler)
         {
             r_Connection.On<string>("UpdateChatRooms", updateChatRoomsReceivedHandler);
+        }
+        public async Task<ResultUnit<string>> TryPostUserRoom(string i_ChatRoomId)
+        {
+            ResultUnit<string> result = new ResultUnit<string>();
+            string endPointQueryUri = $"api/UserRooms?UserName={ConnectedUser.Username}&ChatRoomId={i_ChatRoomId}";
+
+            HttpResponseMessage response = await GetHttpClient().PostAsync(endPointQueryUri, null);
+
+            //result.ReturnValue = long.Parse(response.Content.ToString());
+            if (!response.IsSuccessStatusCode)
+            {
+                //handle ba
+            }
+
+            return result;
+        }
+        public async Task<ResultUnit<HashSet<string>>> TryGetUserRooms()
+        {
+            ResultUnit<HashSet<string>> result = new ResultUnit<HashSet<string>>();
+            string endPointQueryUri = $"api/UserRooms?UserName={ConnectedUser.Username}";
+
+            HttpResponseMessage response = await GetHttpClient().GetAsync(endPointQueryUri);
+            string jsonResponse = await response.Content.ReadAsStringAsync();
+            var set = JsonConvert.DeserializeObject<HashSet<string>> (jsonResponse);
+
+            //result.ReturnValue = long.Parse(response.Content.ToString());
+            if (!response.IsSuccessStatusCode)
+            {
+                //handle ba
+            }
+            result.ReturnValue = set;
+            return result;
+        }
+        public async Task<ResultUnit<ChatMessage>> TryGetLastMessageByChatRoomId(string i_ChatRoomId)
+        {
+            ResultUnit<ChatMessage> result = new ResultUnit<ChatMessage>();
+            string endPointQueryUri = $"api/ChatMessages/Last?ChatRoomId={i_ChatRoomId}";
+            HttpResponseMessage response = await GetHttpClient().GetAsync(endPointQueryUri);
+            if (response.IsSuccessStatusCode)
+            {
+                string jsonResponse = await response.Content.ReadAsStringAsync();
+                ChatMessage chatMessage = JsonConvert.DeserializeObject<ChatMessage>(jsonResponse);
+                result.ReturnValue = chatMessage;
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                result.IsSuccess = false;
+                result.ResultMessage = await response.Content.ReadAsStringAsync();
+            }
+            else
+            {
+                throw new HttpRequestException();
+            }
+
+            return result;
         }
     }
 }

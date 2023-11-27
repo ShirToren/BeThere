@@ -9,6 +9,7 @@ public partial class LoadingPage : ContentPage
 	{
         InitializeComponent();
         m_AuthService = i_AuthService;
+        //m_AuthService.Logout();
     }
 
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
@@ -18,7 +19,6 @@ public partial class LoadingPage : ContentPage
         bool isAuthenticated = await m_AuthService.isAuthenticatedAsync();
         if (isAuthenticated == true)
         {
-           
             await m_AuthService.GetAuthLoginUser();
             await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
         }

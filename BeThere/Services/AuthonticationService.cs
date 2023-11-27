@@ -52,7 +52,11 @@ namespace BeThere.Services
 		public void Logout()
 		{
             Preferences.Default.Remove(m_AuthStateKey);
-
+            HistoryData.ClearAll();
+            SharedDataSource.AvailableChats.Clear();
+            SharedDataSource.AvailableChatRooms.Clear();
+            Preferences.Remove("MessagesList");
+            Preferences.Remove("ChatRoomsList");
         }
 
 		public void StoreAuthenticatedUser(string i_UserName)
@@ -69,8 +73,6 @@ namespace BeThere.Services
         {
             Preferences.Default.Remove(m_AuthenticatedUserName);
         }
-
-
     }
 }
 

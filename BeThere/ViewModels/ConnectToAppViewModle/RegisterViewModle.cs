@@ -16,8 +16,8 @@ namespace BeThere.ViewModels
         {
             m_LoginService = i_LoginService;
             m_UserData = new UserData();
+            m_UserData.Credits = 5;
             RegisterCommand = new Command(async () => await RegisterAsync());
-
         }
 
         [ObservableProperty]
@@ -55,6 +55,8 @@ namespace BeThere.ViewModels
                     if (response.IsSuccess == true)
                     {
                         m_UserData.ClearAllFeilds();
+                        AgeEntryText = string.Empty;
+                        ConfirmPassword = string.Empty;
                         await Shell.Current.DisplayAlert("Registertion", "Registration Successful!", "OK");
                         await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
                     }

@@ -14,16 +14,16 @@ namespace BeThere.ViewModels.ChatViewModel
 {
     public class ChatHistoryViewModel : BaseViewModel
     {
-        private ObservableCollection<ChatMessage> m_AvailableChats;
+        private ObservableCollection<ChatMessage> m_AvailableChats => SharedDataSource.AvailableChats;
         private ChatService m_ChatService;
-        private HashSet<string> m_AvailableChatRooms;
+        private HashSet<string> m_AvailableChatRooms => SharedDataSource.AvailableChatRooms;
         public ICommand ChatCommand { get; private set; }
 
         public ChatHistoryViewModel(ChatService i_ChatService)
         {
-            m_AvailableChats = new ObservableCollection<ChatMessage>();
+            //m_AvailableChats = new ObservableCollection<ChatMessage>();
             m_ChatService = i_ChatService;
-            m_AvailableChatRooms = new HashSet<string>();
+            //m_AvailableChatRooms = new HashSet<string>();
             ChatCommand = new Command<ChatMessage>(chatClicked);
            //removePreferences();
 
@@ -68,6 +68,13 @@ namespace BeThere.ViewModels.ChatViewModel
                     }
                 });
             });
+            m_ChatService.HandleLoadChatReceived((ChatMessages) =>
+            {
+                foreach (ChatMessage chatMessage in ChatMessages)
+                {
+                    SharedDataSource.CurrentChatMessages.Add(chatMessage);
+                }
+            });
         }
         public ObservableCollection<ChatMessage> AvailableChats { get { return m_AvailableChats; }  }
         public HashSet<string> AvailableChatRooms { get { return m_AvailableChatRooms; } } 
@@ -78,6 +85,23 @@ namespace BeThere.ViewModels.ChatViewModel
 
             string serializedRoomSet = JsonSerializer.Serialize(AvailableChatRooms);
             Preferences.Set("ChatRoomsList", serializedRoomSet);
+        }
+
+        public async void LoadChats()
+        {
+            var result = await m_ChatService.TryGetUserRooms();
+            if(result.ReturnValue.Count > 0)
+            {
+                foreach (string room in result.ReturnValue)
+                {
+                    m_AvailableChatRooms.Add(room);
+                    var messageResponse = await m_ChatService.TryGetLastMessageByChatRoomId(room);
+                    if(messageResponse.ReturnValue != null)
+                    {
+                        m_AvailableChats.Add(messageResponse.ReturnValue);
+                    }
+                }
+            }
         }
 
         private void removePreferences()

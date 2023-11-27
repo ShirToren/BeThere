@@ -10,11 +10,10 @@
         <Grid>
             <Label 
        Text="Available Chats"
-       TextColor="Black"
        HorizontalOptions="Center"
        VerticalOptions="Center"
-       FontFamily ="OpenSansRegular"
-       FontSize="Title"
+       FontFamily="OpenSansBold"
+       FontSize="25"
        FontAttributes="Bold"/>
         </Grid>
     </Shell.TitleView>
@@ -25,7 +24,7 @@
                 <Setter Property="FontSize" Value="26" />
                 <Setter Property="TextColor" Value="Black" />
                 <Setter Property="HorizontalOptions" Value="Start" />
-                <Setter Property="FontFamily" Value="Metropolis Medium" />
+                <Setter Property="FontFamily" Value="OpenSansBold" />
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="WidthRequest" Value="160" />
                 <Setter Property="Margin" Value="36, 48, 0, 0" />

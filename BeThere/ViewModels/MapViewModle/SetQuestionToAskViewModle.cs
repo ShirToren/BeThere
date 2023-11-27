@@ -17,6 +17,7 @@ namespace BeThere.ViewModels
 
         private QuestionAskedService m_SendQuestionService;
         private ChatService m_ChatService;
+        private readonly CreditsService r_CreditsService;
         public Command SendQuestionCommand { get; }
         public Command ClearAllCommand { get; }
         private QuestionToAsk m_QuestionToAsk;
@@ -37,10 +38,11 @@ namespace BeThere.ViewModels
         bool isRadiusSet;
 
 
-        public SetQestionToAskViewModle(QuestionAskedService i_SendQuestionService, ChatService i_ChatService)
+        public SetQestionToAskViewModle(QuestionAskedService i_SendQuestionService, ChatService i_ChatService, CreditsService i_CreditsService)
         {
             m_SendQuestionService = i_SendQuestionService;
             m_ChatService = i_ChatService;
+            r_CreditsService = i_CreditsService;
             m_QuestionToAsk = new QuestionToAsk();
             SendQuestionCommand = new Command(async () => await sendQuestionClicked());
             ClearAllCommand = new Command(() => clearAllClicked());
@@ -87,6 +89,8 @@ namespace BeThere.ViewModels
                     m_QuestionToAsk.ChatRoomId = guidForChatRoomId.ToString();
 
                     ResultUnit<string> response = await m_SendQuestionService.TryPostNewQuestion(m_QuestionToAsk);
+                    await r_CreditsService.TryUpdateCredits(-1);
+                    LogedInUser.LogedInUserObject().Credits--;
 
                     HistoryData.AddQuestion(m_QuestionToAsk.QuestionId, m_QuestionToAsk);
                     HistoryData.AddNewAnswersItem(m_QuestionToAsk.QuestionId);

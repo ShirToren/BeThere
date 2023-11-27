@@ -49,10 +49,10 @@ public static class MauiProgram
 
         //builder.Services.AddSingleton<MainPage>();
         builder.Services.AddTransient<MapPage>();
-        builder.Services.AddTransient<ChatPage>();
+        builder.Services.AddSingleton<ChatPage>();
         builder.Services.AddTransient<DetailsQuestionPage>();
         builder.Services.AddTransient<LoadingPage>();
-        builder.Services.AddSingleton<ProfilePage>();
+        builder.Services.AddTransient<ProfilePage>();
         builder.Services.AddSingleton<LoginPage>();
         builder.Services.AddSingleton<RegisterPage>();
         builder.Services.AddSingleton<SetQuestionPage>();
@@ -71,6 +71,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<ChatService>();
         builder.Services.AddSingleton<AnswerService>();
         //builder.Services.AddTransient<IService, MyForeGroundService>();
+        builder.Services.AddSingleton<CreditsService>();
 
 
         builder.Services.AddSingleton<ConnectToAppViewModle>();

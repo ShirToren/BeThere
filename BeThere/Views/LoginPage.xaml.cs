@@ -8,4 +8,10 @@ public partial class LoginPage : ContentPage
         InitializeComponent();
         BindingContext = i_LoginLogic;
     }
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        base.OnNavigatedTo(args);
+        PasswordEntry.Text = String.Empty;
+        userNameEntry.Text = String.Empty;
+    }
 }
